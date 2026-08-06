@@ -3,12 +3,16 @@ pages_build_output_dir = "."
 compatibility_date = "2026-01-01"
 
 # Binds the D1 database to env.DB inside functions/.
-# Replace database_id with the id printed by:
-#   npx wrangler d1 create ani3d
+#
+# Because this file exists, Pages reads bindings from here and IGNORES anything
+# configured in the dashboard's Bindings UI. Add new bindings in this file, not
+# in the dashboard, or they will silently have no effect.
 [[d1_databases]]
 binding = "DB"
 database_name = "ani3d"
-database_id = "local-placeholder"
+database_id = "2b74af00-9b19-44cf-be3b-d5b3f96dff0f"
 
-# ADMIN_PASSWORD and SESSION_SECRET are NOT set here — they are secrets.
+# ADMIN_PASSWORD and SESSION_SECRET are deliberately absent — they are secrets,
+# set in the dashboard under Settings > Variables and Secrets, or via
+#   npx wrangler pages secret put <NAME> --project-name=ani-3d
 # See DEPLOY.md.
