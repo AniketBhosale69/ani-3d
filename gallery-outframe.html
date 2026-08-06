@@ -890,12 +890,11 @@
 
 <div class="back-to-top" id="backToTop">↑</div>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-  // ========== SUPABASE CONFIG ==========
-  const SUPABASE_URL = 'https://iibmcpoqyctytzlclaon.supabase.co';
-  const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlpYm1jcG9xeWN0eXR6bGNsYW9uIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE5MDU1MDAsImV4cCI6MjA5NzQ4MTUwMH0.TlEtbY2QOx4De3kIPb9Z7cQpy2-7MU88DnoneQ8TsWc';
-  const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+  // ========== DATA SOURCE ==========
+  // Served by functions/api/videos.js, backed by Cloudflare D1. No database
+  // key reaches the browser and the endpoint is read-only.
+  const API_URL = '/api/videos?category=outframe';
 
   // ========== DATA ==========
   let allVideos = [];
@@ -1583,9 +1582,9 @@
     const grid = document.getElementById('galleryGrid');
     grid.innerHTML = `<div class="loader"><i class="fas fa-spinner"></i><br>Loading videos...</div>`;
     try {
-      const { data, error } = await supabaseClient.from('outframe_videos').select('*').order('created_at', { ascending: false });
-      if (error) throw error;
-      allVideos = data || [];
+      const res = await fetch(API_URL);
+      if (!res.ok) throw new Error(`Server returned ${res.status}`);
+      allVideos = await res.json();
       isLoading = false;
       renderGallery();
     } catch (err) {

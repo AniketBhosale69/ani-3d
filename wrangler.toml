@@ -1,0 +1,14 @@
+name = "ani-3d"
+pages_build_output_dir = "."
+compatibility_date = "2026-01-01"
+
+# Binds the D1 database to env.DB inside functions/.
+# Replace database_id with the id printed by:
+#   npx wrangler d1 create ani3d
+[[d1_databases]]
+binding = "DB"
+database_name = "ani3d"
+database_id = "local-placeholder"
+
+# ADMIN_PASSWORD and SESSION_SECRET are NOT set here — they are secrets.
+# See DEPLOY.md.

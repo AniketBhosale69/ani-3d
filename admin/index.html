@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>ANI3D · Admin</title>
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #030303; --panel: #0d0d0d; --panel-2: #141414;
+    --line: #262626; --red: #cc0000; --red-lo: #8a0000;
+    --text: #f2f2f2; --muted: #8a8a8a;
+  }
+  body {
+    background: var(--bg); color: var(--text);
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    min-height: 100vh; -webkit-font-smoothing: antialiased;
+  }
+  ::-webkit-scrollbar { width: 9px; height: 9px; }
+  ::-webkit-scrollbar-track { background: var(--panel); }
+  ::-webkit-scrollbar-thumb { background: var(--red); border-radius: 10px; }
+  h1, h2, .brand { font-family: 'Orbitron', sans-serif; letter-spacing: .04em; }
+  a { color: var(--red); }
+
+  /* ---------- Login ---------- */
+  #login { min-height: 100vh; display: grid; place-items: center; padding: 1.5rem; }
+  .login-card {
+    width: 100%; max-width: 380px; background: var(--panel);
+    border: 1px solid var(--line); border-radius: 14px; padding: 2.25rem 1.75rem;
+    text-align: center;
+  }
+  .login-card img { width: 56px; margin-bottom: 1rem; }
+  .login-card h1 { font-size: 1.35rem; margin-bottom: .4rem; }
+  .login-card p { color: var(--muted); font-size: .85rem; margin-bottom: 1.5rem; }
+
+  /* ---------- Shell ---------- */
+  #app { display: none; }
+  header.topbar {
+    position: sticky; top: 0; z-index: 20;
+    display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
+    padding: .85rem 1.25rem; background: rgba(6,6,6,.94);
+    backdrop-filter: blur(10px); border-bottom: 1px solid var(--line);
+  }
+  .brand { font-size: 1.05rem; display: flex; align-items: center; gap: .5rem; }
+  .brand span.red { color: var(--red); }
+  .brand small {
+    font-family: 'Space Grotesk', sans-serif; letter-spacing: 0;
+    color: var(--muted); font-weight: 400; font-size: .72rem;
+    border-left: 1px solid var(--line); padding-left: .6rem; margin-left: .25rem;
+  }
+  .spacer { flex: 1 1 auto; }
+  main { padding: 1.5rem 1.25rem 4rem; max-width: 1240px; margin: 0 auto; }
+
+  /* ---------- Controls ---------- */
+  .toolbar { display: flex; gap: .6rem; flex-wrap: wrap; align-items: center; margin-bottom: 1.1rem; }
+  .tabs { display: inline-flex; background: var(--panel); border: 1px solid var(--line); border-radius: 9px; padding: 3px; }
+  .tabs button {
+    border: 0; background: transparent; color: var(--muted); cursor: pointer;
+    font: inherit; font-size: .82rem; padding: .42rem .95rem; border-radius: 6px;
+  }
+  .tabs button[aria-selected="true"] { background: var(--red); color: #fff; font-weight: 600; }
+  input, select, textarea {
+    background: var(--panel-2); border: 1px solid var(--line); color: var(--text);
+    font: inherit; font-size: .88rem; padding: .55rem .75rem; border-radius: 8px; width: 100%;
+  }
+  input:focus, select:focus, textarea:focus { outline: 2px solid var(--red-lo); outline-offset: -1px; border-color: var(--red); }
+  textarea { min-height: 150px; resize: vertical; line-height: 1.5; font-size: .82rem; }
+  #search { max-width: 260px; }
+  .btn {
+    border: 1px solid var(--line); background: var(--panel-2); color: var(--text);
+    font: inherit; font-size: .84rem; font-weight: 500; padding: .55rem 1rem;
+    border-radius: 8px; cursor: pointer; white-space: nowrap; transition: .15s;
+  }
+  .btn:hover:not(:disabled) { border-color: var(--red); }
+  .btn:disabled { opacity: .5; cursor: not-allowed; }
+  .btn.primary { background: var(--red); border-color: var(--red); color: #fff; font-weight: 600; }
+  .btn.primary:hover:not(:disabled) { background: #e60000; }
+  .btn.danger { color: #ff6b6b; }
+  .btn.danger:hover:not(:disabled) { background: #2a0000; border-color: #ff6b6b; }
+  .btn.sm { padding: .35rem .7rem; font-size: .76rem; }
+  .btn.block { width: 100%; justify-content: center; }
+
+  /* ---------- Table ---------- */
+  .table-wrap { border: 1px solid var(--line); border-radius: 12px; overflow-x: auto; background: var(--panel); }
+  table { width: 100%; border-collapse: collapse; min-width: 780px; }
+  th {
+    text-align: left; font-size: .69rem; text-transform: uppercase; letter-spacing: .09em;
+    color: var(--muted); font-weight: 600; padding: .8rem 1rem;
+    border-bottom: 1px solid var(--line); background: #0a0a0a;
+    position: sticky; top: 0;
+  }
+  td { padding: .8rem 1rem; border-bottom: 1px solid #1b1b1b; font-size: .86rem; vertical-align: middle; }
+  tbody tr:last-child td { border-bottom: 0; }
+  tbody tr:hover { background: #101010; }
+  td.thumb-cell { width: 92px; }
+  td img { width: 76px; height: 43px; object-fit: cover; border-radius: 5px; background: #1a1a1a; display: block; }
+  .title-cell { font-weight: 500; line-height: 1.35; }
+  .title-cell small { display: block; color: var(--muted); font-weight: 400; font-size: .74rem; margin-top: .18rem; }
+  .pill {
+    display: inline-block; font-size: .67rem; font-weight: 700; letter-spacing: .05em;
+    text-transform: uppercase; padding: .22rem .55rem; border-radius: 20px; white-space: nowrap;
+  }
+  .pill.classic { background: #10233b; color: #6fb2ff; }
+  .pill.outframe { background: #3b1010; color: #ff8b6f; }
+  .row-actions { display: flex; gap: .4rem; justify-content: flex-end; }
+  .muted { color: var(--muted); }
+  .empty { padding: 3.5rem 1rem; text-align: center; color: var(--muted); }
+
+  /* ---------- Modal ---------- */
+  dialog {
+    border: 1px solid var(--line); background: var(--panel); color: var(--text);
+    border-radius: 14px; padding: 0; width: min(680px, calc(100vw - 2rem)); max-height: 90vh;
+  }
+  dialog::backdrop { background: rgba(0,0,0,.78); backdrop-filter: blur(3px); }
+  dialog header { padding: 1.1rem 1.4rem; border-bottom: 1px solid var(--line); }
+  dialog header h2 { font-size: 1rem; }
+  .form-body { padding: 1.4rem; overflow-y: auto; max-height: calc(90vh - 140px); }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: .9rem; }
+  .field { display: flex; flex-direction: column; gap: .35rem; }
+  .field.full { grid-column: 1 / -1; }
+  label { font-size: .75rem; color: var(--muted); font-weight: 500; }
+  label .req { color: var(--red); }
+  .hint { font-size: .7rem; color: #666; }
+  dialog footer { padding: 1rem 1.4rem; border-top: 1px solid var(--line); display: flex; gap: .6rem; justify-content: flex-end; }
+  @media (max-width: 560px) { .grid { grid-template-columns: 1fr; } }
+
+  /* ---------- Feedback ---------- */
+  .alert { padding: .65rem .9rem; border-radius: 8px; font-size: .82rem; margin-bottom: 1rem; display: none; }
+  .alert.err { background: #2a0000; border: 1px solid #661111; color: #ff9d9d; }
+  .alert.ok  { background: #052a05; border: 1px solid #146614; color: #9dff9d; }
+  #toast {
+    position: fixed; bottom: 1.4rem; left: 50%; transform: translateX(-50%) translateY(200%);
+    background: var(--panel-2); border: 1px solid var(--line); border-left: 3px solid var(--red);
+    padding: .75rem 1.2rem; border-radius: 8px; font-size: .85rem;
+    transition: transform .25s ease; z-index: 100; max-width: 90vw;
+  }
+  #toast.show { transform: translateX(-50%) translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- ============ LOGIN ============ -->
+<section id="login">
+  <form class="login-card" id="loginForm">
+    <img src="/favicon_io/logo.png" alt="">
+    <h1>ANI<span style="color:var(--red)">3D</span> Admin</h1>
+    <p>Enter the admin password to continue.</p>
+    <div class="alert err" id="loginError"></div>
+    <div class="field" style="margin-bottom:1rem">
+      <input type="password" id="password" placeholder="Password" autocomplete="current-password" required>
+    </div>
+    <button class="btn primary block" id="loginBtn" type="submit">Sign in</button>
+  </form>
+</section>
+
+<!-- ============ APP ============ -->
+<div id="app">
+  <header class="topbar">
+    <div class="brand">ANI<span class="red">3D</span> <small>Content Manager</small></div>
+    <div class="tabs" id="sections">
+      <button data-section="videos" aria-selected="true">Videos</button>
+      <button data-section="posts" aria-selected="false">Blog posts</button>
+    </div>
+    <div class="spacer"></div>
+    <a class="btn sm" href="/" target="_blank" rel="noopener">View site ↗</a>
+    <button class="btn sm" id="logoutBtn">Sign out</button>
+  </header>
+
+  <main>
+    <div class="alert err" id="appError"></div>
+
+    <!-- ---------- VIDEOS ---------- -->
+    <section id="videosPanel">
+    <div class="toolbar">
+      <div class="tabs" id="tabs">
+        <button data-cat="all" aria-selected="true">All</button>
+        <button data-cat="classic" aria-selected="false">Immersive 3D</button>
+        <button data-cat="outframe" aria-selected="false">Out of Frame</button>
+      </div>
+      <input type="search" id="search" placeholder="Search title, genre, language…">
+      <div class="spacer"></div>
+      <span class="muted" id="count" style="font-size:.82rem"></span>
+      <button class="btn primary" id="addBtn">+ Add video</button>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th></th><th>Title</th><th>Category</th><th>Type</th>
+            <th>Language</th><th>Year</th><th></th>
+          </tr>
+        </thead>
+        <tbody id="rows">
+          <tr><td colspan="7" class="empty">Loading…</td></tr>
+        </tbody>
+      </table>
+    </div>
+    </section>
+
+    <!-- ---------- POSTS ---------- -->
+    <section id="postsPanel" hidden>
+      <div class="toolbar">
+        <div class="tabs" id="postTabs">
+          <button data-status="all" aria-selected="true">All</button>
+          <button data-status="published" aria-selected="false">Published</button>
+          <button data-status="draft" aria-selected="false">Drafts</button>
+        </div>
+        <input type="search" id="postSearch" placeholder="Search title, category…">
+        <div class="spacer"></div>
+        <span class="muted" id="postCount" style="font-size:.82rem"></span>
+        <button class="btn primary" id="addPostBtn">+ Add post</button>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th></th><th>Title</th><th>Status</th><th>Category</th><th>Author</th><th>Date</th><th></th></tr>
+          </thead>
+          <tbody id="postRows">
+            <tr><td colspan="7" class="empty">Loading…</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+</div>
+
+<!-- ============ EDIT / ADD ============ -->
+<dialog id="editor">
+  <form id="editorForm" method="dialog">
+    <header><h2 id="editorTitle">Add video</h2></header>
+    <div class="form-body">
+      <div class="alert err" id="formError"></div>
+      <input type="hidden" id="f_id">
+      <div class="grid">
+        <div class="field full">
+          <label for="f_title">Title <span class="req">*</span></label>
+          <input id="f_title" required>
+        </div>
+        <div class="field">
+          <label for="f_category">Category <span class="req">*</span></label>
+          <select id="f_category" required>
+            <option value="classic">Immersive 3D (classic)</option>
+            <option value="outframe">Out of Frame 3D</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="f_content_type">Content type</label>
+          <input id="f_content_type" list="contentTypes" placeholder="Trailer">
+          <datalist id="contentTypes"></datalist>
+        </div>
+        <div class="field">
+          <label for="f_language">Language</label>
+          <input id="f_language" list="languages" placeholder="English">
+          <datalist id="languages"></datalist>
+        </div>
+        <div class="field">
+          <label for="f_year">Year</label>
+          <input id="f_year" type="number" min="1800" max="2200" placeholder="2026">
+        </div>
+        <div class="field full">
+          <label for="f_genre">Genre</label>
+          <input id="f_genre" placeholder="Action, Adventure, Sci-Fi">
+          <span class="hint">Comma-separated. These feed the gallery genre filter, so keep spelling consistent.</span>
+        </div>
+        <div class="field full">
+          <label for="f_stream_url">Stream URL (Wistia embed)</label>
+          <input id="f_stream_url" type="url" placeholder="https://fast.wistia.net/embed/iframe/xxxxxxxx">
+        </div>
+        <div class="field full">
+          <label for="f_download_url">Download URL (VikingFile)</label>
+          <input id="f_download_url" type="url" placeholder="https://vikingfile.com/f/xxxxxxxx">
+        </div>
+        <div class="field full">
+          <label for="f_thumb">Thumbnail URL (ImgBB)</label>
+          <input id="f_thumb" type="url" placeholder="https://i.ibb.co/xxxxxxx/thumb.png">
+          <img id="thumbPreview" alt="" style="display:none;width:190px;height:107px;object-fit:cover;border-radius:6px;margin-top:.5rem">
+        </div>
+        <div class="field full">
+          <label for="f_description">Description</label>
+          <textarea id="f_description" placeholder="Conversion settings, notes…"></textarea>
+        </div>
+      </div>
+    </div>
+    <footer>
+      <button type="button" class="btn" id="cancelBtn">Cancel</button>
+      <button type="submit" class="btn primary" id="saveBtn">Save</button>
+    </footer>
+  </form>
+</dialog>
+
+<!-- ============ POST EDITOR ============ -->
+<dialog id="postEditor">
+  <form id="postForm" method="dialog">
+    <header><h2 id="postEditorTitle">Add post</h2></header>
+    <div class="form-body">
+      <div class="alert err" id="postFormError"></div>
+      <input type="hidden" id="p_id">
+      <div class="grid">
+        <div class="field full">
+          <label for="p_title">Title <span class="req">*</span></label>
+          <input id="p_title" required>
+        </div>
+        <div class="field full">
+          <label for="p_slug">Slug</label>
+          <input id="p_slug" placeholder="auto-generated from the title">
+          <span class="hint">Used in the post's URL. Leave blank to derive it from the title. Changing it on a live post breaks existing links.</span>
+        </div>
+        <div class="field">
+          <label for="p_status">Status</label>
+          <select id="p_status">
+            <option value="draft">Draft (hidden)</option>
+            <option value="published">Published (live)</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="p_category">Category</label>
+          <input id="p_category" list="postCategories" placeholder="Tools &amp; Software">
+          <datalist id="postCategories"></datalist>
+        </div>
+        <div class="field">
+          <label for="p_author">Author</label>
+          <input id="p_author" placeholder="Aniket Bhosale">
+        </div>
+        <div class="field">
+          <label for="p_date">Display date</label>
+          <input id="p_date" placeholder="June 10, 2026">
+          <span class="hint">Shown on the card, as free text.</span>
+        </div>
+        <div class="field full">
+          <label for="p_image">Cover image URL</label>
+          <input id="p_image" type="url" placeholder="https://i.ibb.co/xxxxxxx/cover.png">
+          <img id="postImagePreview" alt="" style="display:none;width:190px;height:107px;object-fit:cover;border-radius:6px;margin-top:.5rem">
+        </div>
+        <div class="field full">
+          <label for="p_excerpt">Excerpt</label>
+          <textarea id="p_excerpt" style="min-height:80px" placeholder="One or two sentences shown on the blog card."></textarea>
+        </div>
+        <div class="field full">
+          <label for="p_content">Content (HTML)</label>
+          <textarea id="p_content" style="min-height:260px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace" placeholder="&lt;h3&gt;Heading&lt;/h3&gt;&lt;p&gt;Paragraph…&lt;/p&gt;"></textarea>
+          <span class="hint">Rendered as raw HTML on the blog page. Only paste markup you trust.</span>
+        </div>
+      </div>
+    </div>
+    <footer>
+      <button type="button" class="btn" id="postCancelBtn">Cancel</button>
+      <button type="submit" class="btn primary" id="postSaveBtn">Save</button>
+    </footer>
+  </form>
+</dialog>
+
+<div id="toast"></div>
+
+<script>
+const $ = (id) => document.getElementById(id);
+let videos = [];
+let filter = 'all';
+let search = '';
+
+// ---------- helpers ----------
+async function api(path, options = {}) {
+  const res = await fetch(path, {
+    headers: { 'Content-Type': 'application/json' },
+    cache: 'no-store',
+    ...options,
+  });
+  if (res.status === 401) { showLogin(); throw new Error('Session expired — please sign in again.'); }
+  const body = res.status === 204 ? null : await res.json().catch(() => null);
+  if (!res.ok) throw new Error(body?.error || `Request failed (${res.status})`);
+  return body;
+}
+
+function toast(msg) {
+  const t = $('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toast._t);
+  toast._t = setTimeout(() => t.classList.remove('show'), 2600);
+}
+
+function showError(el, msg) {
+  const box = $(el);
+  box.textContent = msg;
+  box.style.display = msg ? 'block' : 'none';
+}
+
+const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) =>
+  ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
+
+// ---------- auth ----------
+function showLogin() { $('login').style.display = 'grid'; $('app').style.display = 'none'; }
+function showApp()   { $('login').style.display = 'none'; $('app').style.display = 'block'; }
+
+$('loginForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  showError('loginError', '');
+  $('loginBtn').disabled = true;
+  $('loginBtn').textContent = 'Signing in…';
+  try {
+    await api('/api/admin/login', { method: 'POST', body: JSON.stringify({ password: $('password').value }) });
+    $('password').value = '';
+    showApp();
+    await Promise.all([load(), loadPosts()]);
+  } catch (err) {
+    showError('loginError', err.message);
+  } finally {
+    $('loginBtn').disabled = false;
+    $('loginBtn').textContent = 'Sign in';
+  }
+});
+
+$('logoutBtn').addEventListener('click', async () => {
+  await fetch('/api/admin/logout', { method: 'POST' });
+  videos = [];
+  posts = [];
+  showLogin();
+});
+
+// ---------- data ----------
+async function load() {
+  showError('appError', '');
+  try {
+    videos = await api('/api/admin/videos');
+    render();
+  } catch (err) {
+    showError('appError', err.message);
+    $('rows').innerHTML = `<tr><td colspan="7" class="empty">Could not load videos.</td></tr>`;
+  }
+}
+
+function visible() {
+  const s = search.toLowerCase();
+  return videos.filter((v) => {
+    if (filter !== 'all' && v.category !== filter) return false;
+    if (!s) return true;
+    return [v.title, v.genre, v.language, v.content_type]
+      .some((f) => (f || '').toLowerCase().includes(s));
+  });
+}
+
+function render() {
+  const list = visible();
+  $('count').textContent = `${list.length} of ${videos.length} video${videos.length === 1 ? '' : 's'}`;
+
+  if (!list.length) {
+    $('rows').innerHTML = `<tr><td colspan="7" class="empty">${
+      videos.length ? 'Nothing matches that filter.' : 'No videos yet — add your first one.'
+    }</td></tr>`;
+    return;
+  }
+
+  $('rows').innerHTML = list.map((v) => `
+    <tr>
+      <td class="thumb-cell">${v.thumb ? `<img src="${esc(v.thumb)}" alt="" loading="lazy" onerror="this.style.visibility='hidden'">` : ''}</td>
+      <td class="title-cell">${esc(v.title)}${v.genre ? `<small>${esc(v.genre)}</small>` : ''}</td>
+      <td><span class="pill ${v.category}">${v.category === 'classic' ? 'Immersive' : 'Out of Frame'}</span></td>
+      <td class="muted">${esc(v.content_type || '—')}</td>
+      <td class="muted">${esc(v.language || '—')}</td>
+      <td class="muted">${esc(v.year || '—')}</td>
+      <td>
+        <div class="row-actions">
+          <button class="btn sm" data-edit="${v.id}">Edit</button>
+          <button class="btn sm danger" data-del="${v.id}">Delete</button>
+        </div>
+      </td>
+    </tr>`).join('');
+}
+
+// Datalists learn from whatever is already in the catalogue, so typing stays
+// consistent with the existing rows the gallery filters depend on.
+function refreshDatalists() {
+  const fill = (id, key) => {
+    const vals = [...new Set(videos.map((v) => v[key]).filter(Boolean))].sort();
+    $(id).innerHTML = vals.map((v) => `<option value="${esc(v)}">`).join('');
+  };
+  fill('contentTypes', 'content_type');
+  fill('languages', 'language');
+}
+
+// ---------- table events ----------
+$('rows').addEventListener('click', (e) => {
+  const edit = e.target.closest('[data-edit]');
+  const del = e.target.closest('[data-del]');
+  if (edit) openEditor(videos.find((v) => String(v.id) === edit.dataset.edit));
+  if (del) remove(videos.find((v) => String(v.id) === del.dataset.del));
+});
+
+$('tabs').addEventListener('click', (e) => {
+  const btn = e.target.closest('button[data-cat]');
+  if (!btn) return;
+  filter = btn.dataset.cat;
+  [...$('tabs').children].forEach((b) => b.setAttribute('aria-selected', String(b === btn)));
+  render();
+});
+
+$('search').addEventListener('input', (e) => { search = e.target.value; render(); });
+
+// ---------- editor ----------
+const FIELDS = ['title', 'category', 'content_type', 'genre', 'language', 'year', 'stream_url', 'download_url', 'thumb', 'description'];
+
+function openEditor(video) {
+  refreshDatalists();
+  showError('formError', '');
+  $('editorTitle').textContent = video ? 'Edit video' : 'Add video';
+  $('f_id').value = video?.id ?? '';
+  FIELDS.forEach((f) => { $(`f_${f}`).value = video?.[f] ?? ''; });
+  if (!video) $('f_category').value = filter === 'outframe' ? 'outframe' : 'classic';
+  updateThumbPreview();
+  $('editor').showModal();
+}
+
+$('addBtn').addEventListener('click', () => openEditor(null));
+$('cancelBtn').addEventListener('click', () => $('editor').close());
+
+function updateThumbPreview() {
+  const url = $('f_thumb').value.trim();
+  const img = $('thumbPreview');
+  if (url) { img.src = url; img.style.display = 'block'; } else { img.style.display = 'none'; }
+}
+$('f_thumb').addEventListener('input', updateThumbPreview);
+$('thumbPreview').addEventListener('error', function () { this.style.display = 'none'; });
+
+$('editorForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  showError('formError', '');
+  const id = $('f_id').value;
+  const payload = {};
+  FIELDS.forEach((f) => { payload[f] = $(`f_${f}`).value.trim() || null; });
+
+  $('saveBtn').disabled = true;
+  $('saveBtn').textContent = 'Saving…';
+  try {
+    if (id) {
+      const updated = await api(`/api/admin/videos/${id}`, { method: 'PUT', body: JSON.stringify(payload) });
+      videos = videos.map((v) => (v.id === updated.id ? updated : v));
+      toast('Video updated.');
+    } else {
+      const created = await api('/api/admin/videos', { method: 'POST', body: JSON.stringify(payload) });
+      videos = [created, ...videos];
+      toast('Video added.');
+    }
+    render();
+    $('editor').close();
+  } catch (err) {
+    showError('formError', err.message);
+  } finally {
+    $('saveBtn').disabled = false;
+    $('saveBtn').textContent = 'Save';
+  }
+});
+
+async function remove(video) {
+  if (!video) return;
+  if (!confirm(`Delete "${video.title}"?\n\nThis cannot be undone.`)) return;
+  try {
+    await api(`/api/admin/videos/${video.id}`, { method: 'DELETE' });
+    videos = videos.filter((v) => v.id !== video.id);
+    render();
+    toast('Video deleted.');
+  } catch (err) {
+    showError('appError', err.message);
+  }
+}
+
+// ================= BLOG POSTS =================
+let posts = [];
+let postFilter = 'all';
+let postSearch = '';
+
+async function loadPosts() {
+  try {
+    posts = await api('/api/admin/posts');
+    renderPosts();
+  } catch (err) {
+    showError('appError', err.message);
+    $('postRows').innerHTML = `<tr><td colspan="7" class="empty">Could not load posts.</td></tr>`;
+  }
+}
+
+function renderPosts() {
+  const s = postSearch.toLowerCase();
+  const list = posts.filter((p) => {
+    if (postFilter !== 'all' && p.status !== postFilter) return false;
+    if (!s) return true;
+    return [p.title, p.category, p.author].some((f) => (f || '').toLowerCase().includes(s));
+  });
+
+  $('postCount').textContent = `${list.length} of ${posts.length} post${posts.length === 1 ? '' : 's'}`;
+
+  if (!list.length) {
+    $('postRows').innerHTML = `<tr><td colspan="7" class="empty">${
+      posts.length ? 'Nothing matches that filter.' : 'No posts yet — write your first one.'
+    }</td></tr>`;
+    return;
+  }
+
+  $('postRows').innerHTML = list.map((p) => `
+    <tr>
+      <td class="thumb-cell">${p.image ? `<img src="${esc(p.image)}" alt="" loading="lazy" onerror="this.style.visibility='hidden'">` : ''}</td>
+      <td class="title-cell">${esc(p.title)}<small>/${esc(p.slug)}</small></td>
+      <td><span class="pill ${p.status === 'published' ? 'classic' : 'outframe'}">${p.status}</span></td>
+      <td class="muted">${esc(p.category || '—')}</td>
+      <td class="muted">${esc(p.author || '—')}</td>
+      <td class="muted">${esc(p.date || '—')}</td>
+      <td>
+        <div class="row-actions">
+          <button class="btn sm" data-editpost="${p.id}">Edit</button>
+          <button class="btn sm danger" data-delpost="${p.id}">Delete</button>
+        </div>
+      </td>
+    </tr>`).join('');
+}
+
+const POST_FIELDS = ['title', 'slug', 'category', 'excerpt', 'content', 'image', 'author', 'date', 'status'];
+
+function openPostEditor(post) {
+  showError('postFormError', '');
+  const cats = [...new Set(posts.map((p) => p.category).filter(Boolean))].sort();
+  $('postCategories').innerHTML = cats.map((c) => `<option value="${esc(c)}">`).join('');
+
+  $('postEditorTitle').textContent = post ? 'Edit post' : 'Add post';
+  $('p_id').value = post?.id ?? '';
+  POST_FIELDS.forEach((f) => { $(`p_${f}`).value = post?.[f] ?? ''; });
+  if (!post) {
+    $('p_status').value = 'draft';
+    $('p_author').value = posts[0]?.author || '';
+    $('p_date').value = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+  }
+  updatePostImagePreview();
+  $('postEditor').showModal();
+}
+
+function updatePostImagePreview() {
+  const url = $('p_image').value.trim();
+  const img = $('postImagePreview');
+  if (url) { img.src = url; img.style.display = 'block'; } else { img.style.display = 'none'; }
+}
+$('p_image').addEventListener('input', updatePostImagePreview);
+$('postImagePreview').addEventListener('error', function () { this.style.display = 'none'; });
+
+$('addPostBtn').addEventListener('click', () => openPostEditor(null));
+$('postCancelBtn').addEventListener('click', () => $('postEditor').close());
+
+$('postTabs').addEventListener('click', (e) => {
+  const btn = e.target.closest('button[data-status]');
+  if (!btn) return;
+  postFilter = btn.dataset.status;
+  [...$('postTabs').children].forEach((b) => b.setAttribute('aria-selected', String(b === btn)));
+  renderPosts();
+});
+
+$('postSearch').addEventListener('input', (e) => { postSearch = e.target.value; renderPosts(); });
+
+$('postRows').addEventListener('click', (e) => {
+  const edit = e.target.closest('[data-editpost]');
+  const del = e.target.closest('[data-delpost]');
+  if (edit) openPostEditor(posts.find((p) => String(p.id) === edit.dataset.editpost));
+  if (del) removePost(posts.find((p) => String(p.id) === del.dataset.delpost));
+});
+
+$('postForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  showError('postFormError', '');
+  const id = $('p_id').value;
+  const payload = {};
+  POST_FIELDS.forEach((f) => { payload[f] = $(`p_${f}`).value.trim() || null; });
+  payload.status = $('p_status').value;
+
+  $('postSaveBtn').disabled = true;
+  $('postSaveBtn').textContent = 'Saving…';
+  try {
+    if (id) {
+      const updated = await api(`/api/admin/posts/${id}`, { method: 'PUT', body: JSON.stringify(payload) });
+      posts = posts.map((p) => (p.id === updated.id ? updated : p));
+      toast('Post updated.');
+    } else {
+      const created = await api('/api/admin/posts', { method: 'POST', body: JSON.stringify(payload) });
+      posts = [created, ...posts];
+      toast('Post created.');
+    }
+    renderPosts();
+    $('postEditor').close();
+  } catch (err) {
+    showError('postFormError', err.message);
+  } finally {
+    $('postSaveBtn').disabled = false;
+    $('postSaveBtn').textContent = 'Save';
+  }
+});
+
+async function removePost(post) {
+  if (!post) return;
+  if (!confirm(`Delete "${post.title}"?\n\nThis cannot be undone.`)) return;
+  try {
+    await api(`/api/admin/posts/${post.id}`, { method: 'DELETE' });
+    posts = posts.filter((p) => p.id !== post.id);
+    renderPosts();
+    toast('Post deleted.');
+  } catch (err) {
+    showError('appError', err.message);
+  }
+}
+
+// ---------- section switcher ----------
+$('sections').addEventListener('click', (e) => {
+  const btn = e.target.closest('button[data-section]');
+  if (!btn) return;
+  [...$('sections').children].forEach((b) => b.setAttribute('aria-selected', String(b === btn)));
+  const videos = btn.dataset.section === 'videos';
+  $('videosPanel').hidden = !videos;
+  $('postsPanel').hidden = videos;
+});
+
+// ---------- boot ----------
+(async () => {
+  try {
+    await api('/api/admin/session');
+    showApp();
+    await Promise.all([load(), loadPosts()]);
+  } catch {
+    showLogin();
+  }
+})();
+</script>
+</body>
+</html>

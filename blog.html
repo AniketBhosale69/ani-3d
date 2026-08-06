@@ -883,8 +883,6 @@
   <!-- ========== SCRIPTS ========== -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
   <script>
     // ============================================================
     //  BLOG PAGE - FINAL
@@ -892,10 +890,9 @@
     
     console.log('📝 Blog page loading...');
 
-    const SUPABASE_URL = 'https://iibmcpoqyctytzlclaon.supabase.co';
-    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlpYm1jcG9xeWN0eXR6bGNsYW9uIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE5MDU1MDAsImV4cCI6MjA5NzQ4MTUwMH0.TlEtbY2QOx4De3kIPb9Z7cQpy2-7MU88DnoneQ8TsWc';
-
-    const supabaseBlog = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    // Served by functions/api/posts.js, backed by Cloudflare D1. Returns
+    // published posts only — drafts are not reachable from the public API.
+    const API_URL = '/api/posts';
 
     let allPosts = [];
     let currentCategory = 'All';
@@ -909,20 +906,16 @@
       grid.innerHTML = `<div class="loader"><i class="fas fa-spinner"></i><br>Loading blogs...</div>`;
       
       try {
-        const { data, error } = await supabaseBlog
-          .from('blog_posts')
-          .select('*')
-          .eq('status', 'published')
-          .order('created_at', { ascending: false });
+        const res = await fetch(API_URL);
 
-        if (error) {
-          console.error('❌ Error:', error);
+        if (!res.ok) {
+          const detail = await res.json().catch(() => null);
+          console.error('❌ Error:', res.status, detail);
           grid.innerHTML = `
             <div class="no-results">
               <i class="fas fa-exclamation-triangle" style="color:#cc0000;font-size:2rem;"></i>
               <h3 style="color:#cc0000;">Error Loading Blogs</h3>
-              <p style="color:#888;">${error.message}</p>
-              <p style="color:#888;font-size:0.8rem;margin-top:5px;">💡 Make sure RLS is disabled on blog_posts table</p>
+              <p style="color:#888;">${detail?.error || `Server returned ${res.status}`}</p>
               <button onclick="loadBlogsFromSupabase()" style="margin-top:15px;background:#cc0000;border:none;padding:8px 25px;border-radius:30px;color:white;cursor:pointer;">
                 <i class="fas fa-sync"></i> Retry
               </button>
@@ -931,6 +924,8 @@
           isLoading = false;
           return;
         }
+
+        const data = await res.json();
 
         if (data && data.length > 0) {
           allPosts = data;
@@ -941,7 +936,7 @@
             <div class="no-results">
               <i class="fas fa-book-open" style="font-size:2rem;"></i>
               <h3>No Blogs Found</h3>
-              <p style="color:#888;">Add some blog posts to your Supabase 'blog_posts' table</p>
+              <p style="color:#888;">Add a post from the admin panel and set its status to published.</p>
             </div>
           `;
         }
