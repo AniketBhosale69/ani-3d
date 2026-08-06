@@ -1,0 +1,2 @@
+INSERT INTO videos (category, title, content_type, genre, language, year, stream_url, download_url, thumb, description, created_at)
+VALUES ('classic', 'The beautiful view of Dhom Lake, Mahabaleshwar in TRUE 3D', 'Spatial 3D, 3D, Stereoscopic 3D, Native 3D, iPhone ', NULL, '.', 2026, 'https://fast.wistia.com/embed/medias/rvlnvb9hyv/', 'https://vikingfile.com/f/39uXaBYoZ5', 'https://i.ibb.co/FkqVvS2W/The-beautiful-view-of-Dhom-Lake-Mahabaleshwar-in-TRUE-3-D-Thumbnail.png', '    .', '2026-07-05T00:10:33');
