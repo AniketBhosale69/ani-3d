@@ -1,17 +1,20 @@
--- ANI3D video catalogue (Cloudflare D1)
+-- ANI3D schema, for the D1 dashboard console.
 --
--- Replaces the two Supabase tables (videos + outframe_videos) with a single
--- table discriminated by `category`, so one API and one admin form cover both
--- galleries and any future one.
+-- Deliberately no DROP statements. On a fresh database they do nothing useful,
+-- and if the console executes only the first statement of a paste, a leading
+-- DROP appears to succeed while creating no tables — which then fails as
+-- "no such table: videos" on the next file. IF NOT EXISTS makes every
+-- statement here safe to re-run on its own.
+--
+-- If the console runs only one statement per Execute, run these one at a time,
+-- top to bottom.
 
-DROP TABLE IF EXISTS videos;
-
-CREATE TABLE videos (
+CREATE TABLE IF NOT EXISTS videos (
   id           INTEGER PRIMARY KEY AUTOINCREMENT,
   category     TEXT    NOT NULL CHECK (category IN ('classic', 'outframe')),
   title        TEXT    NOT NULL,
   content_type TEXT,
-  genre        TEXT,              -- comma-separated, matching the existing data
+  genre        TEXT,
   language     TEXT,
   year         INTEGER,
   stream_url   TEXT,
@@ -22,27 +25,21 @@ CREATE TABLE videos (
   updated_at   TEXT    NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ', 'now'))
 );
 
--- Every gallery query is "newest first within one category".
-CREATE INDEX idx_videos_category_created ON videos (category, created_at DESC);
+CREATE INDEX IF NOT EXISTS idx_videos_category_created ON videos (category, created_at DESC);
 
-
--- Blog posts (was the Supabase `blog_posts` table).
-
-DROP TABLE IF EXISTS posts;
-
-CREATE TABLE posts (
+CREATE TABLE IF NOT EXISTS posts (
   id         INTEGER PRIMARY KEY AUTOINCREMENT,
   title      TEXT    NOT NULL,
   slug       TEXT    NOT NULL UNIQUE,
   category   TEXT,
   excerpt    TEXT,
-  content    TEXT,              -- HTML, authored in the admin panel
+  content    TEXT,
   image      TEXT,
   author     TEXT,
-  date       TEXT,              -- human-facing display date, e.g. "June 10, 2026"
+  date       TEXT,
   status     TEXT    NOT NULL DEFAULT 'draft' CHECK (status IN ('draft', 'published')),
   created_at TEXT    NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ', 'now')),
   updated_at TEXT    NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ', 'now'))
 );
 
-CREATE INDEX idx_posts_status_created ON posts (status, created_at DESC);
+CREATE INDEX IF NOT EXISTS idx_posts_status_created ON posts (status, created_at DESC);
