@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>ANI3D - Privacy Policy</title>
+  <meta name="description" content="ANI3D Privacy Policy - Learn how we collect, use, and protect your personal information">
+  <meta name="author" content="Aniket Bhosale">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="apple-touch-icon" sizes="180x180" href="favicon_io/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon_io/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #030303;
+      color: #ffffff;
+      overflow-x: hidden;
+    }
+    
+    ::-webkit-scrollbar { width: 5px; height: 5px; }
+    ::-webkit-scrollbar-track { background: #1a1a1a; }
+    ::-webkit-scrollbar-thumb { background: #cc0000; border-radius: 10px; }
+    
+    #particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+    
+    /* ======================== NAVBAR (EXACT HOME PAGE STYLE) ======================== */
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      padding: 20px 20px;
+      background: rgba(10, 10, 10, 0);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(204, 0, 0, 0.3);
+      transition: 0.3s;
+    }
+    .navbar.scrolled {
+      padding: 15px 40px;
+      background: #00000000;
+    }
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .logo-img {
+      height: 35px;
+      width: auto;
+    }
+    .logo-text-ani {
+      font-family: 'Orbitron', monospace;
+      font-size: 2rem;
+      font-weight: 800;
+      color: #00e1ff;
+      letter-spacing: 1px;
+    }
+    .logo-text-3d {
+      font-family: 'Orbitron', monospace;
+      font-size: 2rem;
+      font-weight: 800;
+      color: #cc0000;
+      letter-spacing: 1px;
+    }
+    @media (max-width: 768px) {
+      .logo-img { height: 25px; }
+      .logo-text-ani, .logo-text-3d { font-size: 1.3rem; }
+      .navbar.scrolled { padding: 15px 20px; }
+    }
+    .nav-links {
+      display: flex;
+      gap: 25px;
+    }
+    .nav-links a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+      transition: 0.3s;
+      white-space: nowrap;
+    }
+    .nav-links a:hover { color: #ff0000; }
+    .hamburger {
+      display: none;
+      font-size: 1.8rem;
+      cursor: pointer;
+      background: none;
+      border: none;
+      color: #ff0000;
+    }
+    @media (max-width: 992px) {
+      .nav-container { padding: 0 20px; }
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background: #000000;
+        flex-direction: column;
+        padding: 20px;
+        gap: 15px;
+        border-bottom: 1px solid #cc0000;
+        z-index: 999;
+      }
+      .nav-links.active { display: flex; }
+      .hamburger { display: block; }
+    }
+    
+    /* Legal Page Content */
+    .legal-page {
+      padding: 140px 0 80px;
+      background: linear-gradient(135deg, #030303 #030303);
+      min-height: 100vh;
+      position: relative;
+      z-index: 1;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+    .legal-card {
+      background: rgba(18, 18, 18, 0.95);
+      backdrop-filter: blur(10px);
+      border-radius: 28px;
+      border: 1px solid rgba(204, 0, 0, 0.2);
+      padding: 45px;
+      transition: all 0.4s ease;
+    }
+    .legal-card:hover {
+      border-color: #cc0000;
+      transform: translateY(-5px);
+    }
+    .legal-card h1 {
+      font-size: 2rem;
+      font-family: 'Orbitron', monospace;
+      color: #cc0000;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    .legal-card h2 {
+      color: #ff6666;
+      margin: 30px 0 15px;
+      font-size: 1.3rem;
+    }
+    .legal-card p {
+      color: #bbb;
+      line-height: 1.8;
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+    }
+    .legal-card ul {
+      margin: 15px 0;
+      padding-left: 25px;
+    }
+    .legal-card li {
+      color: #aaa;
+      margin-bottom: 8px;
+    }
+    .legal-card strong {
+      color: #cc0000;
+    }
+    .back-home {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      border: 2px solid #cc0000;
+      color: #cc0000;
+      padding: 10px 25px;
+      border-radius: 40px;
+      text-decoration: none;
+      font-weight: 600;
+      margin-top: 30px;
+      transition: 0.3s;
+    }
+    .back-home:hover {
+      background: #cc0000;
+      color: white;
+      transform: translateX(-5px);
+    }
+    .footer {
+      background: #030303;
+      padding: 50px 0 30px;
+      border-top: 1px solid rgba(204, 0, 0, 0.2);
+      position: relative;
+      z-index: 1;
+    }
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 40px;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+    .footer-logo p { color: #777; font-size: 0.75rem; margin-top: 10px; max-width: 250px; }
+    .footer-links { display: flex; gap: 50px; flex-wrap: wrap; }
+    .footer-column h4 { color: #fff; margin-bottom: 15px; font-size: 0.85rem; }
+    .footer-column a { display: block; color: #777; text-decoration: none; font-size: 0.75rem; margin-bottom: 8px; transition: 0.3s; }
+    .footer-column a:hover { color: #cc0000; }
+    .footer-bottom { text-align: center; padding-top: 30px; border-top: 1px solid rgba(204,0,0,0.1); }
+    .footer-bottom p { color: #555; font-size: 0.65rem; }
+    .back-to-top {
+      position: fixed;
+      bottom: 30px;
+      left: 30px;
+      width: 40px;
+      height: 40px;
+      background: rgba(204, 0, 0, 0.2);
+      backdrop-filter: blur(10px);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0;
+      transition: 0.3s;
+      z-index: 99;
+      border: 1px solid #cc0000;
+      color: #cc0000;
+    }
+    .show-btn { opacity: 1; }
+    @media (max-width: 768px) {
+      .legal-page { padding: 120px 0 50px; }
+      .container { padding: 0 20px; }
+      .legal-card { padding: 25px; }
+      .legal-card h1 { font-size: 1.5rem; }
+      .footer-content { flex-direction: column; text-align: center; }
+      .footer-logo p { margin: 0 auto; }
+      .footer-links { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+<canvas id="particles"></canvas>
+
+<!-- NAVBAR - Privacy Page -->
+<nav class="navbar" id="navbar">
+  <div class="nav-container">
+    <a href="index.html" class="logo-link" style="text-decoration: none;">
+      <div class="logo">
+        <img src="favicon_io/logo.png" alt="ANI3D Logo" class="logo-img">
+        <span class="logo-text-ani">ANI</span><span class="logo-text-3d">3D</span>
+      </div>
+    </a>
+    <div class="nav-menu">
+      <div class="nav-links" id="navLinks">
+        <a href="index.html">HOME</a>
+        <a href="gallery-classic.html">IMMERSIVE 3D</a>
+        <a href="gallery-outframe.html">OUT OF FRAME</a>
+        <a href="creator.html">CREATOR</a>
+        <a href="blog.html">BLOG</a>
+      </div>
+    </div>
+    <button class="hamburger" id="hamburger">☰</button>
+  </div>
+</nav>
+
+<main class="legal-page">
+  <div class="container">
+    <div class="legal-card">
+      <h1><i class="fas fa-shield-alt"></i> Privacy Policy</h1>
+      <p><strong>Last Updated: June 10, 2026</strong></p>
+      
+      <h2>1. Introduction</h2>
+      <p>Ani3D respects your privacy. This page explains what information may be collected through the website and how it is used.</p>
+      
+      <h2>2. Information We Collect</h2>
+      <p>When using the contact form, you may choose to provide:</p><p>• Name</p><p>	• Email address</p><p>	• Message content</p><p>• Query category</p><p>	 Providing this information is voluntary.
+</p>
+</p>
+      
+      <h2>3. How Information Is Used</h2>
+      <p>Information submitted through the contact form is used to:</p>
+      <p>	• Respond to questions and requests</p>
+      <p>	• Review feedback and suggestions</p>
+      <p>	• Address complaints or concerns</p>
+      <p>	• Improve the website and its content</p>
+      
+      <h2>4. Third-Party Links</h2>
+      <p>Ani3D may contain links to third-party websites and platforms such as YouTube, Reddit, Discord, and other external services.</p>
+      <p>These websites operate independently and have their own privacy policies.</p>
+
+      <h2>5. Changes to This Policy</h2>
+      <p>This Privacy Policy may be updated from time to time to reflect changes to the website or its features.</p>
+      
+      <a href="index.html" class="back-home"><i class="fas fa-arrow-left"></i> Back to Home</a>
+    </div>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="footer-content">
+    <div class="footer-logo">
+      <div class="logo">
+        <img src="favicon_io/logo.png" alt="ANI3D Logo" class="logo-img">
+      </div>
+      <p>Experience cinema differently</p><p> Experience everything in 3D.</p>
+    </div>
+    <div class="footer-links">
+      <div class="footer-column"><h4>Explore</h4><a href="index.html">Home</a><a href="blog.html">Blog</a><a href="creator.html">Creator</a></div>
+      <div class="footer-column"><h4>Galleries</h4><a href="gallery-classic.html">Immersive 3D</a><a href="gallery-outframe.html">Out of Frame</a></div>
+      <div class="footer-column"><h4>Legal</h4><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms & Conditions</a></div>
+    </div>
+  </div>
+  <div class="footer-bottom"><p>© 2026 ANI3D — All rights reserved</p></div>
+</footer>
+
+<div class="back-to-top" id="backToTop">↑</div>
+
+<script>
+  function initParticles() {
+    const canvas = document.getElementById('particles');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+    resize();
+    let particles = [];
+    for (let i = 0; i < 50; i++) {
+      particles.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, radius: Math.random() * 1.5, alpha: Math.random(), speed: 0.1 + Math.random() * 0.2, color: Math.random() > 0.7 ? "#cc0000" : "#fff" });
+    }
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fillStyle = p.color === "#cc0000" ? `rgba(204,0,0,${p.alpha * 0.3})` : `rgba(255,255,255,${p.alpha * 0.15})`;
+        ctx.fill();
+        p.y += p.speed;
+        if (p.y > canvas.height) p.y = 0;
+      });
+      requestAnimationFrame(draw);
+    }
+    draw();
+    window.addEventListener('resize', () => { resize(); particles = []; for (let i = 0; i < 50; i++) { particles.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, radius: Math.random() * 1.5, alpha: Math.random(), speed: 0.1 + Math.random() * 0.2, color: Math.random() > 0.7 ? "#cc0000" : "#fff" }); } });
+  }
+  function initNavbar() {
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => { if (window.scrollY > 50) navbar.classList.add('scrolled'); else navbar.classList.remove('scrolled'); });
+  }
+  function initHamburger() {
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+    if (hamburger && navLinks) {
+      hamburger.addEventListener('click', () => navLinks.classList.toggle('active'));
+      document.querySelectorAll('.nav-links a').forEach(link => { link.addEventListener('click', () => navLinks.classList.remove('active')); });
+    }
+  }
+  function initBackToTop() {
+    const btn = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => { if (window.scrollY > 500) btn.classList.add('show-btn'); else btn.classList.remove('show-btn'); });
+    btn?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+  }
+  document.addEventListener('DOMContentLoaded', () => {
+    initParticles();
+    initNavbar();
+    initHamburger();
+    initBackToTop();
+  });
+</script>
+</body>
+</html>

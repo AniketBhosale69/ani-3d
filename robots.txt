@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://ani3d.in/sitemap.xml

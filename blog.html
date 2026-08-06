@@ -1,0 +1,1190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>ANI3D - Blog | 3D Guides, Tutorials & Insights</title>
+  <meta name="description" content="Explore 3D playback guides, tutorials, reviews, and insights. Learn about SBS 3D, Anaglyph 3D, VR headsets, and AI 2D-to-3D conversion.">
+  <meta name="author" content="Aniket Bhosale">
+  <meta name="robots" content="index, follow">
+  
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="apple-touch-icon" sizes="180x180" href="favicon_io/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon_io/favicon-16x16.png">
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-87H1FH146C"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-87H1FH146C');
+  </script>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #0a0a0a;
+      color: #ffffff;
+      overflow-x: hidden;
+    }
+
+    ::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #1a1a1a;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cc0000;
+      border-radius: 10px;
+    }
+
+    #particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    /* ========== NAVBAR ========== */
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      padding: 20px 20px;
+      background: rgba(10, 10, 10, 0);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(204, 0, 0, 0.3);
+      transition: 0.3s;
+    }
+    .navbar.scrolled {
+      padding: 15px 40px;
+      background: #00000000;
+    }
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .logo-img {
+      height: 35px;
+      width: auto;
+    }
+    .logo-text-ani {
+      font-family: 'Orbitron', monospace;
+      font-size: 2rem;
+      font-weight: 800;
+      color: #00e1ff;
+      letter-spacing: 1px;
+    }
+    .logo-text-3d {
+      font-family: 'Orbitron', monospace;
+      font-size: 2rem;
+      font-weight: 800;
+      color: #cc0000;
+      letter-spacing: 1px;
+    }
+    .nav-links {
+      display: flex;
+      gap: 25px;
+    }
+    .nav-links a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+      transition: 0.3s;
+      white-space: nowrap;
+    }
+    .nav-links a:hover { color: #ff0000; }
+    .nav-links a.active { color: #cc0000; }
+    .hamburger {
+      display: none;
+      font-size: 1.8rem;
+      cursor: pointer;
+      background: none;
+      border: none;
+      color: #ff0000;
+    }
+
+    /* ========== BLOG HERO ========== */
+    .blog-hero {
+      padding: 150px 0 80px;
+      background: linear-gradient(135deg, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.95));
+      text-align: center;
+      position: relative;
+    }
+    .blog-hero-content h1 {
+      font-size: 3.5rem;
+      font-family: 'Orbitron', monospace;
+      margin-bottom: 15px;
+    }
+    .blog-hero-content p {
+      color: #aaa;
+      font-size: 1rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .gradient-text {
+      background: linear-gradient(135deg, #cc0000, #ff4444);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .section-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(204, 0, 0, 0.15);
+      padding: 6px 16px;
+      border-radius: 50px;
+      font-size: 0.75rem;
+      color: #cc0000;
+      margin-bottom: 15px;
+    }
+
+    /* ========== CATEGORY FILTER ========== */
+    .blog-filter-section {
+      background: #050505;
+      padding: 20px 0;
+      border-bottom: 1px solid rgba(204, 0, 0, 0.1);
+      position: sticky;
+      top: 70px;
+      z-index: 99;
+      overflow-x: auto;
+    }
+    .blog-filter-wrapper {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 40px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+    .filter-label {
+      color: #888;
+      font-size: 0.7rem;
+      font-weight: 600;
+      margin-right: 10px;
+      letter-spacing: 1px;
+      white-space: nowrap;
+    }
+    .filter-btn {
+      background: rgba(20, 20, 20, 0.9);
+      border: 1px solid rgba(204, 0, 0, 0.2);
+      padding: 5px 15px;
+      border-radius: 30px;
+      font-size: 0.65rem;
+      font-weight: 500;
+      color: #aaa;
+      cursor: pointer;
+      transition: 0.3s;
+      white-space: nowrap;
+    }
+    .filter-btn:hover {
+      background: rgba(204, 0, 0, 0.2);
+      color: #fff;
+      border-color: #cc0000;
+    }
+    .filter-btn.active {
+      background: #cc0000;
+      color: white;
+      border-color: #cc0000;
+    }
+
+    /* ========== BLOG GRID ========== */
+    .blog-grid-section {
+      padding: 60px 0;
+      background: #030303;
+    }
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    /* ========== BLOG CARD ========== */
+    .blog-card {
+      background: rgba(20, 20, 20, 0.95);
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(204, 0, 0, 0.15);
+      transition: all 0.4s ease;
+      cursor: pointer;
+    }
+    .blog-card:hover {
+      transform: translateY(-8px);
+      border-color: #cc0000;
+      box-shadow: 0 15px 35px rgba(204, 0, 0, 0.3);
+    }
+
+    /* ========== BLOG CARD IMAGE - AUTO FIT (Gallery Style) ========== */
+    .blog-card-image {
+      width: 100%;
+      aspect-ratio: 16/9;
+      overflow: hidden;
+      background: #1a1a1a;
+      position: relative;
+    }
+
+    .blog-card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .blog-card:hover .blog-card-image img {
+      transform: scale(1.05);
+    }
+
+    .blog-card-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .blog-card:hover .blog-card-overlay {
+      opacity: 1;
+    }
+
+    .blog-card-overlay i {
+      font-size: 3rem;
+      color: #cc0000;
+    }
+
+    /* ========== BLOG CARD CONTENT ========== */
+    .blog-card-content {
+      padding: 16px 18px;
+    }
+    .blog-card-category {
+      display: inline-block;
+      background: rgba(204, 0, 0, 0.15);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.65rem;
+      color: #ff6666;
+      margin-bottom: 10px;
+    }
+    .blog-card-title {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #fff;
+      line-height: 1.4;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .blog-card-excerpt {
+      font-size: 0.8rem;
+      color: #aaa;
+      line-height: 1.5;
+      margin-bottom: 12px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .blog-card-meta {
+      display: flex;
+      justify-content: space-between;
+      padding-top: 10px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      font-size: 0.65rem;
+      color: #666;
+    }
+    .blog-card-meta i {
+      color: #cc0000;
+      margin-right: 5px;
+    }
+
+    /* ========== LOADING & NO RESULTS ========== */
+    .loader {
+      text-align: center;
+      padding: 50px;
+      color: #888;
+      grid-column: 1 / -1;
+    }
+    .loader i {
+      font-size: 2rem;
+      color: #cc0000;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .no-results {
+      text-align: center;
+      padding: 50px;
+      color: #888;
+      grid-column: 1 / -1;
+    }
+    .no-results i {
+      font-size: 2rem;
+      color: #888;
+      margin-bottom: 15px;
+    }
+
+    /* ============================================================
+       BLOG DETAIL MODAL
+       ============================================================ */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.98);
+      z-index: 2000;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-content {
+      position: relative;
+      max-width: 1000px;
+      width: 100%;
+      max-height: 92vh;
+      background: #0f0f0f;
+      border-radius: 20px;
+      border: 2px solid rgba(204, 0, 0, 0.3);
+      overflow-y: auto;
+    }
+
+    .modal-content::-webkit-scrollbar {
+      width: 6px;
+    }
+    .modal-content::-webkit-scrollbar-track {
+      background: #1a1a1a;
+    }
+    .modal-content::-webkit-scrollbar-thumb {
+      background: #cc0000;
+      border-radius: 10px;
+    }
+
+    .close-modal {
+      position: sticky;
+      top: 15px;
+      float: right;
+      font-size: 2rem;
+      color: #fff;
+      cursor: pointer;
+      z-index: 10;
+      transition: 0.3s;
+      background: rgba(0, 0, 0, 0.8);
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 15px 20px 0 0;
+      border: 1px solid rgba(204, 0, 0, 0.3);
+    }
+    .close-modal:hover {
+      color: #cc0000;
+      transform: rotate(90deg);
+    }
+
+    #blogDetailContainer {
+      padding: 30px 40px 40px;
+    }
+
+    .blog-detail-image {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background-color: #121212;
+      border-radius: 16px;
+      margin-bottom: 25px;
+      overflow: hidden;
+      border: 1px solid rgba(204, 0, 0, 0.15);
+    }
+
+    .blog-detail-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .blog-detail-title {
+      font-size: 2rem;
+      margin-bottom: 12px;
+      font-family: 'Orbitron', monospace;
+      color: #cc0000;
+      line-height: 1.3;
+    }
+
+    .blog-detail-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      padding-bottom: 15px;
+      border-bottom: 2px solid rgba(204, 0, 0, 0.15);
+      margin-bottom: 25px;
+      font-size: 0.85rem;
+      color: #999;
+    }
+
+    .blog-detail-meta span {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .blog-detail-meta i {
+      color: #cc0000;
+    }
+
+    .blog-detail-content {
+      line-height: 1.9;
+      color: #d0d0d0;
+      font-size: 1rem;
+    }
+
+    .blog-detail-content p {
+      margin-bottom: 20px;
+    }
+    .blog-detail-content h1 {
+      color: #cc0000;
+      font-size: 2rem;
+      font-family: 'Orbitron', monospace;
+      margin: 35px 0 20px;
+    }
+    .blog-detail-content h2 {
+      color: #ff4444;
+      font-size: 1.6rem;
+      font-family: 'Orbitron', monospace;
+      margin: 30px 0 18px;
+    }
+    .blog-detail-content h3 {
+      color: #ff6666;
+      font-size: 1.3rem;
+      font-family: 'Orbitron', monospace;
+      margin: 28px 0 15px;
+    }
+    .blog-detail-content ul, .blog-detail-content ol {
+      margin: 18px 0 22px;
+      padding-left: 30px;
+    }
+    .blog-detail-content li {
+      margin-bottom: 10px;
+      line-height: 1.8;
+    }
+    .blog-detail-content li::marker {
+      color: #cc0000;
+    }
+    .blog-detail-content a {
+      color: #ff5555;
+      text-decoration: underline;
+      transition: 0.3s;
+    }
+    .blog-detail-content a:hover {
+      color: #ff9999;
+    }
+    .blog-detail-content strong {
+      color: #ff7777;
+    }
+
+    .back-to-blog-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: transparent;
+      border: 2px solid #cc0000;
+      color: #cc0000;
+      padding: 12px 30px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.85rem;
+      transition: 0.3s;
+      margin-top: 30px;
+      cursor: pointer;
+    }
+    .back-to-blog-btn:hover {
+      background: #cc0000;
+      color: #fff;
+      transform: translateX(-5px);
+    }
+
+    /* ========== BACK TO TOP ========== */
+    .back-to-top {
+      position: fixed;
+      bottom: 30px;
+      left: 30px;
+      width: 40px;
+      height: 40px;
+      background: rgba(204, 0, 0, 0.2);
+      backdrop-filter: blur(10px);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0;
+      transition: 0.3s;
+      z-index: 99;
+      border: 1px solid #cc0000;
+      color: #cc0000;
+      font-size: 1.1rem;
+    }
+    .show-btn {
+      opacity: 1;
+    }
+    .back-to-top:hover {
+      background: rgba(204, 0, 0, 0.5);
+      transform: translateY(-5px);
+    }
+
+    /* ========== FOOTER ========== */
+    .footer {
+      background: #030303;
+      padding: 50px 0 30px;
+      border-top: 1px solid rgba(204, 0, 0, 0.2);
+      position: relative;
+      z-index: 1;
+    }
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 40px;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+    .footer-logo p {
+      color: #777;
+      font-size: 0.75rem;
+      margin-top: 10px;
+      max-width: 250px;
+    }
+    .footer-links {
+      display: flex;
+      gap: 50px;
+      flex-wrap: wrap;
+    }
+    .footer-column h4 {
+      color: #fff;
+      margin-bottom: 15px;
+      font-size: 0.85rem;
+    }
+    .footer-column a {
+      display: block;
+      color: #777;
+      text-decoration: none;
+      font-size: 0.75rem;
+      margin-bottom: 8px;
+      transition: 0.3s;
+    }
+    .footer-column a:hover {
+      color: #cc0000;
+    }
+    .footer-bottom {
+      text-align: center;
+      padding-top: 30px;
+      border-top: 1px solid rgba(204, 0, 0, 0.1);
+      margin-top: 30px;
+    }
+    .footer-bottom p {
+      color: #555;
+      font-size: 0.65rem;
+    }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 992px) {
+      .blog-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 25px;
+        padding: 0 20px;
+      }
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background: #000;
+        flex-direction: column;
+        padding: 20px;
+        gap: 15px;
+        border-bottom: 1px solid #cc0000;
+        z-index: 999;
+      }
+      .nav-links.active {
+        display: flex;
+      }
+      .hamburger {
+        display: block;
+      }
+      .blog-filter-wrapper {
+        padding: 0 20px;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        gap: 5px;
+      }
+      .filter-btn {
+        font-size: 0.6rem;
+        padding: 4px 12px;
+        white-space: nowrap;
+      }
+      .container {
+        padding: 0 20px;
+      }
+      #blogDetailContainer {
+        padding: 25px 25px 35px;
+      }
+      .blog-detail-title {
+        font-size: 1.6rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .blog-hero {
+        padding: 120px 0 50px;
+      }
+      .blog-hero-content h1 {
+        font-size: 2rem;
+      }
+      .blog-hero-content p {
+        font-size: 0.85rem;
+        padding: 0 20px;
+      }
+      .blog-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 0 15px;
+      }
+      .blog-card-content {
+        padding: 14px 16px;
+      }
+      .blog-card-title {
+        font-size: 0.95rem;
+      }
+      .blog-card-excerpt {
+        font-size: 0.75rem;
+      }
+      .blog-detail-title {
+        font-size: 1.3rem;
+      }
+      #blogDetailContainer {
+        padding: 20px;
+      }
+      .logo-img {
+        height: 25px;
+      }
+      .logo-text-ani, .logo-text-3d {
+        font-size: 1.3rem;
+      }
+      .navbar.scrolled {
+        padding: 15px 20px;
+      }
+      .footer-content {
+        flex-direction: column;
+        gap: 30px;
+        padding: 0 20px;
+      }
+      .footer-links {
+        gap: 30px;
+      }
+      .blog-filter-section {
+        top: 65px;
+      }
+      .close-modal {
+        width: 40px;
+        height: 40px;
+        font-size: 1.5rem;
+        margin: 10px 15px 0 0;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .blog-hero {
+        padding: 100px 0 40px;
+      }
+      .blog-hero-content h1 {
+        font-size: 1.6rem;
+      }
+      .blog-grid {
+        padding: 0 10px;
+        gap: 15px;
+      }
+      .blog-detail-title {
+        font-size: 1.1rem;
+      }
+      .blog-detail-meta {
+        gap: 12px;
+        font-size: 0.7rem;
+      }
+      #blogDetailContainer {
+        padding: 15px;
+      }
+      .back-to-top {
+        bottom: 15px;
+        left: 15px;
+        width: 35px;
+        height: 35px;
+        font-size: 0.9rem;
+      }
+      .close-modal {
+        width: 35px;
+        height: 35px;
+        font-size: 1.3rem;
+        margin: 8px 10px 0 0;
+      }
+      .blog-detail-content {
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="particles"></canvas>
+
+  <!-- ========== NAVBAR ========== -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo-link" style="text-decoration: none;">
+        <div class="logo">
+          <img src="favicon_io/logo.png" alt="ANI3D Logo" class="logo-img">
+          <span class="logo-text-ani">ANI</span><span class="logo-text-3d">3D</span>
+        </div>
+      </a>
+      <div class="nav-menu">
+        <div class="nav-links" id="navLinks">
+          <a href="index.html">HOME</a>
+          <a href="gallery-classic.html">IMMERSIVE 3D</a>
+          <a href="gallery-outframe.html">OUT OF FRAME 3D</a>
+          <a href="creator.html">CREATOR</a>
+          <a href="blog.html" class="active">BLOG</a>
+        </div>
+      </div>
+      <button class="hamburger" id="hamburger">☰</button>
+    </div>
+  </nav>
+
+  <!-- ========== MAIN ========== -->
+  <main>
+    <section class="blog-hero">
+      <div class="container">
+        <div class="blog-hero-content">
+          <span class="section-tag"><i class="fas fa-pen-fancy"></i> Insights & Stories</span>
+          <h1>ANI3D <span class="gradient-text">Blog</span></h1>
+          <p>Your guide to 3D playback, formats, displays and immersive viewing experience.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="blog-filter-section" id="blogFilterSection">
+      <div class="blog-filter-wrapper" id="blogFilterWrapper">
+        <span class="filter-label"><i class="fas fa-filter"></i> Categories:</span>
+      </div>
+    </section>
+
+    <section class="blog-grid-section">
+      <div class="blog-grid" id="blogGrid">
+        <div class="loader"><i class="fas fa-spinner"></i><br>Loading blogs...</div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ========== BLOG DETAIL MODAL ========== -->
+  <div id="blogModal" class="modal">
+    <div class="modal-content">
+      <span class="close-modal" id="modalClose">&times;</span>
+      <div id="blogDetailContainer"></div>
+    </div>
+  </div>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <a href="index.html" class="logo-link" style="text-decoration: none;">
+          <div class="footer-logo">
+            <div class="logo">
+              <img src="favicon_io/logo.png" alt="ANI3D Logo" class="logo-img">
+            </div>
+            <p>Experience cinema differently.</p>
+            <p>Experience everything in 3D.</p>
+          </div>
+        </a>
+        <div class="footer-links">
+          <div class="footer-column">
+            <h4>Explore</h4>
+            <a href="index.html">Home</a>
+            <a href="blog.html">Blog</a>
+            <a href="creator.html">Creator</a>
+          </div>
+          <div class="footer-column">
+            <h4>Galleries</h4>
+            <a href="gallery-classic.html">Immersive 3D</a>
+            <a href="gallery-outframe.html">Out of Frame</a>
+          </div>
+          <div class="footer-column">
+            <h4>Legal</h4>
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="terms.html">Terms & Conditions</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 ANI3D — All rights reserved</p>
+      </div>
+    </div>
+  </footer>
+
+  <div class="back-to-top" id="backToTop">↑</div>
+
+  <!-- ========== SCRIPTS ========== -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <script>
+    // ============================================================
+    //  BLOG PAGE - FINAL
+    // ============================================================
+    
+    console.log('📝 Blog page loading...');
+
+    const SUPABASE_URL = 'https://iibmcpoqyctytzlclaon.supabase.co';
+    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlpYm1jcG9xeWN0eXR6bGNsYW9uIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE5MDU1MDAsImV4cCI6MjA5NzQ4MTUwMH0.TlEtbY2QOx4De3kIPb9Z7cQpy2-7MU88DnoneQ8TsWc';
+
+    const supabaseBlog = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    let allPosts = [];
+    let currentCategory = 'All';
+    let isLoading = true;
+
+    // ============================================================
+    //  LOAD BLOGS
+    // ============================================================
+    async function loadBlogsFromSupabase() {
+      const grid = document.getElementById('blogGrid');
+      grid.innerHTML = `<div class="loader"><i class="fas fa-spinner"></i><br>Loading blogs...</div>`;
+      
+      try {
+        const { data, error } = await supabaseBlog
+          .from('blog_posts')
+          .select('*')
+          .eq('status', 'published')
+          .order('created_at', { ascending: false });
+
+        if (error) {
+          console.error('❌ Error:', error);
+          grid.innerHTML = `
+            <div class="no-results">
+              <i class="fas fa-exclamation-triangle" style="color:#cc0000;font-size:2rem;"></i>
+              <h3 style="color:#cc0000;">Error Loading Blogs</h3>
+              <p style="color:#888;">${error.message}</p>
+              <p style="color:#888;font-size:0.8rem;margin-top:5px;">💡 Make sure RLS is disabled on blog_posts table</p>
+              <button onclick="loadBlogsFromSupabase()" style="margin-top:15px;background:#cc0000;border:none;padding:8px 25px;border-radius:30px;color:white;cursor:pointer;">
+                <i class="fas fa-sync"></i> Retry
+              </button>
+            </div>
+          `;
+          isLoading = false;
+          return;
+        }
+
+        if (data && data.length > 0) {
+          allPosts = data;
+          console.log('✅ Loaded', data.length, 'blogs');
+        } else {
+          allPosts = [];
+          grid.innerHTML = `
+            <div class="no-results">
+              <i class="fas fa-book-open" style="font-size:2rem;"></i>
+              <h3>No Blogs Found</h3>
+              <p style="color:#888;">Add some blog posts to your Supabase 'blog_posts' table</p>
+            </div>
+          `;
+        }
+        
+        isLoading = false;
+        renderCategories();
+        renderBlogs();
+        
+      } catch (err) {
+        console.error('❌ Error:', err);
+        grid.innerHTML = `
+          <div class="no-results">
+            <i class="fas fa-exclamation-triangle" style="color:#cc0000;font-size:2rem;"></i>
+            <h3 style="color:#cc0000;">Connection Error</h3>
+            <p style="color:#888;">${err.message}</p>
+          </div>
+        `;
+        isLoading = false;
+      }
+    }
+
+    // ============================================================
+    //  RENDER CATEGORIES - AUTO DETECT
+    // ============================================================
+    function renderCategories() {
+      const wrapper = document.getElementById('blogFilterWrapper');
+      const postCategories = [...new Set(allPosts.map(p => p.category).filter(Boolean))];
+      const allCategories = ['All', ...postCategories];
+      
+      wrapper.innerHTML = `
+        <span class="filter-label"><i class="fas fa-filter"></i> Categories:</span>
+        ${allCategories.map(cat => `
+          <button class="filter-btn ${currentCategory === cat ? 'active' : ''}" data-category="${cat}">
+            ${cat}
+          </button>
+        `).join('')}
+      `;
+
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+          this.classList.add('active');
+          currentCategory = this.dataset.category;
+          renderBlogs();
+        });
+      });
+    }
+
+    // ============================================================
+    //  RENDER BLOGS
+    // ============================================================
+    function renderBlogs() {
+      if (isLoading) return;
+      
+      const grid = document.getElementById('blogGrid');
+      
+      let filtered = allPosts;
+      if (currentCategory !== 'All') {
+        filtered = filtered.filter(p => p.category === currentCategory);
+      }
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `
+          <div class="no-results">
+            <i class="fas fa-search" style="font-size:2rem;"></i>
+            <h3>No blogs in "${currentCategory}"</h3>
+            <p style="color:#888;">Try selecting a different category</p>
+          </div>
+        `;
+        return;
+      }
+
+      grid.innerHTML = filtered.map(post => `
+        <div class="blog-card" data-id="${post.id}">
+          <div class="blog-card-image">
+            <img src="${post.image || 'https://via.placeholder.com/400x225/1a1a1a/cc0000?text=No+Image'}" 
+                 alt="${post.title || 'Blog Image'}" 
+                 loading="lazy"
+                 onerror="this.src='https://via.placeholder.com/400x225/1a1a1a/cc0000?text=No+Image'">
+            <div class="blog-card-overlay">
+              <i class="fas fa-book-open"></i>
+            </div>
+          </div>
+          <div class="blog-card-content">
+            <span class="blog-card-category">${post.category || 'General'}</span>
+            <h3 class="blog-card-title">${post.title || 'Untitled'}</h3>
+            <p class="blog-card-excerpt">${post.excerpt || 'No description available.'}</p>
+            <div class="blog-card-meta">
+              <span><i class="fas fa-user"></i> ${post.author || 'ANI3D'}</span>
+              <span><i class="fas fa-calendar-alt"></i> ${post.date || 'Coming Soon'}</span>
+            </div>
+          </div>
+        </div>
+      `).join('');
+
+      document.querySelectorAll('.blog-card').forEach(card => {
+        card.addEventListener('click', function() {
+          const id = parseInt(this.dataset.id);
+          const post = allPosts.find(p => p.id === id);
+          if (post) openBlogDetail(post);
+        });
+      });
+    }
+
+    // ============================================================
+    //  OPEN BLOG DETAIL
+    // ============================================================
+    function openBlogDetail(post) {
+      const modal = document.getElementById('blogModal');
+      const container = document.getElementById('blogDetailContainer');
+      
+      container.innerHTML = `
+        <div class="blog-detail-image">
+          <img src="${post.image || 'https://via.placeholder.com/800x450/1a1a1a/cc0000?text=No+Image'}" 
+               alt="${post.title || 'Blog Image'}"
+               onerror="this.src='https://via.placeholder.com/800x450/1a1a1a/cc0000?text=No+Image'">
+        </div>
+        
+        <h1 class="blog-detail-title">${post.title || 'Untitled'}</h1>
+        
+        <div class="blog-detail-meta">
+          <span><i class="fas fa-user"></i> ${post.author || 'ANI3D'}</span>
+          <span><i class="fas fa-calendar-alt"></i> ${post.date || 'Coming Soon'}</span>
+          <span><i class="fas fa-tag"></i> ${post.category || 'General'}</span>
+        </div>
+        
+        <div class="blog-detail-content">
+          ${post.content || '<p>No content available for this blog post.</p>'}
+        </div>
+        
+        <button class="back-to-blog-btn" id="backToBlogBtn">
+          <i class="fas fa-arrow-left"></i> Back to Blog
+        </button>
+      `;
+
+      document.getElementById('backToBlogBtn')?.addEventListener('click', closeBlogModal);
+      modal.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeBlogModal() {
+      const modal = document.getElementById('blogModal');
+      modal.style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
+
+    // ============================================================
+    //  NAVBAR FUNCTIONS
+    // ============================================================
+    function initNavbar() {
+      const navbar = document.getElementById("navbar");
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 50) navbar.classList.add("scrolled");
+        else navbar.classList.remove("scrolled");
+      });
+    }
+
+    function initHamburger() {
+      const hamburger = document.getElementById("hamburger");
+      const navLinks = document.getElementById("navLinks");
+      if (hamburger && navLinks) {
+        hamburger.addEventListener("click", () => navLinks.classList.toggle("active"));
+      }
+    }
+
+    function initBackToTop() {
+      const backBtn = document.getElementById("backToTop");
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 500) backBtn.classList.add("show-btn");
+        else backBtn.classList.remove("show-btn");
+      });
+      backBtn?.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+    }
+
+    function initModalClose() {
+      document.getElementById('modalClose')?.addEventListener('click', closeBlogModal);
+      document.getElementById('blogModal')?.addEventListener('click', (e) => {
+        if (e.target === document.getElementById('blogModal')) closeBlogModal();
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeBlogModal();
+      });
+    }
+
+    // ============================================================
+    //  PARTICLES
+    // ============================================================
+    function initParticles() {
+      const canvas = document.getElementById('particles');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      let particles = [];
+      for (let i = 0; i < 60; i++) {
+        particles.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          radius: Math.random() * 1.5,
+          alpha: Math.random(),
+          speed: 0.15 + Math.random() * 0.25,
+          color: Math.random() > 0.7 ? "#cc0000" : "#fff"
+        });
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach(p => {
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+          if (p.color === "#cc0000") {
+            ctx.fillStyle = `rgba(204,0,0,${p.alpha * 0.3})`;
+          } else {
+            ctx.fillStyle = `rgba(255,255,255,${p.alpha * 0.15})`;
+          }
+          ctx.fill();
+          p.y += p.speed;
+          if (p.y > canvas.height) {
+            p.y = 0;
+            p.x = Math.random() * canvas.width;
+          }
+        });
+        requestAnimationFrame(draw);
+      }
+      draw();
+      window.addEventListener('resize', () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      });
+    }
+
+    // ============================================================
+    //  INIT
+    // ============================================================
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('📝 Blog page initializing...');
+      initParticles();
+      initNavbar();
+      initHamburger();
+      initBackToTop();
+      initModalClose();
+      loadBlogsFromSupabase();
+    });
+  </script>
+</body>
+</html>

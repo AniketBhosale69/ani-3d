@@ -1,0 +1,25 @@
+# OS cruft
+.DS_Store
+Thumbs.db
+desktop.ini
+*~
+
+# Editors
+.vscode/
+.idea/
+*.swp
+
+# Logs / local scratch
+*.log
+.cache/
+tmp/
+
+# Node (only if a toolchain is ever added — nothing here needs it today)
+node_modules/
+.wrangler/
+
+# Cloudflare / deploy secrets
+.dev.vars
+.env
+.env.*
+!.env.example

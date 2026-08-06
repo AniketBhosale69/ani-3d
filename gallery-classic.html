@@ -1,0 +1,2000 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover" />
+  <title>ANI3D · Immersive 3DGallery</title>
+  <meta name="description" content="Immersive stereoscopic 3D content gallery with depth perception" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <link rel="apple-touch-icon" sizes="180x180" href="favicon_io/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon_io/favicon-16x16.png" />
+  <style>
+    /* ===== RESET & BASE ===== */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #0a0a0a;
+      color: #ffffff;
+      overflow-x: hidden;
+    }
+    ::-webkit-scrollbar { width: 5px; height: 5px; }
+    ::-webkit-scrollbar-track { background: #1a1a1a; }
+    ::-webkit-scrollbar-thumb { background: #cc0000; border-radius: 10px; }
+
+    /* ===== PARTICLES ===== */
+    #particles {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* ===== NAVBAR ===== */
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      padding: 20px 20px;
+      background: rgba(10, 10, 10, 0);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(204, 0, 0, 0.3);
+      transition: 0.3s;
+    }
+    .navbar.scrolled { padding: 15px 40px; background: #00000000; }
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .logo-img { height: 35px; width: auto; }
+    .logo-text-ani { font-family: 'Orbitron', monospace; font-size: 2rem; font-weight: 800; color: #00e1ff; letter-spacing: 1px; }
+    .logo-text-3d { font-family: 'Orbitron', monospace; font-size: 2rem; font-weight: 800; color: #cc0000; letter-spacing: 1px; }
+    .nav-links {
+      display: flex;
+      gap: 25px;
+    }
+    .nav-links a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+      transition: 0.3s;
+      white-space: nowrap;
+    }
+    .nav-links a:hover { color: #ff0000; }
+    .nav-links a.active { color: #cc0000; }
+    .hamburger {
+      display: none;
+      font-size: 1.8rem;
+      cursor: pointer;
+      background: none;
+      border: none;
+      color: #ff0000;
+    }
+    @media (max-width: 768px) {
+      .logo-img { height: 28px; }
+      .logo-text-ani, .logo-text-3d { font-size: 1.5rem; }
+      .navbar.scrolled { padding: 15px 20px; }
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background: #000;
+        flex-direction: column;
+        padding: 20px;
+        gap: 15px;
+        border-bottom: 1px solid #cc0000;
+        z-index: 999;
+      }
+      .nav-links.active { display: flex; }
+      .hamburger { display: block; }
+    }
+
+    /* ===== HERO ===== */
+    .gallery-hero {
+      padding: 120px 0 30px;
+      background: linear-gradient(135deg, #0a0a0a, #050505);
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+    .gallery-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(204,0,0,0.15);
+      padding: 6px 16px;
+      border-radius: 50px;
+      font-size: 0.75rem;
+      color: #cc0000;
+      margin-bottom: 15px;
+    }
+    .gallery-hero h1 { font-size: 2.8rem; font-family: 'Orbitron', monospace; margin-bottom: 12px; }
+    .gradient-text { background: linear-gradient(135deg, #cc0000, #ff4444); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .gallery-hero p { color: #aaa; max-width: 500px; margin: 0 auto; font-size: 0.85rem; }
+    .gallery-stats {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 25px;
+      flex-wrap: wrap;
+    }
+    .stat-card {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255,255,255,0.05);
+      padding: 6px 15px;
+      border-radius: 40px;
+      font-size: 0.75rem;
+    }
+
+    /* ===== FILTER BAR (TOP) ===== */
+    .filter-bar-wrapper {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 20px 20px;
+      position: relative;
+      z-index: 2;
+    }
+    .filter-toggle {
+      background: rgba(18,18,18,0.95);
+      border: 1px solid rgba(204,0,0,0.25);
+      border-radius: 60px;
+      padding: 10px 28px;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      transition: 0.3s;
+      color: #fff;
+      font-weight: 600;
+      font-size: 0.9rem;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+    }
+    .filter-toggle:hover {
+      border-color: #cc0000;
+      background: rgba(204,0,0,0.1);
+    }
+    .filter-toggle i { color: #cc0000; }
+    .filter-toggle .arrow { transition: transform 0.3s; }
+    .filter-toggle.open .arrow { transform: rotate(180deg); }
+
+    .filter-panel {
+      background: rgba(12,12,12,0.95);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(204,0,0,0.15);
+      border-radius: 20px;
+      padding: 0 20px;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), padding 0.4s ease, opacity 0.3s ease;
+      opacity: 0;
+      margin-top: 12px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+    }
+    .filter-panel.open {
+      max-height: 750px;
+      padding: 20px 20px 24px;
+      opacity: 1;
+    }
+
+    /* ===== ACCORDION FILTERS ===== */
+    .filter-accordion {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .filter-accordion-item {
+      border: 1px solid rgba(204,0,0,0.1);
+      border-radius: 12px;
+      overflow: hidden;
+      background: rgba(20,20,20,0.3);
+      transition: border-color 0.3s;
+    }
+    .filter-accordion-item:hover { border-color: rgba(204,0,0,0.3); }
+    .filter-accordion-item.active { border-color: rgba(204,0,0,0.5); }
+    .filter-accordion-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      cursor: pointer;
+      transition: background 0.2s;
+      user-select: none;
+    }
+    .filter-accordion-header:hover { background: rgba(204,0,0,0.05); }
+    .filter-accordion-header .label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #ddd;
+      letter-spacing: 0.5px;
+    }
+    .filter-accordion-header .label i {
+      color: #cc0000;
+      margin-right: 10px;
+      width: 20px;
+      text-align: center;
+    }
+    .filter-accordion-header .icon {
+      font-size: 0.7rem;
+      color: #888;
+      transition: transform 0.3s ease;
+    }
+    .filter-accordion-item.active .filter-accordion-header .icon { transform: rotate(180deg); }
+    .filter-accordion-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease, padding 0.3s ease;
+      padding: 0 16px;
+    }
+    .filter-accordion-item.active .filter-accordion-body {
+      max-height: 280px;
+      padding: 6px 16px 16px;
+      overflow-y: auto;
+    }
+    .filter-accordion-body::-webkit-scrollbar { width: 3px; }
+    .filter-accordion-body::-webkit-scrollbar-thumb { background: #cc0000; border-radius: 10px; }
+
+    .filter-option-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .filter-option-btn {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(204,0,0,0.12);
+      padding: 4px 12px;
+      border-radius: 30px;
+      font-size: 0.65rem;
+      font-weight: 500;
+      color: #aaa;
+      cursor: pointer;
+      transition: 0.25s;
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      touch-action: manipulation;
+    }
+    .filter-option-btn i { font-size: 0.55rem; }
+    .filter-option-btn:hover {
+      background: rgba(204,0,0,0.15);
+      color: #fff;
+      border-color: #cc0000;
+      transform: translateY(-1px);
+    }
+    .filter-option-btn.active {
+      background: #cc0000;
+      color: white;
+      border-color: #cc0000;
+      box-shadow: 0 0 12px rgba(204,0,0,0.25);
+    }
+    .filter-reset-btn {
+      background: transparent;
+      border: none;
+      color: #888;
+      font-size: 0.7rem;
+      cursor: pointer;
+      transition: 0.3s;
+      padding: 4px 8px;
+      border-radius: 20px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      touch-action: manipulation;
+    }
+    .filter-reset-btn:hover { color: #cc0000; background: rgba(204,0,0,0.08); }
+    .filter-reset-wrap {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 8px;
+      border-top: 1px solid rgba(204,0,0,0.1);
+      padding-top: 10px;
+    }
+
+    /* ===== SEARCH BAR ===== */
+    .search-wrapper {
+      background: rgba(10,10,10,0.6);
+      backdrop-filter: blur(8px);
+      border-radius: 60px;
+      border: 1px solid rgba(204,0,0,0.15);
+      padding: 4px 4px 4px 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 24px;
+      transition: 0.3s ease;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .search-wrapper:focus-within {
+      border-color: #cc0000;
+      box-shadow: 0 0 30px rgba(204,0,0,0.08), 0 4px 20px rgba(0,0,0,0.3);
+    }
+    .search-wrapper .search-icon { color: #cc0000; font-size: 0.9rem; opacity: 0.7; }
+    .search-wrapper input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      padding: 12px 4px;
+      color: #fff;
+      font-size: 0.85rem;
+      font-weight: 400;
+      outline: none;
+      min-width: 0;
+    }
+    .search-wrapper input::placeholder { color: #666; font-weight: 300; }
+    .search-wrapper .search-shortcut {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 30px;
+      padding: 4px 12px;
+      font-size: 0.6rem;
+      color: #555;
+      letter-spacing: 0.5px;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    /* ===== GALLERY GRID ===== */
+    .gallery-grid-wrapper {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 20px 40px;
+      position: relative;
+      z-index: 1;
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 25px;
+    }
+
+    /* ===== VIDEO CARD ===== */
+    .gallery-card {
+      background: rgba(16,16,16,0.95);
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(204,0,0,0.12);
+      transition: all 0.3s ease;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      min-height: 380px;
+      max-height: 460px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+    }
+    .gallery-card:hover {
+      transform: translateY(-6px);
+      border-color: #cc0000;
+      box-shadow: 0 20px 40px rgba(204,0,0,0.08), 0 8px 24px rgba(0,0,0,0.5);
+    }
+    .card-media {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16/9;
+      overflow: hidden;
+      background: #1a1a1a;
+      flex-shrink: 0;
+    }
+    .card-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s;
+    }
+    .gallery-card:hover .card-media img { transform: scale(1.05); }
+    .play-overlay {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      opacity: 0;
+      transition: 0.3s;
+    }
+    .gallery-card:hover .play-overlay { opacity: 1; }
+    .overlay-icon {
+      width: 40px; height: 40px;
+      background: rgba(204,0,0,0.9);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: 0.3s;
+      touch-action: manipulation;
+    }
+    .overlay-icon:hover { transform: scale(1.1); background: #ff0000; }
+    .overlay-icon i { font-size: 1rem; color: white; }
+    .card-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: #cc0000;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 0.55rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #fff;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+    .card-info {
+      padding: 12px 14px 14px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      min-height: 0;
+    }
+    .card-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #fff;
+      line-height: 1.3;
+      flex-shrink: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .card-description-wrapper {
+      flex: 1;
+      min-height: 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .card-description {
+      font-size: 0.7rem;
+      color: #aaa;
+      line-height: 1.4;
+      max-height: 36px;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+    .card-description.expanded {
+      max-height: 70px;
+      overflow-y: auto;
+      -webkit-line-clamp: unset;
+      display: block;
+    }
+    .card-description::-webkit-scrollbar { width: 2px; }
+    .card-description::-webkit-scrollbar-thumb { background: #cc0000; border-radius: 10px; }
+    .read-more-btn {
+      background: transparent;
+      border: none;
+      color: #cc0000;
+      font-size: 0.6rem;
+      cursor: pointer;
+      padding: 2px 0;
+      font-weight: 600;
+      transition: 0.3s;
+      flex-shrink: 0;
+      text-align: left;
+      touch-action: manipulation;
+    }
+    .read-more-btn:hover { color: #ff4444; }
+
+    .card-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px 6px;
+      margin: 4px 0 6px;
+      flex-shrink: 0;
+      align-items: center;
+    }
+    .meta-tag {
+      padding: 2px 10px;
+      border-radius: 20px;
+      font-size: 0.55rem;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      background: rgba(255,255,255,0.04);
+      color: #bbb;
+      border: 1px solid rgba(255,255,255,0.06);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .meta-tag i { font-size: 0.45rem; }
+    .meta-tag.content { background: rgba(204,0,0,0.12); color: #ff7777; border-color: rgba(204,0,0,0.15); }
+    .meta-tag.lang { background: rgba(0,150,255,0.1); color: #66bbff; border-color: rgba(0,150,255,0.1); }
+    .meta-tag.genre { background: rgba(0,200,100,0.08); color: #66ee99; border-color: rgba(0,200,100,0.08); }
+    .meta-tag.year { background: rgba(255,215,0,0.08); color: #ffd966; border-color: rgba(255,215,0,0.08); }
+
+    .card-actions {
+      display: flex;
+      gap: 8px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .action-btn {
+      flex: 1;
+      padding: 6px 4px;
+      border-radius: 8px;
+      font-size: 0.65rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.25s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      border: none;
+      touch-action: manipulation;
+    }
+    .action-btn i { font-size: 0.55rem; }
+    .stream-btn-card {
+      background: linear-gradient(135deg, #cc0000, #ff4444);
+      color: white;
+    }
+    .stream-btn-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(204,0,0,0.3); }
+    .download-btn-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(204,0,0,0.25);
+      color: #ddd;
+    }
+    .download-btn-card:hover { background: rgba(204,0,0,0.12); border-color: #cc0000; }
+
+    .load-more { text-align: center; margin-top: 30px; }
+    .load-more-btn {
+      background: transparent;
+      border: 2px solid #cc0000;
+      color: #cc0000;
+      padding: 8px 30px;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s;
+      touch-action: manipulation;
+    }
+    .load-more-btn:hover { background: #cc0000; color: white; }
+    .no-results { text-align: center; padding: 50px; color: #888; }
+    .reset-btn { background: #cc0000; border: none; padding: 8px 25px; border-radius: 30px; color: white; cursor: pointer; margin-top: 12px; touch-action: manipulation; }
+
+    /* ===== MODAL ===== */
+    .video-modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.97);
+      z-index: 2000;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(10px);
+    }
+    .modal-content {
+      position: relative;
+      max-width: 1000px;
+      width: 92%;
+      background: #0d0d0d;
+      border-radius: 20px;
+      border: 2px solid #cc0000;
+      overflow: hidden;
+      box-shadow: 0 40px 80px rgba(0,0,0,0.8);
+      max-height: 95vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .modal-close {
+      position: absolute;
+      top: 12px;
+      right: 18px;
+      font-size: 1.8rem;
+      color: #fff;
+      cursor: pointer;
+      z-index: 10;
+      transition: 0.3s;
+      touch-action: manipulation;
+    }
+    .modal-close:hover { color: #cc0000; transform: rotate(90deg); }
+    .modal-video { width: 100%; aspect-ratio: 16/9; background: #000; flex-shrink: 0; }
+    .modal-video iframe { width: 100%; height: 100%; border: none; }
+    .modal-info { padding: 14px 18px 18px; flex: 1; overflow-y: auto; max-height: 45vh; }
+    .modal-info::-webkit-scrollbar { width: 3px; }
+    .modal-info::-webkit-scrollbar-thumb { background: #cc0000; border-radius: 10px; }
+    .modal-info h3 { color: #cc0000; margin-bottom: 4px; font-size: 1rem; }
+    .modal-description {
+      color: #bbb;
+      font-size: 0.8rem;
+      line-height: 1.5;
+      margin-bottom: 8px;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      max-height: 150px;
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+    .modal-description::-webkit-scrollbar { width: 2px; }
+    .modal-description::-webkit-scrollbar-thumb { background: #cc0000; border-radius: 10px; }
+    .modal-meta { display: flex; gap: 10px; margin-bottom: 10px; font-size: 0.7rem; flex-wrap: wrap; }
+    .modal-meta .meta-tag { font-size: 0.65rem; padding: 3px 12px; }
+    .modal-actions { display: flex; gap: 12px; margin-top: 8px; flex-wrap: wrap; }
+    .modal-download-btn {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid #cc0000;
+      padding: 6px 20px;
+      border-radius: 40px;
+      color: white;
+      cursor: pointer;
+      transition: 0.3s;
+      font-size: 0.75rem;
+      touch-action: manipulation;
+    }
+    .modal-download-btn:hover { background: #cc0000; }
+
+    /* ===== FOOTER ===== */
+    .footer { background: #030303; padding: 50px 0 30px; border-top: 1px solid rgba(204,0,0,0.2); position: relative; z-index: 1; }
+    .footer-content { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 40px; max-width: 1400px; margin: 0 auto; padding: 0 40px; }
+    .footer-logo p { color: #777; font-size: 0.75rem; margin-top: 10px; max-width: 250px; }
+    .footer-links { display: flex; gap: 50px; flex-wrap: wrap; }
+    .footer-column h4 { color: #fff; margin-bottom: 15px; font-size: 0.85rem; }
+    .footer-column a { display: block; color: #777; text-decoration: none; font-size: 0.75rem; margin-bottom: 8px; transition: 0.3s; }
+    .footer-column a:hover { color: #cc0000; }
+    .footer-bottom { text-align: center; padding-top: 30px; border-top: 1px solid rgba(204,0,0,0.1); }
+    .footer-bottom p { color: #555; font-size: 0.65rem; }
+
+    .back-to-top {
+      position: fixed;
+      bottom: 30px;
+      left: 30px;
+      width: 40px;
+      height: 40px;
+      background: rgba(204,0,0,0.2);
+      backdrop-filter: blur(10px);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0;
+      transition: 0.3s;
+      z-index: 99;
+      border: 1px solid #cc0000;
+      color: #cc0000;
+      font-size: 1.1rem;
+      touch-action: manipulation;
+    }
+    .show-btn { opacity: 1; }
+    .back-to-top:hover { background: rgba(204,0,0,0.5); transform: translateY(-5px); }
+
+    .loader { text-align: center; padding: 50px; color: #888; }
+    .loader i { font-size: 2rem; color: #cc0000; animation: spin 1s linear infinite; }
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+    /* ===== RESPONSIVE - ONLY LAYOUT CHANGES, TEXT SIZE SAME ===== */
+    @media (max-width: 992px) {
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+      .gallery-hero h1 { font-size: 2.8rem; }
+    }
+    @media (max-width: 768px) {
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+      .gallery-hero { padding: 100px 16px 30px; }
+      .gallery-hero h1 { font-size: 2.8rem; }
+      .filter-panel.open { padding: 16px; }
+      .filter-bar-wrapper { padding: 0 16px 16px; }
+      .gallery-grid-wrapper { padding: 0 16px 30px; }
+      .filter-option-btn { padding: 4px 12px; }
+    }
+    @media (max-width: 576px) {
+      .gallery-grid { grid-template-columns: 1fr; gap: 16px; }
+      .gallery-hero { padding: 80px 12px 20px; }
+      .gallery-hero h1 { font-size: 2.4rem; }
+      .gallery-hero p { font-size: 0.8rem; }
+      .filter-bar-wrapper { padding: 0 12px 12px; }
+      .gallery-grid-wrapper { padding: 0 12px 20px; }
+      .filter-panel.open { padding: 12px; }
+      .filter-toggle { padding: 8px 18px; font-size: 0.85rem; }
+      .filter-accordion-header { padding: 10px 12px; }
+      .filter-accordion-header .label { font-size: 0.75rem; }
+      .filter-option-btn { font-size: 0.6rem; padding: 3px 10px; }
+      .search-wrapper { padding: 3px 3px 3px 16px; }
+      .search-wrapper input { font-size: 0.8rem; padding: 10px 2px; }
+      .search-wrapper .search-shortcut { display: none; }
+      .gallery-card { min-height: 340px; max-height: 420px; }
+      .card-info { padding: 10px 12px 12px; }
+      .card-title { font-size: 0.85rem; }
+      .card-description { font-size: 0.65rem; }
+      .card-meta { gap: 3px 4px; }
+      .meta-tag { font-size: 0.5rem; padding: 1px 8px; }
+      .meta-tag i { font-size: 0.4rem; }
+      .action-btn { font-size: 0.6rem; padding: 5px 3px; }
+      .action-btn i { font-size: 0.5rem; }
+      .card-badge { font-size: 0.5rem; padding: 2px 8px; }
+      .overlay-icon { width: 34px; height: 34px; }
+      .overlay-icon i { font-size: 0.85rem; }
+      .back-to-top { width: 34px; height: 34px; font-size: 0.95rem; bottom: 18px; left: 18px; }
+      .modal-info { padding: 10px 14px 14px; }
+      .modal-info h3 { font-size: 0.9rem; }
+      .modal-description { font-size: 0.7rem; }
+      .modal-meta .meta-tag { font-size: 0.55rem; padding: 2px 10px; }
+      .modal-download-btn { font-size: 0.65rem; padding: 5px 14px; }
+      .footer-content { padding: 0 16px; gap: 24px; }
+      .footer-links { gap: 24px; }
+      .footer-column h4 { font-size: 0.75rem; }
+      .footer-column a { font-size: 0.65rem; }
+      .footer-logo p { font-size: 0.65rem; }
+      .load-more-btn { font-size: 0.7rem; padding: 6px 20px; }
+    }
+  </style>
+</head>
+<body>
+<canvas id="particles"></canvas>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <div class="nav-container">
+    <a href="index.html" class="logo-link" style="text-decoration: none;">
+      <div class="logo">
+        <img src="favicon_io/logo.png" alt="ANI3D Logo" class="logo-img">
+        <span class="logo-text-ani">ANI</span><span class="logo-text-3d">3D</span>
+      </div>
+    </a>
+    <div class="nav-menu">
+      <div class="nav-links" id="navLinks">
+        <a href="index.html">HOME</a>
+        <a href="gallery-classic.html" class="active">IMMERSIVE 3D</a>
+        <a href="gallery-outframe.html">OUT OF FRAME 3D</a>
+        <a href="creator.html">CREATOR</a>
+        <a href="blog.html">BLOG</a>
+      </div>
+    </div>
+    <button class="hamburger" id="hamburger">☰</button>
+  </div>
+</nav>
+
+<main>
+  <section class="gallery-hero">
+    <span class="gallery-badge"><i class="fas fa-film"></i> Immersive 3D Collection</span>
+    <h1>Immersive <span class="gradient-text">3D</span></h1>
+             <p>  Weekly content will be uploaded</p>
+    <div class="gallery-stats">
+      <div class="stat-card"><i class="fas fa-video"></i> <span id="totalVideos">0</span> Titles</div>
+      <div class="stat-card"><i class="fas fa-layer-group"></i> Depth Effects</div>
+    </div>
+  </section>
+
+  <!-- FILTER BAR (TOP) -->
+  <div class="filter-bar-wrapper">
+    <div class="filter-toggle" id="filterToggle">
+      <i class="fas fa-sliders-h"></i> Filters
+      <span class="arrow"><i class="fas fa-chevron-down"></i></span>
+    </div>
+    <div class="filter-panel" id="filterPanel">
+      <div class="filter-accordion" id="filterAccordion">
+        <div class="filter-accordion-item active" data-accordion="content">
+          <div class="filter-accordion-header">
+            <span class="label"><i class="fas fa-film"></i> Content Type</span>
+            <span class="icon"><i class="fas fa-chevron-down"></i></span>
+          </div>
+          <div class="filter-accordion-body">
+            <div class="filter-option-grid" id="filterContentOptions"></div>
+          </div>
+        </div>
+        <div class="filter-accordion-item" data-accordion="genres">
+          <div class="filter-accordion-header">
+            <span class="label"><i class="fas fa-theater-masks"></i> Genres</span>
+            <span class="icon"><i class="fas fa-chevron-down"></i></span>
+          </div>
+          <div class="filter-accordion-body">
+            <div class="filter-option-grid" id="filterGenreOptions"></div>
+          </div>
+        </div>
+        <div class="filter-accordion-item" data-accordion="languages">
+          <div class="filter-accordion-header">
+            <span class="label"><i class="fas fa-language"></i> Languages</span>
+            <span class="icon"><i class="fas fa-chevron-down"></i></span>
+          </div>
+          <div class="filter-accordion-body">
+            <div class="filter-option-grid" id="filterLanguageOptions"></div>
+          </div>
+        </div>
+        <div class="filter-accordion-item" data-accordion="years">
+          <div class="filter-accordion-header">
+            <span class="label"><i class="fas fa-calendar"></i> Years</span>
+            <span class="icon"><i class="fas fa-chevron-down"></i></span>
+          </div>
+          <div class="filter-accordion-body">
+            <div class="filter-option-grid" id="filterYearOptions"></div>
+          </div>
+        </div>
+        <div class="filter-reset-wrap">
+          <button class="filter-reset-btn" id="resetFiltersBtn"><i class="fas fa-undo-alt"></i> Reset All Filters</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GALLERY -->
+  <div class="gallery-grid-wrapper">
+    <div class="search-wrapper">
+      <i class="fas fa-search search-icon"></i>
+      <input type="text" id="searchInput" placeholder="Search Immersive 3Dvideos...">
+      <span class="search-shortcut"><i class="fas fa-command"></i> </span>
+    </div>
+
+    <div class="gallery-grid" id="galleryGrid">
+      <div class="loader"><i class="fas fa-spinner"></i><br>Loading videos...</div>
+    </div>
+    <div class="load-more" id="loadMoreWrap">
+      <button class="load-more-btn" id="loadMoreBtn"><i class="fas fa-chevron-down"></i> Load More</button>
+    </div>
+    <div class="no-results" id="noResults" style="display: none;">
+      <i class="fas fa-video-slash" style="font-size: 1.5rem;"></i>
+      <h3>No videos found</h3>
+      <button class="reset-btn" id="resetBtn">Reset Filters</button>
+    </div>
+  </div>
+</main>
+
+<!-- MODAL -->
+<div id="videoModal" class="video-modal">
+  <div class="modal-content">
+    <span class="modal-close" id="modalClose">&times;</span>
+    <div class="modal-video" id="modalVideo"></div>
+    <div class="modal-info" id="modalInfo"></div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-content">
+    <div class="footer-logo">
+      <a href="index.html" class="logo-link" style="text-decoration: none;">
+        <div class="logo"><img src="favicon_io/logo.png" alt="ANI3D Logo" class="logo-img"></div>
+      </a>
+      <p>Experience cinema differently.</p>
+      <p>Experience everything in 3D.</p>
+    </div>
+    <div class="footer-links">
+      <div class="footer-column"><h4>Explore</h4><a href="index.html">Home</a><a href="blog.html">Blog</a><a href="creator.html">Creator</a></div>
+      <div class="footer-column"><h4>Galleries</h4><a href="gallery-classic.html">Immersive 3D</a><a href="gallery-outframe.html">Out of Frame</a></div>
+      <div class="footer-column"><h4>Legal</h4><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms & Conditions</a></div>
+    </div>
+  </div>
+  <div class="footer-bottom"><p>© 2026 ANI3D — All rights reserved</p></div>
+</footer>
+
+<div class="back-to-top" id="backToTop">↑</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  // ========== SUPABASE CONFIG ==========
+  const SUPABASE_URL = 'https://iibmcpoqyctytzlclaon.supabase.co';
+  const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlpYm1jcG9xeWN0eXR6bGNsYW9uIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE5MDU1MDAsImV4cCI6MjA5NzQ4MTUwMH0.TlEtbY2QOx4De3kIPb9Z7cQpy2-7MU88DnoneQ8TsWc';
+  const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+  // ========== DATA ==========
+  let allVideos = [];
+  let isLoading = true;
+
+ const contentTypes = [
+  { id: "all", name: "All", icon: "fa-film" },
+   // Movies & Cinema
+  { id: "movie", name: "Movie", icon: "fa-film" },
+  { id: "feature-film", name: "Feature Film", icon: "fa-film" },
+  { id: "short-film", name: "Short Film", icon: "fa-video" },
+  { id: "independent-film", name: "Independent Film", icon: "fa-star" },
+  { id: "fan-film", name: "Fan Film", icon: "fa-users" },
+  { id: "silent-film", name: "Silent Film", icon: "fa-film" },
+  { id: "animated-film", name: "Animated Film", icon: "fa-film" },
+  { id: "anime-film", name: "Anime Film", icon: "fa-dragon" },
+  { id: "documentary", name: "Documentary", icon: "fa-file-video" },
+  { id: "documentary-short", name: "Documentary Short", icon: "fa-file-video" },
+  { id: "imax-documentary", name: "IMAX Documentary", icon: "fa-film" },
+
+  // Trailers & Promotional
+  { id: "trailer", name: "Trailer", icon: "fa-film" },
+  { id: "official-trailer", name: "Official Trailer", icon: "fa-film" },
+  { id: "teaser", name: "Teaser", icon: "fa-film" },
+  { id: "teaser-trailer", name: "Teaser Trailer", icon: "fa-film" },
+  { id: "announcement-trailer", name: "Announcement Trailer", icon: "fa-bullhorn" },
+  { id: "launch-trailer", name: "Launch Trailer", icon: "fa-rocket" },
+  { id: "final-trailer", name: "Final Trailer", icon: "fa-film" },
+  { id: "story-trailer", name: "Story Trailer", icon: "fa-film" },
+  { id: "cinematic-trailer", name: "Cinematic Trailer", icon: "fa-film" },
+  { id: "gameplay-trailer", name: "Gameplay Trailer", icon: "fa-gamepad" },
+  { id: "game-trailer", name: "Game Trailer", icon: "fa-gamepad" },
+  { id: "tv-spot", name: "TV Spot", icon: "fa-tv" },
+  { id: "promo", name: "Promo", icon: "fa-bullhorn" },
+  { id: "featurette", name: "Featurette", icon: "fa-video" },
+  { id: "first-look", name: "First Look", icon: "fa-eye" },
+  { id: "sneak-peek", name: "Sneak Peek", icon: "fa-eye" },
+
+  // Clips & Extras
+  { id: "clip", name: "Clip", icon: "fa-scissors" },
+  { id: "extended-clip", name: "Extended Clip", icon: "fa-scissors" },
+  { id: "opening-scene", name: "Opening Scene", icon: "fa-play" },
+  { id: "ending-scene", name: "Ending Scene", icon: "fa-stop" },
+  { id: "mid-credits-scene", name: "Mid-Credits Scene", icon: "fa-list" },
+  { id: "post-credits-scene", name: "Post-Credits Scene", icon: "fa-list" },
+  { id: "deleted-scene", name: "Deleted Scene", icon: "fa-cut" },
+  { id: "alternate-scene", name: "Alternate Scene", icon: "fa-random" },
+  { id: "behind-the-scenes", name: "Behind the Scenes", icon: "fa-video" },
+  { id: "making-of", name: "Making Of", icon: "fa-cogs" },
+  { id: "bloopers", name: "Bloopers", icon: "fa-laugh" },
+  { id: "gag-reel", name: "Gag Reel", icon: "fa-laugh-squint" },
+
+  // Television
+  { id: "tv-show", name: "TV Show", icon: "fa-tv" },
+  { id: "tv-series", name: "TV Series", icon: "fa-tv" },
+  { id: "episode", name: "Episode", icon: "fa-play-circle" },
+  { id: "season", name: "Season", icon: "fa-layer-group" },
+  { id: "mini-series", name: "Mini Series", icon: "fa-layer-group" },
+  { id: "limited-series", name: "Limited Series", icon: "fa-layer-group" },
+  { id: "anthology-series", name: "Anthology Series", icon: "fa-book" },
+  { id: "sitcom", name: "Sitcom", icon: "fa-tv" },
+  { id: "reality-show", name: "Reality Show", icon: "fa-eye" },
+  { id: "variety-show", name: "Variety Show", icon: "fa-star" },
+  { id: "game-show", name: "Game Show", icon: "fa-gamepad" },
+  { id: "talk-show", name: "Talk Show", icon: "fa-microphone" },
+  { id: "news-broadcast", name: "News Broadcast", icon: "fa-newspaper" },
+
+  // Web & Streaming
+  { id: "web-series", name: "Web Series", icon: "fa-globe" },
+  { id: "streaming-original", name: "Streaming Original", icon: "fa-play-circle" },
+  { id: "digital-exclusive", name: "Digital Exclusive", icon: "fa-laptop" },
+  { id: "livestream", name: "Livestream", icon: "fa-broadcast-tower" },
+  { id: "livestream-replay", name: "Livestream Replay", icon: "fa-history" },
+  { id: "podcast", name: "Podcast", icon: "fa-microphone" },
+  { id: "interview", name: "Interview", icon: "fa-users" },
+  { id: "commentary", name: "Commentary", icon: "fa-comments" },
+  { id: "reaction", name: "Reaction", icon: "fa-smile" },
+  { id: "video-essay", name: "Video Essay", icon: "fa-pen" },
+  { id: "vlog", name: "Vlog", icon: "fa-video" },
+
+  // Music
+  { id: "song", name: "Song", icon: "fa-music" },
+  { id: "music-video", name: "Music Video", icon: "fa-music" },
+  { id: "lyric-video", name: "Lyric Video", icon: "fa-music" },
+  { id: "live-performance", name: "Live Performance", icon: "fa-microphone" },
+  { id: "concert", name: "Concert", icon: "fa-music" },
+  { id: "concert-film", name: "Concert Film", icon: "fa-film" },
+  { id: "dance-performance", name: "Dance Performance", icon: "fa-music" },
+  { id: "orchestra-performance", name: "Orchestra Performance", icon: "fa-music" },
+  { id: "album-visualizer", name: "Album Visualizer", icon: "fa-compact-disc" },
+  { id: "audio-visualizer", name: "Audio Visualizer", icon: "fa-wave-square" },
+
+  // Anime
+  { id: "anime-series", name: "Anime Series", icon: "fa-dragon" },
+  { id: "anime-episode", name: "Anime Episode", icon: "fa-play-circle" },
+  { id: "anime-trailer", name: "Anime Trailer", icon: "fa-film" },
+  { id: "anime-opening", name: "Anime Opening", icon: "fa-play" },
+  { id: "anime-ending", name: "Anime Ending", icon: "fa-stop" },
+  { id: "ova", name: "OVA (Original Video Animation)", icon: "fa-dragon" },
+  { id: "ona", name: "ONA (Original Net Animation)", icon: "fa-globe" },
+  { id: "amv", name: "AMV (Anime Music Video)", icon: "fa-music" },
+  { id: "gameplay", name: "Gameplay", icon: "fa-gamepad" },
+  { id: "walkthrough", name: "Walkthrough", icon: "fa-map" },
+  { id: "lets-play", name: "Let's Play", icon: "fa-play" },
+  { id: "speedrun", name: "Speedrun", icon: "fa-stopwatch" },
+  { id: "cutscene", name: "Cutscene", icon: "fa-film" },
+  { id: "cinematic", name: "Cinematic", icon: "fa-film" },
+  { id: "game-intro", name: "Game Intro", icon: "fa-play-circle" },
+  { id: "game-ending", name: "Game Ending", icon: "fa-flag-checkered" },
+  { id: "game-review", name: "Game Review", icon: "fa-star" },
+  { id: "game-demo", name: "Game Demo", icon: "fa-gamepad" },
+  { id: "benchmark-test", name: "Benchmark Test", icon: "fa-gauge-high" },
+  { id: "mod-showcase", name: "Mod Showcase", icon: "fa-puzzle-piece" },
+
+  // Social Media
+  { id: "youtube-video", name: "YouTube Video", icon: "fa-youtube" },
+  { id: "youtube-short", name: "YouTube Short", icon: "fa-youtube" },
+  { id: "instagram-reel", name: "Instagram Reel", icon: "fa-instagram" },
+  { id: "facebook-reel", name: "Facebook Reel", icon: "fa-facebook" },
+  { id: "tiktok", name: "TikTok", icon: "fa-music" },
+  { id: "short", name: "Short", icon: "fa-video" },
+  { id: "reel", name: "Reel", icon: "fa-clapperboard" },
+  { id: "meme", name: "Meme", icon: "fa-face-laugh" },
+  { id: "gif", name: "GIF", icon: "fa-image" },
+  { id: "viral-video", name: "Viral Video", icon: "fa-fire" },
+  { id: "internet-video", name: "Internet Video", icon: "fa-globe" },
+  { id: "social-media-clip", name: "Social Media Clip", icon: "fa-share-nodes" },
+
+  // Sports
+  { id: "sports-clip", name: "Sports Clip", icon: "fa-medal" },
+  { id: "match-highlights", name: "Match Highlights", icon: "fa-trophy" },
+  { id: "tournament-highlights", name: "Tournament Highlights", icon: "fa-trophy" },
+  { id: "goal-compilation", name: "Goal Compilation", icon: "fa-futbol" },
+  { id: "cricket-highlights", name: "Cricket Highlights", icon: "fa-baseball-bat-ball" },
+  { id: "football-highlights", name: "Football Highlights", icon: "fa-futbol" },
+  { id: "formula-1-highlights", name: "Formula 1 Highlights", icon: "fa-flag-checkered" },
+  { id: "olympic-highlights", name: "Olympic Highlights", icon: "fa-medal" },
+  { id: "race-replay", name: "Race Replay", icon: "fa-flag-checkered" },
+
+  // Educational
+  { id: "tutorial", name: "Tutorial", icon: "fa-chalkboard-user" },
+  { id: "guide", name: "Guide", icon: "fa-book" },
+  { id: "playback-guide", name: "Playback Guide", icon: "fa-play-circle" },
+  { id: "review", name: "Review", icon: "fa-star" },
+  { id: "comparison", name: "Comparison", icon: "fa-scale-balanced" },
+  { id: "native-vs-ai-comparison", name: "Native vs AI Comparison", icon: "fa-scale-balanced" },
+  { id: "demonstration", name: "Demonstration", icon: "fa-hand-pointer" },
+  { id: "experiment", name: "Experiment", icon: "fa-flask" },
+  { id: "showcase", name: "Showcase", icon: "fa-star" },
+  { id: "presentation", name: "Presentation", icon: "fa-display" },
+  { id: "case-study", name: "Case Study", icon: "fa-book-open" },
+  { id: "breakdown", name: "Breakdown", icon: "fa-diagram-project" },
+  { id: "deep-dive", name: "Deep Dive", icon: "fa-magnifying-glass" },
+  { id: "explained", name: "Explained", icon: "fa-circle-info" },
+  { id: "faq", name: "FAQ", icon: "fa-circle-question" },
+  { id: "qa", name: "Q&A", icon: "fa-comments" },
+
+  // Technology
+  { id: "software-demo", name: "Software Demo", icon: "fa-code" },
+  { id: "app-demo", name: "App Demo", icon: "fa-mobile-screen" },
+  { id: "product-demo", name: "Product Demo", icon: "fa-box-open" },
+  { id: "hardware-showcase", name: "Hardware Showcase", icon: "fa-microchip" },
+  { id: "tech-review", name: "Tech Review", icon: "fa-laptop" },
+  { id: "device-comparison", name: "Device Comparison", icon: "fa-scale-balanced" },
+  { id: "camera-test", name: "Camera Test", icon: "fa-camera" },
+  { id: "screen-recording", name: "Screen Recording", icon: "fa-desktop" },
+  { id: "ui-showcase", name: "UI Showcase", icon: "fa-desktop" },
+  { id: "website-showcase", name: "Website Showcase", icon: "fa-globe" },
+  { id: "benchmark", name: "Benchmark", icon: "fa-gauge-high" },
+  { id: "tech-showcase", name: "Tech Showcase", icon: "fa-microchip" },
+  { id: "device-showcase", name: "Device Showcase", icon: "fa-mobile-screen" },
+  { id: "software-tutorial", name: "Software Tutorial", icon: "fa-code" },
+  { id: "app-tutorial", name: "App Tutorial", icon: "fa-mobile-screen" },
+
+  // Images & Artwork
+  { id: "image", name: "Image", icon: "fa-image" },
+  { id: "photo", name: "Photo", icon: "fa-camera" },
+  { id: "gallery", name: "Gallery", icon: "fa-images" },
+  { id: "wallpaper", name: "Wallpaper", icon: "fa-image" },
+  { id: "poster", name: "Poster", icon: "fa-image" },
+  { id: "artwork", name: "Artwork", icon: "fa-palette" },
+  { id: "concept-art", name: "Concept Art", icon: "fa-pencil" },
+  { id: "fan-art", name: "Fan Art", icon: "fa-heart" },
+
+  // Ani3D Originals
+  { id: "ai-2d-to-3d-conversion", name: "AI 2D to 3D Conversion", icon: "fa-cube" },
+  { id: "native-stereoscopic-3d", name: "Native Stereoscopic 3D", icon: "fa-cube" },
+  { id: "spatial-video", name: "Spatial Video", icon: "fa-cube" },
+  { id: "sbs-3d", name: "SBS 3D", icon: "fa-cube" },
+  { id: "half-sbs-3d", name: "Half SBS 3D", icon: "fa-cube" },
+  { id: "full-sbs-3d", name: "Full SBS 3D", icon: "fa-cube" },
+  { id: "over-under-3d", name: "Over/Under 3D", icon: "fa-cube" },
+  { id: "frame-break-3d", name: "Frame Break 3D", icon: "fa-cube" },
+  { id: "pop-out-3d", name: "Pop-Out 3D", icon: "fa-cube" },
+  { id: "classic-stereoscopic-3d", name: "Classic Stereoscopic 3D", icon: "fa-cube" },
+  { id: "before-after", name: "Before & After", icon: "fa-right-left" },
+  { id: "3d-comparison", name: "3D Comparison", icon: "fa-scale-balanced" },
+  { id: "3d-showcase", name: "3D Showcase", icon: "fa-cube" },
+  { id: "3d-demo", name: "3D Demo", icon: "fa-cube" },
+  { id: "3d-experiment", name: "3D Experiment", icon: "fa-flask" },
+  { id: "3d-review", name: "3D Review", icon: "fa-star" },
+  { id: "3d-tutorial", name: "3D Tutorial", icon: "fa-chalkboard-user" },
+  { id: "3d-capture", name: "3D Capture", icon: "fa-camera" },
+
+  // VR / AR
+  { id: "vr-experience", name: "VR Experience", icon: "fa-vr-cardboard" },
+  { id: "vr-demo", name: "VR Demo", icon: "fa-vr-cardboard" },
+  { id: "vr-gameplay", name: "VR Gameplay", icon: "fa-gamepad" },
+  { id: "vr-video", name: "VR Video", icon: "fa-vr-cardboard" },
+  { id: "ar-demo", name: "AR Demo", icon: "fa-cube" },
+  { id: "spatial-experience", name: "Spatial Experience", icon: "fa-glasses" },
+  { id: "360-video", name: "360° Video", icon: "fa-globe" },
+  { id: "180-video", name: "180° Video", icon: "fa-globe" },
+
+  // Miscellaneous
+  { id: "advertisement", name: "Advertisement", icon: "fa-rectangle-ad" },
+  { id: "commercial", name: "Commercial", icon: "fa-rectangle-ad" },
+  { id: "public-service-announcement", name: "Public Service Announcement (PSA)", icon: "fa-bullhorn" },
+  { id: "opening-sequence", name: "Opening Sequence", icon: "fa-play" },
+  { id: "intro", name: "Intro", icon: "fa-play" },
+  { id: "outro", name: "Outro", icon: "fa-stop" },
+  { id: "motion-graphics", name: "Motion Graphics", icon: "fa-bezier-curve" },
+  { id: "logo-animation", name: "Logo Animation", icon: "fa-icons" },
+  { id: "title-sequence", name: "Title Sequence", icon: "fa-film" },
+  { id: "fan-edit", name: "Fan Edit", icon: "fa-scissors" },
+  { id: "montage", name: "Montage", icon: "fa-layer-group" },
+  { id: "compilation", name: "Compilation", icon: "fa-layer-group" },
+  { id: "time-lapse", name: "Time-lapse", icon: "fa-clock" },
+  { id: "hyperlapse", name: "Hyperlapse", icon: "fa-clock" },
+  { id: "slow-motion", name: "Slow Motion", icon: "fa-forward" },
+  { id: "announcement", name: "Announcement", icon: "fa-bullhorn" },
+  { id: "event-coverage", name: "Event Coverage", icon: "fa-calendar" },
+  { id: "press-conference", name: "Press Conference", icon: "fa-microphone" },
+
+  // Photography
+  { id: "portrait", name: "Portrait", icon: "fa-user" },
+  { id: "landscape-photography", name: "Landscape Photography", icon: "fa-mountain" },
+  { id: "street-photography", name: "Street Photography", icon: "fa-road" },
+  { id: "astrophotography", name: "Astrophotography", icon: "fa-star" },
+  { id: "underwater-footage", name: "Underwater Footage", icon: "fa-water" },
+
+  // News & Documentary Footage
+  { id: "news-report", name: "News Report", icon: "fa-newspaper" },
+  { id: "weather-report", name: "Weather Report", icon: "fa-cloud-sun" },
+  { id: "cctv-footage", name: "CCTV Footage", icon: "fa-video" },
+  { id: "drone-footage", name: "Drone Footage", icon: "fa-helicopter" },
+  { id: "wildlife-footage", name: "Wildlife Footage", icon: "fa-paw" },
+  { id: "nature-footage", name: "Nature Footage", icon: "fa-tree" },
+  { id: "macro-photography", name: "Macro Photography", icon: "fa-camera" },
+  { id: "microscope-footage", name: "Microscope Footage", icon: "fa-microscope" },
+  { id: "medical-animation", name: "Medical Animation", icon: "fa-staff-snake" },
+  { id: "scientific-visualization", name: "Scientific Visualization", icon: "fa-atom" },
+  { id: "product-showcase", name: "Product Showcase", icon: "fa-box-open" },
+  { id: "unboxing", name: "Unboxing", icon: "fa-box" },
+  { id: "restoration", name: "Restoration", icon: "fa-screwdriver-wrench" },
+  { id: "archive-footage", name: "Archive Footage", icon: "fa-box-archive" },
+  { id: "historical-footage", name: "Historical Footage", icon: "fa-landmark" },
+  { id: "roller-coaster-pov", name: "Roller Coaster POV", icon: "fa-person-booth" },
+  { id: "dashcam", name: "Dashcam", icon: "fa-car" },
+  { id: "fpv-drone-footage", name: "FPV Drone Footage", icon: "fa-helicopter" },
+  { id: "city-tour", name: "City Tour", icon: "fa-city" },
+  { id: "museum-tour", name: "Museum Tour", icon: "fa-landmark" },
+  { id: "educational-lecture", name: "Educational Lecture", icon: "fa-graduation-cap" },
+  { id: "lecture-recording", name: "Lecture Recording", icon: "fa-chalkboard-user" },
+  ];
+    const languages = [
+  { id: "all", name: "All", icon: "fa-globe" },
+  // International
+  { id: "english", name: "English" },
+
+  // Spanish & Portuguese
+  { id: "spanish", name: "Spanish" },
+  { id: "mexican-spanish", name: "Mexican Spanish" },
+  { id: "portuguese", name: "Portuguese" },
+  { id: "brazilian-portuguese", name: "Brazilian Portuguese" },
+
+  // French & Italian
+  { id: "french", name: "French" },
+  { id: "canadian-french", name: "Canadian French" },
+  { id: "italian", name: "Italian" },
+
+  // Germanic
+  { id: "german", name: "German" },
+  { id: "dutch", name: "Dutch" },
+  { id: "swedish", name: "Swedish" },
+  { id: "norwegian", name: "Norwegian" },
+  { id: "danish", name: "Danish" },
+  { id: "icelandic", name: "Icelandic" },
+
+  // Eastern Europe
+  { id: "russian", name: "Russian" },
+  { id: "ukrainian", name: "Ukrainian" },
+  { id: "polish", name: "Polish" },
+  { id: "czech", name: "Czech" },
+  { id: "slovak", name: "Slovak" },
+  { id: "hungarian", name: "Hungarian" },
+  { id: "romanian", name: "Romanian" },
+  { id: "bulgarian", name: "Bulgarian" },
+
+  // Balkan
+  { id: "serbian", name: "Serbian" },
+  { id: "croatian", name: "Croatian" },
+  { id: "slovenian", name: "Slovenian" },
+  { id: "bosnian", name: "Bosnian" },
+  { id: "albanian", name: "Albanian" },
+  { id: "greek", name: "Greek" },
+
+  // Baltic
+  { id: "estonian", name: "Estonian" },
+  { id: "latvian", name: "Latvian" },
+  { id: "lithuanian", name: "Lithuanian" },
+
+  // Celtic
+  { id: "irish", name: "Irish" },
+  { id: "welsh", name: "Welsh" },
+  { id: "scottish-gaelic", name: "Scottish Gaelic" },
+
+  // Other European
+  { id: "maltese", name: "Maltese" },
+  { id: "turkish", name: "Turkish" },
+
+  // Indian Languages
+  { id: "hindi", name: "Hindi" },
+  { id: "marathi", name: "Marathi" },
+  { id: "gujarati", name: "Gujarati" },
+  { id: "punjabi", name: "Punjabi" },
+  { id: "bengali", name: "Bengali" },
+  { id: "assamese", name: "Assamese" },
+  { id: "odia", name: "Odia" },
+  { id: "urdu", name: "Urdu" },
+  { id: "telugu", name: "Telugu" },
+  { id: "tamil", name: "Tamil" },
+  { id: "kannada", name: "Kannada" },
+  { id: "malayalam", name: "Malayalam" },
+
+  // Regional Languages
+  { id: "bhojpuri", name: "Bhojpuri" },
+  { id: "maithili", name: "Maithili" },
+  { id: "konkani", name: "Konkani" },
+  { id: "sanskrit", name: "Sanskrit" },
+  { id: "kashmiri", name: "Kashmiri" },
+  { id: "dogri", name: "Dogri" },
+  { id: "sindhi", name: "Sindhi" },
+  { id: "tulu", name: "Tulu" },
+  { id: "kodava", name: "Kodava" },
+  { id: "manipuri-meitei", name: "Manipuri (Meitei)" },
+  { id: "bodo", name: "Bodo" },
+  { id: "santali", name: "Santali" },
+  { id: "mizo", name: "Mizo" },
+  { id: "khasi", name: "Khasi" },
+  { id: "garo", name: "Garo" },
+  { id: "nagamese", name: "Nagamese" },
+  { id: "nepali", name: "Nepali" },
+
+  // East Asia
+  { id: "mandarin-chinese", name: "Mandarin Chinese" },
+  { id: "cantonese", name: "Cantonese" },
+  { id: "taiwanese-hokkien", name: "Taiwanese Hokkien" },
+  { id: "hakka", name: "Hakka" },
+
+  // Japan & Korea
+  { id: "japanese", name: "Japanese" },
+  { id: "korean", name: "Korean" },
+  { id: "mongolian", name: "Mongolian" },
+
+  // Southeast Asia
+  { id: "thai", name: "Thai" },
+  { id: "vietnamese", name: "Vietnamese" },
+  { id: "indonesian", name: "Indonesian" },
+  { id: "malay", name: "Malay" },
+  { id: "filipino", name: "Filipino" },
+  { id: "tagalog", name: "Tagalog" },
+  { id: "cebuano", name: "Cebuano" },
+  { id: "burmese", name: "Burmese" },
+  { id: "khmer", name: "Khmer" },
+  { id: "lao", name: "Lao" },
+  { id: "javanese", name: "Javanese" },
+  { id: "sundanese", name: "Sundanese" },
+
+  // South Asia
+  { id: "sinhala", name: "Sinhala" },
+  { id: "dhivehi", name: "Dhivehi" },
+  { id: "tibetan", name: "Tibetan" },
+
+  // Middle East & Central Asia
+  { id: "arabic", name: "Arabic" },
+  { id: "persian-farsi", name: "Persian (Farsi)" },
+  { id: "hebrew", name: "Hebrew" },
+  { id: "kurdish", name: "Kurdish" },
+  { id: "armenian", name: "Armenian" },
+  { id: "azerbaijani", name: "Azerbaijani" },
+  { id: "georgian", name: "Georgian" },
+  { id: "pashto", name: "Pashto" },
+
+  // African Languages
+  { id: "swahili", name: "Swahili" },
+  { id: "zulu", name: "Zulu" },
+  { id: "xhosa", name: "Xhosa" },
+  { id: "afrikaans", name: "Afrikaans" },
+  { id: "hausa", name: "Hausa" },
+  { id: "yoruba", name: "Yoruba" },
+  { id: "igbo", name: "Igbo" },
+  { id: "amharic", name: "Amharic" },
+  { id: "somali", name: "Somali" },
+
+  // Indigenous & Native Languages
+  { id: "quechua", name: "Quechua" },
+  { id: "guarani", name: "Guarani" },
+
+  // Classical & Constructed Languages
+  { id: "latin", name: "Latin" },
+  { id: "esperanto", name: "Esperanto" },
+
+  // Sign Languages
+  { id: "american-sign-language", name: "American Sign Language (ASL)" },
+  { id: "british-sign-language", name: "British Sign Language (BSL)" },
+  { id: "international-sign", name: "International Sign" },
+
+  // Audio Options
+  { id: "no-dialogue", name: "No Dialogue" },
+  { id: "silent", name: "Silent" },
+  { id: "instrumental", name: "Instrumental" },
+
+];const genres = [
+  { id: "all", name: "All", icon: "fa-star" },
+ // Core genres
+{ id: "action", name: "Action" },
+{ id: "adventure", name: "Adventure" },
+{ id: "animation", name: "Animation" },
+{ id: "anime", name: "Anime" },
+{ id: "biography", name: "Biography" },
+{ id: "comedy", name: "Comedy" },
+{ id: "crime", name: "Crime" },
+{ id: "documentary", name: "Documentary" },
+{ id: "drama", name: "Drama" },
+{ id: "family", name: "Family" },
+{ id: "fantasy", name: "Fantasy" },
+{ id: "history", name: "History" },
+{ id: "horror", name: "Horror" },
+{ id: "music", name: "Music" },
+{ id: "musical", name: "Musical" },
+{ id: "mystery", name: "Mystery" },
+{ id: "romance", name: "Romance" },
+{ id: "sci-fi", name: "Sci-Fi" },
+{ id: "sport", name: "Sport" },
+{ id: "superhero", name: "Superhero" },
+{ id: "suspense", name: "Suspense" },
+{ id: "thriller", name: "Thriller" },
+{ id: "war", name: "War" },
+{ id: "western", name: "Western" },
+{ id: "reality", name: "Reality" },
+{ id: "educational", name: "Educational" },
+{ id: "experimental", name: "Experimental" },
+{ id: "noir", name: "Noir" },
+
+// Epic & Adventure
+{ id: "action-epic", name: "Action Epic" },
+{ id: "adventure-epic", name: "Adventure Epic" },
+{ id: "fantasy-epic", name: "Fantasy Epic" },
+{ id: "historical-epic", name: "Historical Epic" },
+{ id: "space-epic", name: "Space Epic" },
+{ id: "adventure-fantasy", name: "Adventure Fantasy" },
+{ id: "fantasy-adventure", name: "Fantasy Adventure" },
+{ id: "quest", name: "Quest" },
+{ id: "treasure-hunt", name: "Treasure Hunt" },
+{ id: "urban-adventure", name: "Urban Adventure" },
+{ id: "globetrotting-adventure", name: "Globetrotting Adventure" },
+{ id: "space-adventure", name: "Space Adventure" },
+{ id: "jungle-adventure", name: "Jungle Adventure" },
+{ id: "sea-adventure", name: "Sea Adventure" },
+{ id: "island-adventure", name: "Island Adventure" },
+{ id: "expedition", name: "Expedition" },
+{ id: "exploration", name: "Exploration" },
+{ id: "lost-world", name: "Lost World" },
+{ id: "road-trip", name: "Road Trip" },
+{ id: "survival", name: "Survival" },
+{ id: "survival-thriller", name: "Survival Thriller" },
+
+// Fantasy & Mythology
+{ id: "high-fantasy", name: "High Fantasy" },
+{ id: "low-fantasy", name: "Low Fantasy" },
+{ id: "dark-fantasy", name: "Dark Fantasy" },
+{ id: "urban-fantasy", name: "Urban Fantasy" },
+{ id: "mythic-adventure", name: "Mythic Adventure" },
+{ id: "magic", name: "Magic" },
+{ id: "mythology", name: "Mythology" },
+{ id: "folklore", name: "Folklore" },
+{ id: "fairy-tale", name: "Fairy Tale" },
+{ id: "wizards", name: "Wizards" },
+{ id: "dragons", name: "Dragons" },
+{ id: "knights", name: "Knights" },
+{ id: "kingdom", name: "Kingdom" },
+{ id: "royalty", name: "Royalty" },
+{ id: "medieval", name: "Medieval" },
+{ id: "sword-and-sandal", name: "Sword & Sandal" },
+{ id: "sword-fantasy", name: "Sword Fantasy" },
+
+// Science Fiction
+{ id: "hard-sci-fi", name: "Hard Sci-Fi" },
+{ id: "soft-sci-fi", name: "Soft Sci-Fi" },
+{ id: "cyberpunk", name: "Cyberpunk" },
+{ id: "steampunk", name: "Steampunk" },
+{ id: "space-opera", name: "Space Opera" },
+{ id: "alien", name: "Alien" },
+{ id: "alien-invasion", name: "Alien Invasion" },
+{ id: "robot", name: "Robot" },
+{ id: "android", name: "Android" },
+{ id: "artificial-intelligence", name: "Artificial Intelligence" },
+{ id: "virtual-reality", name: "Virtual Reality" },
+{ id: "augmented-reality", name: "Augmented Reality" },
+{ id: "dystopian", name: "Dystopian" },
+{ id: "post-apocalyptic", name: "Post-Apocalyptic" },
+{ id: "future-tech", name: "Future Tech" },
+{ id: "space-colony", name: "Space Colony" },
+{ id: "space-exploration", name: "Space Exploration" },
+{ id: "terraforming", name: "Terraforming" },
+{ id: "time-travel", name: "Time Travel" },
+{ id: "time-loop", name: "Time Loop" },
+{ id: "time-paradox", name: "Time Paradox" },
+{ id: "alternate-reality", name: "Alternate Reality" },
+{ id: "parallel-universe", name: "Parallel Universe" },
+{ id: "multiverse", name: "Multiverse" },
+{ id: "genetic-engineering", name: "Genetic Engineering" },
+{ id: "cloning", name: "Cloning" },
+{ id: "nanotechnology", name: "Nanotechnology" },
+{ id: "quantum", name: "Quantum" },
+{ id: "simulation", name: "Simulation" },
+
+// Horror
+{ id: "psychological-horror", name: "Psychological Horror" },
+{ id: "supernatural", name: "Supernatural" },
+{ id: "paranormal", name: "Paranormal" },
+{ id: "ghost", name: "Ghost" },
+{ id: "haunted-house", name: "Haunted House" },
+{ id: "demon", name: "Demon" },
+{ id: "exorcism", name: "Exorcism" },
+{ id: "occult", name: "Occult" },
+{ id: "possession", name: "Possession" },
+{ id: "zombie", name: "Zombie" },
+{ id: "vampire", name: "Vampire" },
+{ id: "werewolf", name: "Werewolf" },
+{ id: "monster", name: "Monster" },
+{ id: "creature-feature", name: "Creature Feature" },
+{ id: "kaiju", name: "Kaiju" },
+{ id: "slasher", name: "Slasher" },
+{ id: "body-horror", name: "Body Horror" },
+{ id: "folk-horror", name: "Folk Horror" },
+{ id: "cosmic-horror", name: "Cosmic Horror" },
+{ id: "gothic-horror", name: "Gothic Horror" },
+{ id: "found-footage", name: "Found Footage" },
+{ id: "lovecraftian-horror", name: "Lovecraftian Horror" },
+{ id: "analog-horror", name: "Analog Horror" },
+{ id: "mecha", name: "Mecha" },
+{ id: "dark-fairy-tale", name: "Dark Fairy Tale" },
+
+// Thriller & Crime
+{ id: "crime-thriller", name: "Crime Thriller" },
+{ id: "political-thriller", name: "Political Thriller" },
+{ id: "psychological-thriller", name: "Psychological Thriller" },
+{ id: "spy-thriller", name: "Spy Thriller" },
+{ id: "tech-thriller", name: "Tech Thriller" },
+{ id: "legal-thriller", name: "Legal Thriller" },
+{ id: "conspiracy", name: "Conspiracy" },
+{ id: "detective", name: "Detective" },
+{ id: "investigation", name: "Investigation" },
+{ id: "mystery-box", name: "Mystery Box" },
+{ id: "police", name: "Police" },
+{ id: "courtroom", name: "Courtroom" },
+{ id: "prison", name: "Prison" },
+{ id: "gangster", name: "Gangster" },
+{ id: "mafia", name: "Mafia" },
+{ id: "drug-cartel", name: "Drug Cartel" },
+{ id: "organized-crime", name: "Organized Crime" },
+{ id: "smuggling", name: "Smuggling" },
+{ id: "white-collar-crime", name: "White Collar Crime" },
+{ id: "corruption", name: "Corruption" },
+{ id: "heist", name: "Heist" },
+{ id: "revenge", name: "Revenge" },
+{ id: "assassin", name: "Assassin" },
+{ id: "hitman", name: "Hitman" },
+{ id: "serial-killer", name: "Serial Killer" },
+{ id: "espionage", name: "Espionage" },
+{ id: "military", name: "Military" },
+{ id: "tactical", name: "Tactical" },
+{ id: "mercenary", name: "Mercenary" },
+{ id: "vigilante", name: "Vigilante" },
+{ id: "undercover", name: "Undercover" },
+{ id: "rescue-mission", name: "Rescue Mission" },
+{ id: "chase", name: "Chase" },
+{ id: "gunfight", name: "Gunfight" },
+{ id: "hand-to-hand-combat", name: "Hand-to-Hand Combat" },
+{ id: "martial-arts", name: "Martial Arts" },
+{ id: "samurai", name: "Samurai" },
+{ id: "ninja", name: "Ninja" },
+{ id: "wuxia", name: "Wuxia" },
+
+// Drama & Romance
+{ id: "coming-of-age", name: "Coming-of-Age" },
+{ id: "coming-of-age-drama", name: "Coming-of-Age Drama" },
+{ id: "family-drama", name: "Family Drama" },
+{ id: "historical-drama", name: "Historical Drama" },
+{ id: "political-drama", name: "Political Drama" },
+{ id: "romantic-drama", name: "Romantic Drama" },
+{ id: "sports-drama", name: "Sports Drama" },
+{ id: "medical-drama", name: "Medical Drama" },
+{ id: "courtroom-drama", name: "Courtroom Drama" },
+{ id: "crime-drama", name: "Crime Drama" },
+{ id: "social-drama", name: "Social Drama" },
+{ id: "slice-of-life", name: "Slice of Life" },
+{ id: "melodrama", name: "Melodrama" },
+{ id: "character-study", name: "Character Study" },
+{ id: "human-relationships", name: "Human Relationships" },
+{ id: "romantic-comedy", name: "Romantic Comedy" },
+{ id: "romantic-fantasy", name: "Romantic Fantasy" },
+{ id: "romantic-thriller", name: "Romantic Thriller" },
+{ id: "love-story", name: "Love Story" },
+{ id: "teen-romance", name: "Teen Romance" },
+{ id: "period-romance", name: "Period Romance" },
+{ id: "second-chance-romance", name: "Second Chance Romance" },
+{ id: "friends-to-lovers", name: "Friends to Lovers" },
+{ id: "enemies-to-lovers", name: "Enemies to Lovers" },
+{ id: "love-triangle", name: "Love Triangle" },
+
+// Comedy
+{ id: "dark-comedy", name: "Dark Comedy" },
+{ id: "satire", name: "Satire" },
+{ id: "parody", name: "Parody" },
+{ id: "slapstick", name: "Slapstick" },
+{ id: "screwball-comedy", name: "Screwball Comedy" },
+{ id: "buddy-comedy", name: "Buddy Comedy" },
+{ id: "family-comedy", name: "Family Comedy" },
+{ id: "teen-comedy", name: "Teen Comedy" },
+{ id: "workplace-comedy", name: "Workplace Comedy" },
+{ id: "romantic-comedy", name: "Romantic Comedy" },
+
+// Sports
+{ id: "cricket", name: "Cricket" },
+{ id: "football", name: "Football" },
+{ id: "soccer", name: "Soccer" },
+{ id: "basketball", name: "Basketball" },
+{ id: "baseball", name: "Baseball" },
+{ id: "tennis", name: "Tennis" },
+{ id: "badminton", name: "Badminton" },
+{ id: "formula-1", name: "Formula 1" },
+{ id: "motorsport", name: "Motorsport" },
+{ id: "racing", name: "Racing" },
+{ id: "wrestling", name: "Wrestling" },
+{ id: "boxing", name: "Boxing" },
+{ id: "mma", name: "MMA" },
+{ id: "ufc", name: "UFC" },
+{ id: "kabaddi", name: "Kabaddi" },
+{ id: "hockey", name: "Hockey" },
+{ id: "athletics", name: "Athletics" },
+{ id: "olympics", name: "Olympics" },
+{ id: "esports", name: "Esports" },
+{ id: "chess", name: "Chess" },
+
+// Music
+{ id: "concert", name: "Concert" },
+{ id: "live-performance", name: "Live Performance" },
+{ id: "dance", name: "Dance" },
+{ id: "singing", name: "Singing" },
+{ id: "orchestra", name: "Orchestra" },
+{ id: "classical-music", name: "Classical Music" },
+{ id: "rock", name: "Rock" },
+{ id: "pop", name: "Pop" },
+{ id: "hip-hop", name: "Hip Hop" },
+{ id: "rap", name: "Rap" },
+{ id: "jazz", name: "Jazz" },
+{ id: "edm", name: "EDM" },
+{ id: "folk-music", name: "Folk Music" },
+
+// Documentary subjects
+{ id: "nature", name: "Nature" },
+{ id: "wildlife", name: "Wildlife" },
+{ id: "environment", name: "Environment" },
+{ id: "ocean", name: "Ocean" },
+{ id: "space", name: "Space" },
+{ id: "technology", name: "Technology" },
+{ id: "science", name: "Science" },
+{ id: "culture", name: "Culture" },
+{ id: "society", name: "Society" },
+{ id: "politics", name: "Politics" },
+{ id: "crime-documentary", name: "Crime Documentary" },
+{ id: "sports-documentary", name: "Sports Documentary" },
+{ id: "music-documentary", name: "Music Documentary" },
+{ id: "travel-documentary", name: "Travel Documentary" },
+{ id: "food-documentary", name: "Food Documentary" },
+{ id: "behind-the-scenes", name: "Behind the Scenes" },
+{ id: "making-of", name: "Making Of" },
+{ id: "business", name: "Business" },
+{ id: "economics", name: "Economics" },
+{ id: "philosophy", name: "Philosophy" },
+{ id: "psychology", name: "Psychology" },
+
+// Audience
+{ id: "kids", name: "Kids" },
+{ id: "teen", name: "Teen" },
+{ id: "young-adult", name: "Young Adult" },
+{ id: "adult", name: "Adult" },
+{ id: "family-friendly", name: "Family Friendly" },
+
+// Production & Style
+{ id: "live-action", name: "Live Action" },
+{ id: "cgi", name: "CGI" },
+{ id: "vfx", name: "VFX" },
+{ id: "motion-capture", name: "Motion Capture" },
+{ id: "stop-motion", name: "Stop Motion" },
+{ id: "clay-animation", name: "Clay Animation" },
+{ id: "2d-animation", name: "2D Animation" },
+{ id: "3d-animation", name: "3D Animation" },
+
+// Regional cinema
+{ id: "hollywood", name: "Hollywood" },
+{ id: "bollywood", name: "Bollywood" },
+{ id: "tollywood", name: "Tollywood" },
+{ id: "kollywood", name: "Kollywood" },
+{ id: "mollywood", name: "Mollywood" },
+{ id: "sandalwood", name: "Sandalwood" },
+{ id: "pollywood", name: "Pollywood" },
+{ id: "japanese-cinema", name: "Japanese Cinema" },
+{ id: "korean-cinema", name: "Korean Cinema" },
+{ id: "chinese-cinema", name: "Chinese Cinema" },
+{ id: "european-cinema", name: "European Cinema" },
+{ id: "international-cinema", name: "International Cinema" },
+
+// Ani3D specific
+{ id: "3d", name: "3D" },
+{ id: "stereoscopic", name: "Stereoscopic" },
+{ id: "sbs-3d", name: "SBS 3D" },
+{ id: "native-3d", name: "Native 3D" },
+{ id: "ai-2d-to-3d", name: "AI 2D to 3D" },
+{ id: "frame-break", name: "Frame Break" },
+{ id: "pop-out", name: "Pop-Out" },
+{ id: "depth-showcase", name: "Depth Showcase" },
+{ id: "comparison", name: "Comparison" },
+{ id: "owl3d", name: "Owl3D" },
+{ id: "spatial-video", name: "Spatial Video" },
+{ id: "apple-vision-pro", name: "Apple Vision Pro" },
+{ id: "vr-headset", name: "VR Headset" },
+{ id: "ar-glasses", name: "AR Glasses" },
+{ id: "xreal", name: "XREAL" },
+{ id: "meta-quest", name: "Meta Quest" },
+{ id: "3d-tv", name: "3D TV" },
+{ id: "3d-projector", name: "3D Projector" },
+{ id: "anaglyph-3d", name: "Anaglyph 3D" },
+{ id: "glasses-free-3d", name: "Glasses-Free 3D" },
+{ id: "mobile-vr", name: "Mobile VR" },
+{ id: "stereo-camera", name: "Stereo Camera" }
+
+];  const years = [{id:"all",name:"All",icon:"fa-calendar"}];
+  for (let y=1888; y<=2028; y++) years.push({id:y.toString(), name:y.toString(), icon:"fa-calendar"});
+
+  // ========== STATE ==========
+  let currentTab = "content";
+  let currentFilter = "all";
+  let currentSearch = "";
+  let currentItems = 8;
+
+  // ========== UTILITY ==========
+  function cleanDescription(desc) {
+    if (!desc) return 'No description available.';
+    const lines = desc.split('\n');
+    const clean = lines.filter(line => {
+      const t = line.trim();
+      if (t.includes(':') && !t.startsWith('Current') && !t.startsWith('Output')) return false;
+      return true;
+    });
+    return clean.join('\n').trim() || desc;
+  }
+
+  function toggleDescription(btn) {
+    const desc = btn.parentElement.querySelector('.card-description');
+    if (desc.classList.contains('expanded')) {
+      desc.classList.remove('expanded');
+      btn.textContent = 'Read More';
+    } else {
+      desc.classList.add('expanded');
+      btn.textContent = 'Read Less';
+    }
+  }
+
+  // ========== SUPABASE ==========
+  async function loadVideosFromSupabase() {
+    const grid = document.getElementById('galleryGrid');
+    grid.innerHTML = `<div class="loader"><i class="fas fa-spinner"></i><br>Loading videos...</div>`;
+    try {
+      const { data, error } = await supabaseClient.from('videos').select('*').order('created_at', { ascending: false });
+      if (error) throw error;
+      allVideos = data || [];
+      isLoading = false;
+      renderGallery();
+    } catch (err) {
+      console.error(err);
+      grid.innerHTML = `<div class="no-results"><i class="fas fa-exclamation-triangle" style="color:#cc0000;font-size:1.5rem;"></i><h3>Error loading videos</h3><p style="color:#888;font-size:0.8rem;">${err.message}</p></div>`;
+      isLoading = false;
+    }
+  }
+
+  // ========== FILTER LOGIC ==========
+  function getFilteredVideos() {
+    let filtered = [...allVideos];
+    if (currentTab === 'content' && currentFilter !== 'all') {
+      filtered = filtered.filter(v => v.content_type && v.content_type.toLowerCase() === currentFilter.toLowerCase());
+    } else if (currentTab === 'languages' && currentFilter !== 'all') {
+      filtered = filtered.filter(v => v.language && v.language.toLowerCase() === currentFilter.toLowerCase());
+    } else if (currentTab === 'genres' && currentFilter !== 'all') {
+      filtered = filtered.filter(v => {
+        if (!v.genre) return false;
+        return v.genre.split(',').map(g => g.trim().toLowerCase()).includes(currentFilter.toLowerCase());
+      });
+    } else if (currentTab === 'years' && currentFilter !== 'all') {
+      filtered = filtered.filter(v => v.year && v.year.toString() === currentFilter);
+    }
+    if (currentSearch) {
+      const s = currentSearch.toLowerCase();
+      filtered = filtered.filter(v => (v.title && v.title.toLowerCase().includes(s)) || (v.description && v.description.toLowerCase().includes(s)));
+    }
+    return filtered;
+  }
+
+  // ========== RENDER ==========
+  function renderGallery() {
+    if (isLoading) return;
+    const filtered = getFilteredVideos();
+    const display = filtered.slice(0, currentItems);
+    const grid = document.getElementById('galleryGrid');
+    const noResults = document.getElementById('noResults');
+    const loadWrap = document.getElementById('loadMoreWrap');
+    document.getElementById('totalVideos').textContent = filtered.length;
+
+    if (display.length === 0) {
+      grid.innerHTML = '';
+      noResults.style.display = 'block';
+      loadWrap.style.display = 'none';
+      return;
+    }
+    noResults.style.display = 'none';
+    loadWrap.style.display = display.length >= filtered.length ? 'none' : 'block';
+
+    grid.innerHTML = display.map((v, idx) => {
+      const id = v.id || 'video-' + idx;
+      const thumb = v.thumb || 'https://via.placeholder.com/400x225/1a1a1a/cc0000?text=No+Image';
+      const contentType = v.content_type || 'N/A';
+      const language = v.language || 'N/A';
+      const year = v.year || 'N/A';
+      const desc = cleanDescription(v.description || 'No description available.');
+      const isLong = desc.length > 80;
+      
+      const genreList = v.genre ? v.genre.split(',').map(g => g.trim()).filter(g => g.length > 0) : [];
+      
+      let metaHtml = `
+        <span class="meta-tag content"><i class="fas fa-tag"></i> ${contentType}</span>
+        <span class="meta-tag lang"><i class="fas fa-language"></i> ${language}</span>
+      `;
+      genreList.forEach(genre => {
+        metaHtml += `<span class="meta-tag genre"><i class="fas fa-mask"></i> ${genre}</span>`;
+      });
+      metaHtml += `<span class="meta-tag year"><i class="fas fa-calendar"></i> ${year}</span>`;
+
+      return `
+        <div class="gallery-card" data-id="${id}">
+          <div class="card-media">
+            <img src="${thumb}" alt="${v.title || 'Video'}" loading="lazy" onerror="this.src='https://via.placeholder.com/400x225/1a1a1a/cc0000?text=No+Image'">
+            <div class="play-overlay">
+              <div class="overlay-icon play-icon" data-id="${id}"><i class="fas fa-play"></i></div>
+              <div class="overlay-icon" onclick="event.stopPropagation(); window.open('${v.download_url || ''}', '_blank')"><i class="fas fa-download"></i></div>
+            </div>
+            <div class="card-badge">🎬 Immersive 3D</div>
+          </div>
+          <div class="card-info">
+            <h3 class="card-title">${v.title || 'Untitled'}</h3>
+            <div class="card-description-wrapper">
+              <div class="card-description" id="desc-${id}">${desc}</div>
+              ${isLong ? `<button class="read-more-btn" onclick="toggleDescription(this)">Read More</button>` : ''}
+            </div>
+            <div class="card-meta">
+              ${metaHtml}
+            </div>
+            <div class="card-actions">
+              <button class="action-btn stream-btn-card stream-btn" data-id="${id}"><i class="fas fa-play"></i> Stream</button>
+              <button class="action-btn download-btn-card" onclick="event.stopPropagation(); window.open('${v.download_url || ''}', '_blank')"><i class="fas fa-download"></i> Download</button>
+            </div>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    document.querySelectorAll('.gallery-card').forEach(card => {
+      card.addEventListener('click', function(e) {
+        if (e.target.closest('.action-btn') || e.target.closest('.overlay-icon') || e.target.closest('.read-more-btn')) return;
+        const vid = allVideos.find(v => (v.id && v.id.toString()) === this.dataset.id);
+        if (vid) openStreamModal(vid);
+      });
+    });
+    document.querySelectorAll('.stream-btn').forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        const card = this.closest('.gallery-card');
+        if (card) {
+          const vid = allVideos.find(v => (v.id && v.id.toString()) === card.dataset.id);
+          if (vid) openStreamModal(vid);
+        }
+      });
+    });
+    document.querySelectorAll('.play-icon').forEach(icon => {
+      icon.addEventListener('click', function(e) {
+        e.stopPropagation();
+        const card = this.closest('.gallery-card');
+        if (card) {
+          const vid = allVideos.find(v => (v.id && v.id.toString()) === card.dataset.id);
+          if (vid) openStreamModal(vid);
+        }
+      });
+    });
+  }
+
+  // ========== MODAL ==========
+  function openStreamModal(video) {
+    if (!video) return;
+    const modal = document.getElementById('videoModal');
+    const container = document.getElementById('modalVideo');
+    const info = document.getElementById('modalInfo');
+    const streamUrl = video.stream_url || '';
+    if (!streamUrl) { alert('Stream URL not available'); return; }
+    container.innerHTML = `<iframe src="${streamUrl}" frameborder="0" allowfullscreen allow="autoplay; fullscreen" style="width:100%;height:100%;border:none;"></iframe>`;
+    const contentType = video.content_type || 'N/A';
+    const language = video.language || 'N/A';
+    const year = video.year || 'N/A';
+    const desc = cleanDescription(video.description || 'No description available.');
+    const genreList = video.genre ? video.genre.split(',').map(g => g.trim()).filter(g => g.length > 0) : [];
+    let metaHtml = `
+      <span class="meta-tag content"><i class="fas fa-tag"></i> ${contentType}</span>
+      <span class="meta-tag lang"><i class="fas fa-language"></i> ${language}</span>
+    `;
+    genreList.forEach(g => { metaHtml += `<span class="meta-tag genre"><i class="fas fa-mask"></i> ${g}</span>`; });
+    metaHtml += `<span class="meta-tag year"><i class="fas fa-calendar"></i> ${year}</span>`;
+
+    info.innerHTML = `
+      <h3><i class="fas fa-film" style="color:#cc0000"></i> ${video.title || 'Untitled'}</h3>
+      <div class="modal-description">${desc}</div>
+      <div class="modal-meta">${metaHtml}</div>
+      <div class="modal-actions">
+        <button class="modal-download-btn" onclick="window.open('${video.download_url || ''}', '_blank')"><i class="fas fa-download"></i> Download Video</button>
+      </div>
+    `;
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    document.getElementById('videoModal').style.display = 'none';
+    document.getElementById('modalVideo').innerHTML = '';
+    document.body.style.overflow = 'auto';
+  }
+
+  // ========== RENDER FILTER OPTIONS ==========
+  function renderFilterOptions() {
+    const render = (containerId, items, tab) => {
+      const el = document.getElementById(containerId);
+      el.innerHTML = items.map(item => `
+        <button class="filter-option-btn ${currentTab === tab && currentFilter === item.id ? 'active' : ''}" data-tab="${tab}" data-value="${item.id}">
+          <i class="fas ${item.icon}"></i> ${item.name}
+        </button>
+      `).join('');
+    };
+    render('filterContentOptions', contentTypes, 'content');
+    render('filterGenreOptions', genres, 'genres');
+    render('filterLanguageOptions', languages, 'languages');
+    render('filterYearOptions', years, 'years');
+
+    document.querySelectorAll('.filter-option-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.filter-option-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        currentTab = this.dataset.tab;
+        currentFilter = this.dataset.value;
+        currentItems = 8;
+        renderGallery();
+      });
+    });
+  }
+
+  // ========== INIT ==========
+  function init() {
+    const toggle = document.getElementById('filterToggle');
+    const panel = document.getElementById('filterPanel');
+    toggle.addEventListener('click', () => {
+      toggle.classList.toggle('open');
+      panel.classList.toggle('open');
+    });
+
+    document.querySelectorAll('.filter-accordion-header').forEach(header => {
+      header.addEventListener('click', function() {
+        const item = this.parentElement;
+        const isActive = item.classList.contains('active');
+        document.querySelectorAll('.filter-accordion-item').forEach(el => el.classList.remove('active'));
+        if (!isActive) item.classList.add('active');
+      });
+    });
+
+    const reset = document.getElementById('resetFiltersBtn');
+    reset.addEventListener('click', () => {
+      currentTab = 'content';
+      currentFilter = 'all';
+      currentSearch = '';
+      currentItems = 8;
+      document.getElementById('searchInput').value = '';
+      document.querySelectorAll('.filter-option-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.filter-accordion-item').forEach(el => el.classList.remove('active'));
+      document.querySelector('[data-accordion="content"]')?.classList.add('active');
+      renderFilterOptions();
+      renderGallery();
+    });
+    document.getElementById('resetBtn')?.addEventListener('click', () => {
+      currentTab = 'content';
+      currentFilter = 'all';
+      currentSearch = '';
+      currentItems = 8;
+      document.getElementById('searchInput').value = '';
+      document.querySelectorAll('.filter-option-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.filter-accordion-item').forEach(el => el.classList.remove('active'));
+      document.querySelector('[data-accordion="content"]')?.classList.add('active');
+      renderFilterOptions();
+      renderGallery();
+    });
+
+    document.getElementById('searchInput').addEventListener('input', (e) => {
+      currentSearch = e.target.value;
+      currentItems = 8;
+      renderGallery();
+    });
+
+    document.getElementById('loadMoreBtn').addEventListener('click', () => {
+      currentItems += 6;
+      renderGallery();
+    });
+
+    document.getElementById('modalClose').addEventListener('click', closeModal);
+    document.getElementById('videoModal').addEventListener('click', (e) => {
+      if (e.target === document.getElementById('videoModal')) closeModal();
+    });
+
+    const back = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+      back.classList.toggle('show-btn', window.scrollY > 500);
+    });
+    back.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    window.addEventListener('scroll', () => {
+      document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    document.getElementById('hamburger').addEventListener('click', () => {
+      document.getElementById('navLinks').classList.toggle('active');
+    });
+    document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click', () => {
+      document.getElementById('navLinks').classList.remove('active');
+    }));
+
+    initParticles();
+    renderFilterOptions();
+    loadVideosFromSupabase();
+  }
+
+  function initParticles() {
+    const canvas = document.getElementById('particles');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    let particles = [];
+    for (let i=0; i<50; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        radius: Math.random() * 1.2,
+        alpha: Math.random(),
+        speed: 0.1 + Math.random() * 0.2,
+        color: Math.random() > 0.7 ? "#cc0000" : "#fff"
+      });
+    }
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fillStyle = p.color === "#cc0000" ? `rgba(204,0,0,${p.alpha * 0.25})` : `rgba(255,255,255,${p.alpha * 0.1})`;
+        ctx.fill();
+        p.y += p.speed;
+        if (p.y > canvas.height) { p.y = 0; p.x = Math.random() * canvas.width; }
+      });
+      requestAnimationFrame(draw);
+    }
+    draw();
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>

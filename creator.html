@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<!-- Title (60 characters se kam) -->
+<title>ANI3D - Premium Stereoscopic 3D Experience</title>
+
+<!-- Meta Description (150-160 characters) -->
+<meta name="description" content="Experience cinema in stunning stereoscopic 3D. Watch Immersive 3D and out-of-frame 3D videos. AI-powered 2D to 3D conversion for movies, songs, and shows.">
+
+<!-- Meta Keywords -->
+<meta name="keywords" content="3D video, stereoscopic 3D, Immersive 3D, out of frame 3D, 3D conversion, Owl3D, ANI3D, 3D movies, 3D songs">
+
+<!-- Author -->
+<meta name="author" content="Aniket Bhosale">
+
+<!-- Robots -->
+<meta name="robots" content="index, follow">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="apple-touch-icon" sizes="180x180" href="favicon_io/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon_io/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-87H1FH146C"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-87H1FH146C');
+</script>
+<style>/* Creator Page Styles - Complete Working CSS */
+/* ======================== NAVBAR (EXACT HOME PAGE STYLE) ======================== */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: 20px 20px;
+  background: rgba(10, 10, 10, 0);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(204, 0, 0, 0.3);
+  transition: 0.3s;
+}
+
+.navbar.scrolled {
+  padding: 15px 40px;
+  background: #00000000;
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo-img {
+  height: 35px;
+  width: auto;
+}
+
+.logo-text-ani {
+  font-family: 'Orbitron', monospace;
+  font-size: 2rem;
+  font-weight: 800;
+  color: #00e1ff;
+  letter-spacing: 1px;
+}
+
+.logo-text-3d {
+  font-family: 'Orbitron', monospace;
+  font-size: 2rem;
+  font-weight: 800;
+  color: #cc0000;
+  letter-spacing: 1px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 25px;
+}
+
+.nav-links a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  transition: 0.3s;
+  white-space: nowrap;
+}
+
+.nav-links a:hover {
+  color: #ff0000;
+}
+
+.nav-links a.active {
+  color: #cc0000;
+}
+
+.hamburger {
+  display: none;
+  font-size: 1.8rem;
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: #ff0000;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .logo-img {
+    height: 25px;
+  }
+  .logo-text-ani, .logo-text-3d {
+    font-size: 1.3rem;
+  }
+  .navbar.scrolled {
+    padding: 15px 20px;
+  }
+}
+
+@media (max-width: 992px) {
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    background: #000;
+    flex-direction: column;
+    padding: 20px;
+    gap: 15px;
+    border-bottom: 1px solid #cc0000;
+    z-index: 999;
+  }
+  .nav-links.active {
+    display: flex;
+  }
+  .hamburger {
+    display: block;
+  }
+  .nav-container {
+    padding: 0 20px;
+  }
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Hero Section */
+.creator-hero {
+  padding: 150px 0 80px;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.95));
+  text-align: center;
+  position: relative;
+}
+
+.creator-hero-content h1 {
+  font-size: 3.5rem;
+  font-family: 'Orbitron', monospace;
+  margin-bottom: 15px;
+}
+
+.creator-hero-content p {
+  color: #aaa;
+  font-size: 1.1rem;
+}
+
+/* Creator Main */
+.creator-main {
+  padding: 60px 0;
+  background: #030303;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.creator-profile-grid {
+  display: grid;
+  grid-template-columns: 350px 1fr;
+  gap: 40px;
+}
+
+@media (max-width: 992px) {
+  .creator-profile-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Left Side */
+.creator-profile-left {
+  position: sticky;
+  top: 100px;
+}
+
+@media (max-width: 992px) {
+  .creator-profile-left {
+    position: static;
+  }
+}
+
+.profile-image-card {
+  background: rgba(20, 20, 20, 0.8);
+  backdrop-filter: blur(10px);
+  border-radius: 25px;
+  padding: 25px;
+  text-align: center;
+  border: 1px solid rgba(204, 0, 0, 0.2);
+  margin-bottom: 25px;
+}
+
+.profile-image {
+  width: 200px;
+  height: 200px;
+  margin: 0 auto 20px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid #cc0000;
+  background: #1a1a1a;
+}
+
+.profile-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profile-social {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.profile-social a {
+  width: 40px;
+  height: 40px;
+  background: rgba(204, 0, 0, 0.15);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #cc0000;
+  font-size: 1.2rem;
+  transition: 0.3s;
+  text-decoration: none;
+}
+
+.profile-social a:hover {
+  background: #cc0000;
+  color: #fff;
+  transform: translateY(-3px);
+}
+
+.quick-info-card {
+  background: rgba(20, 20, 20, 0.8);
+  backdrop-filter: blur(10px);
+  border-radius: 25px;
+  padding: 25px;
+  border: 1px solid rgba(204, 0, 0, 0.2);
+}
+
+.quick-info-card h3 {
+  color: #cc0000;
+  margin-bottom: 20px;
+  font-size: 1.2rem;
+}
+
+.quick-info-card ul {
+  list-style: none;
+  padding: 0;
+}
+
+.quick-info-card li {
+  padding: 10px 0;
+  color: #aaa;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.quick-info-card li i {
+  width: 25px;
+  color: #cc0000;
+}
+
+/* Right Side */
+.creator-profile-right > div {
+  background: rgba(20, 20, 20, 0.8);
+  backdrop-filter: blur(10px);
+  border-radius: 25px;
+  padding: 30px;
+  margin-bottom: 25px;
+  border: 1px solid rgba(204, 0, 0, 0.2);
+  transition: 0.3s;
+}
+
+.creator-profile-right > div:hover {
+  border-color: #cc0000;
+}
+
+.creator-profile-right h2 {
+  color: #cc0000;
+  font-size: 1.4rem;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.creator-profile-right p {
+  color: #bbb;
+  line-height: 1.8;
+  margin-bottom: 15px;
+}
+
+/* Skills */
+.skills-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.skill-item {
+  width: 100%;
+}
+
+.skill-name {
+  display: block;
+  margin-bottom: 5px;
+  color: #fff;
+  font-size: 0.85rem;
+}
+
+.skill-bar {
+  height: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.skill-progress {
+  height: 100%;
+  background: linear-gradient(90deg, #cc0000, #ff4444);
+  border-radius: 10px;
+  width: 0%;
+  animation: skillFill 1s ease-out forwards;
+}
+
+@keyframes skillFill {
+  from { width: 0; }
+  to { width: var(--width, 90%); }
+}
+
+/* Tools */
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
+.tool-item {
+  background: rgba(204, 0, 0, 0.1);
+  padding: 12px;
+  border-radius: 12px;
+  text-align: center;
+  color: #ff6666;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: 0.3s;
+}
+
+.tool-item:hover {
+  background: #cc0000;
+  color: #fff;
+  transform: translateY(-3px);
+}
+
+@media (max-width: 768px) {
+  .tools-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Timeline */
+.timeline {
+  position: relative;
+  padding-left: 30px;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 8px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg, #cc0000, transparent);
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 30px;
+}
+
+.timeline-year {
+  position: absolute;
+  left: -30px;
+  top: 0;
+  background: #cc0000;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  color: #fff;
+}
+
+.timeline-content {
+  padding-left: 25px;
+}
+
+.timeline-content h4 {
+  color: #fff;
+  margin-bottom: 8px;
+  font-size: 1rem;
+}
+
+.timeline-content p {
+  color: #888;
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+/* Mission Quote */
+.mission-quote {
+  background: rgba(204, 0, 0, 0.1);
+  padding: 25px;
+  border-radius: 20px;
+  text-align: center;
+  font-size: 1.1rem;
+  color: #cc0000;
+  font-family: 'Orbitron', monospace;
+  margin-top: 20px;
+}
+
+.mission-quote i {
+  margin: 0 10px;
+  opacity: 0.5;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .creator-hero {
+    padding: 120px 0 50px;
+  }
+  
+  .creator-hero-content h1 {
+    font-size: 2rem;
+  }
+  
+  .container {
+    padding: 0 20px;
+  }
+  
+  .creator-profile-right > div {
+    padding: 20px;
+  }
+  
+  .timeline {
+    padding-left: 20px;
+  }
+  
+  .timeline-year {
+    position: relative;
+    left: 0;
+    display: inline-block;
+    margin-bottom: 10px;
+  }
+  
+  .timeline-content {
+    padding-left: 0;
+  }
+  
+  .timeline::before {
+    display: none;
+  }
+}
+
+/* Footer */
+.footer {
+  background: #030303;
+  padding: 50px 0 30px;
+  border-top: 1px solid rgba(204, 0, 0, 0.2);
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 40px;
+  margin-bottom: 40px;
+}
+
+.footer-logo .logo {
+  font-family: 'Orbitron', monospace;
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #00e1ff;
+}
+
+.footer-logo .logo span {
+  color: #ff0000;
+}
+
+.footer-logo p {
+  color: #777;
+  font-size: 0.75rem;
+  max-width: 250px;
+}
+
+.footer-links {
+  display: flex;
+  gap: 50px;
+  flex-wrap: wrap;
+}
+
+.footer-column h4 {
+  color: #fff;
+  margin-bottom: 15px;
+  font-size: 0.85rem;
+}
+
+.footer-column a {
+  display: block;
+  color: #777;
+  text-decoration: none;
+  font-size: 0.75rem;
+  margin-bottom: 8px;
+  transition: 0.3s;
+}
+
+.footer-column a:hover {
+  color: #cc0000;
+}
+
+.footer-bottom {
+  text-align: center;
+  padding-top: 30px;
+  border-top: 1px solid rgba(204, 0, 0, 0.1);
+}
+
+.footer-bottom p {
+  color: #555;
+  font-size: 0.65rem;
+}
+
+/* Back to Top */
+.back-to-top {
+  position: fixed;
+  bottom: 30px;
+  left: 30px;
+  width: 40px;
+  height: 40px;
+  background: rgba(204, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  transition: 0.3s;
+  z-index: 99;
+  border: 1px solid #cc0000;
+  color: #cc0000;
+  font-size: 1.1rem;
+}
+
+.show-btn {
+  opacity: 1;
+}
+
+
+</style>
+
+
+</head>
+<body>
+<canvas id="particles"></canvas>
+
+<!-- Navbar (Same as Home Page) -->
+<nav class="navbar" id="navbar">
+  <div class="nav-container">
+<a href="index.html" class="logo-link" style="text-decoration: none;">
+      <div class="logo">
+        <img src="favicon_io/logo.png" alt="ANI3D Logo" class="logo-img">
+        <span class="logo-text-ani">ANI</span><span class="logo-text-3d">3D</span>
+      </div>
+    </a>    <div class="nav-menu">
+      <div class="nav-links" id="navLinks">
+        <a href="index.html">HOME</a>
+        <a href="gallery-classic.html">IMMERSIVE 3D</a>
+        <a href="gallery-outframe.html">OUT OF FRAME 3D</a>
+        <a href="creator.html" class="active">CREATOR</a>
+        <a href="blog.html">BLOG</a>
+      </div>
+    </div>
+    <button class="hamburger" id="hamburger">☰</button>
+  </div>
+</nav>
+
+<main>
+  <!-- Creator Hero -->
+  <section class="creator-hero">
+    <div class="container">
+      <div class="creator-hero-content">
+        <span class="section-tag"><i class="fas fa-star"></i> Meet The Creator</span>
+        <h1>Aniket <span class="gradient-text">Bhosale</span></h1>
+        <p>3D Enthusiast | VFX Student | Film Maker</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Creator Main Content -->
+  <section class="creator-main">
+    <div class="container">
+      <div class="creator-profile-grid">
+        <!-- Left Side -->
+        <div class="creator-profile-left">
+          <div class="profile-image-card">
+            <div class="profile-image">
+              <img src="images/anikent  image/ani don.png" alt="Aniket Bhosale" onerror="this.src='images/ani don.png'">
+            </div>
+            <div class="profile-social">
+              <a href="https://www.youtube.com/@Anicake05" target="_blank"><i class="fab fa-youtube"></i></a>
+              <a href="https://www.instagram.com/anicake.5?igsh=MWcxejQwaHIwcmM3Mg==" target="_blank"><i class="fab fa-instagram"></i></a>
+              <a href="https://twitter.com/AniketImax75487" target="_blank"><i class="fab fa-twitter"></i></a>
+              <a href="mailto:aniketimax@gmail.com"><i class="fas fa-envelope"></i></a>
+            </div>
+          </div>
+        
+        </div>
+        
+        <!-- Right Side -->
+        <div class="creator-profile-right">
+          <div class="bio-card">
+            <h2><i class="fas fa-user-astronaut"></i> About Me</h2>
+            <p> My name is Aniket Bhosale, and I’m a passionate 3D enthusiast and VFX student. 3D is one of the biggest reasons I fell in love with cinema in the first place. It’s what made moviegoing feel magical to me. While most people were comfortable watching films at home, I was always the person excited to experience them on the biggest screen possible, just to feel that sense of depth, scale, and immersion that only 3D could offer.</p>
+            <p>Honestly, I could probably talk about 3D for hours and still not run out of things to say. The format has always fascinated me, and even today I still carry the same excitement and passion for it that I had growing up.</p>
+            <p>Ani3D is a space created for fellow 3D enthusiasts who still believe there’s something special about stereoscopic experiences. And if you’re reading this right now, chances are… you’re probably one of us too.</p>
+            <p>The exciting part is that creating 3D content is now more accessible than ever before.</p>
+            <p>Through this website, I want to help people discover how modern tools and AI-assisted workflows can make stereoscopic 3D creation possible even from home. From learning how to capture spatial and stereoscopic footage using newer iPhones, to experimenting with 2D-to-3D image and video conversion applications on PC like Owl3D, this platform is all about exploring the world of 3D creation in an approachable, creative, and passion-driven way.</p>
+            <p>One of the biggest reasons this website exists is not to promote the app itself, nor to simply become another 3D content library. For me, it’s about showing fellow 3D enthusiasts what’s truly possible with tools like these. If people enjoy the 3D catalogue and experiments created through Ani3D, then hopefully it encourages them to start exploring and creating their own stereoscopic 3D experiences too. And honestly, that would make me incredibly happy.</p>
+            <p>And finally, thank you for being a part of Ani3D. I genuinely hope you enjoy the 3D videos, experiments, and experiences shared throughout this journey as much as I enjoy creating them.</p>
+          
+          </div>
+          
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- Footer -->
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-content">
+      <a href="index.html" class="logo-link" style="text-decoration: none;">
+
+      <div class="footer-logo">
+         <div class="logo">
+        <img src="favicon_io/logo.png" alt="ANI3D Logo" class="logo-img">
+      </div>
+        <p>Experience cinema differently.</p>
+        <p> Experience everything in 3D.</p>
+            </div>
+      <div class="footer-links">
+        <div class="footer-column">
+        <h4>Explore</h4>
+        <a href="index.html">Home</a>
+        <a href="blog.html">Blog</a>
+        <a href="creator.html">Creator</a>
+      </div>
+      <div class="footer-column">
+        <h4>Galleries</h4>
+        <a href="gallery-classic.html">Immersive 3D</a>
+        <a href="gallery-outframe.html">Out of Frame</a>
+      </div>
+      <div class="footer-column">
+        <h4>Legal</h4>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms & Conditions</a>
+      </div>
+
+      </div>
+    </div>
+     <div class="footer-bottom">
+          <p>© 2026 ANI3D — All rights reserved</p>
+          <p style="margin-top: 15px; color: #888; font-size: 0.75rem;">
+            Website Creator & 3D character Artist -
+            <a href="####" target="_blank" style="color: #00aeff; text-decoration: none; font-weight: 600; transition: 0.3s;" 
+              onmouseover="this.style.textDecoration='underline'; this.style.opacity='0.8';" 
+              onmouseout="this.style.textDecoration='none'; this.style.opacity='1';">Sourabh Jangir</a>
+          </p>
+        </div>
+  </div>
+</footer>
+
+
+<div class="back-to-top" id="backToTop">↑</div>
+
+<!-- Scripts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script src="script.js"></script>
+<script>
+  // Mobile Hamburger Menu Fix for Creator Page
+  document.addEventListener('DOMContentLoaded', function() {
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+    
+    if (hamburger && navLinks) {
+      hamburger.addEventListener('click', function() {
+        navLinks.classList.toggle('active');
+      });
+    }
+  });
+  // Creator Page JavaScript
+document.addEventListener("DOMContentLoaded", function() {
+  
+  // Navbar scroll effect
+  const navbar = document.getElementById("navbar");
+  if (navbar) {
+    window.addEventListener("scroll", function() {
+      if (window.scrollY > 50) {
+        navbar.classList.add("scrolled");
+      } else {
+        navbar.classList.remove("scrolled");
+      }
+    });
+  }
+  
+  // Hamburger menu
+  const hamburger = document.getElementById("hamburger");
+  const navLinks = document.getElementById("navLinks");
+  if (hamburger && navLinks) {
+    hamburger.addEventListener("click", function() {
+      navLinks.classList.toggle("active");
+    });
+  }
+  
+  // Back to top
+  const backBtn = document.getElementById("backToTop");
+  if (backBtn) {
+    window.addEventListener("scroll", function() {
+      if (window.scrollY > 500) {
+        backBtn.classList.add("show-btn");
+      } else {
+        backBtn.classList.remove("show-btn");
+      }
+    });
+    
+    backBtn.addEventListener("click", function() {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  }
+  
+  // Skill bars animation
+  const skillBars = document.querySelectorAll('.skill-progress');
+  skillBars.forEach(bar => {
+    const width = bar.style.width;
+    bar.style.setProperty('--width', width);
+  });
+});
+// ======================== 3D MODE FOR CREATOR PAGE ========================
+function init3DModeForCreator() {
+  const btn = document.getElementById('stereoscopic3dBtn');
+  if (!btn) return;
+  
+  let is3DMode = false;
+  
+  btn.addEventListener('click', () => {
+    is3DMode = !is3DMode;
+    if (is3DMode) {
+      document.body.classList.add('stereo-3d-active');
+      btn.innerHTML = '<i class="fas fa-eye"></i><span>🔴🔵 3D ON</span>';
+      btn.style.background = 'linear-gradient(135deg, #333333, #000000)';
+    } else {
+      document.body.classList.remove('stereo-3d-active');
+      btn.innerHTML = '<i class="fas fa-glasses"></i><span>🔴🔵 ACTIVATE 3D MODE</span>';
+      btn.style.background = 'linear-gradient(135deg, #cc0000, #ff4444)';
+    }
+  });
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+  init3DModeForCreator();
+});
+
+
+
+</script>
+</body>
+</html>

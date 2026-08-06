@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>ANI3D | The 3D Experience Project | SBS 3D Videos, AI 2D-to-3D & Stereoscopic Experiences</title>
+
+<meta name="description" content="Explore stereoscopic 3D movies, trailers, clips, SBS 3D videos, AI-assisted 2D-to-3D conversions, VR experiences, anaglyph 3D, frame-break effects, and immersive visual media through Ani3D.">
+
+<meta name="keywords" content="ANI3D, The 3D Experience Project, stereoscopic 3D, SBS 3D, side-by-side 3D, 3D videos, 3D movies, 3D trailers, 3D clips, AI 2D to 3D, Owl3D, VR 3D, anaglyph 3D, frame break 3D, pop-out 3D, 3D TV, 3D projector, glasses-free 3D, stereoscopic video, 3D conversion, 3D camera, spatial video, 3D images">
+<!-- Author -->
+<meta name="author" content="Aniket Bhosale">
+
+
+<!-- Robots -->
+<meta name="robots" content="index, follow"><script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+</script>
+<script type="text/javascript">
+   (function(){
+      emailjs.init({
+        publicKey: "YOUR_PUBLIC_KEY",
+      });
+   })();
+</script>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="apple-touch-icon" sizes="180x180" href="favicon_io/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon_io/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-87H1FH146C"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-87H1FH146C');
+</script>
+</head>
+<body>
+<canvas id="particles"></canvas>
+
+<nav class="navbar" id="navbar">
+    <div class="nav-container">
+    <a href="index.html" class="logo-link" style="text-decoration: none;">
+      <div class="logo">
+        <img src="favicon_io/logo.png" alt="ANI3D Logo" class="logo-img">
+        <span class="logo-text-ani">ANI</span><span class="logo-text-3d">3D</span>
+      </div>
+    </a>
+    <div class="nav-menu">
+      <div class="nav-links" id="navLinks">
+        <a href="./">HOME</a>
+        <a href="#comparison">3D SHOWCASE</a>
+       <a href="gallery-classic.html">IMMERSIVE 3D</a>
+        <a href="gallery-outframe.html" class="active">OUT OF FRAME 3D</a>
+        <a href="#about">ABOUT</a>
+        <a href="creator.html">CREATOR</a>
+        <a href="#community">COMMUNITY</a>
+        <a href="blog.html">BLOG</a>
+      </div>
+    </div>
+    <button class="hamburger" id="hamburger">☰</button>
+  </div>
+</nav>
+
+<main>
+<!-- Hero Section -->
+<section id="home" class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-particles"></div>
+  <div class="container hero-content">
+    <div class="hero-grid">
+      <div class="hero-left">
+        <div class="hero-badge">
+          <i class="fas fa-cube"></i> <span>Welcome to the ultimate 3D experience archive.</span>
+        </div>
+        <h1>Experience <span class="gradient-text">Cinema</span> Differently</h1>
+        <p class="hero-description">Ani 3D is home to The 3D Experience Project, a passion-driven initiative dedicated to exploring visual media through stereoscopic 3D.</p>
+        <p class="hero-description">Using AI-assisted 2D-to-3D image and video conversion with Owl3D, alongside original projects shot in stereoscopic 3D using newer iPhones, the goal is to explore as many forms of visual entertainment as possible through the lens of depth and immersive presentation. From Hollywood blockbusters and regional cinema to television, anime, animated features, horror films, action spectacles, internet culture, memes, reels, YouTube Shorts, website browsing in 3D, motion graphics, gameplay clips ranging from mobile gaming to PC gaming, colour and black-and-white content, UI experiments, and random online visuals, this project exists to push the boundaries of what can be experienced in 3D.</p>
+        <p class="hero-description">The content spans 20+ genres, multiple film industries, and languages from around the world, creating a global 3D showcase driven entirely by passion and curiosity.</p>
+        <div class="hero-buttons">
+          <a href="#Classic3D" class="btn-primary">Explore 3D Library <i class="fas fa-arrow-right"></i></a>
+          <a href="#about" class="btn-outline">Learn More <i class="fas fa-play-circle"></i></a>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div class="hero-3d-devices-wrapper">
+          <p class="hero-3d-devices-heading">Enjoy Ani3D content across a wide range of compatible 3D viewing devices.</p>
+          <div class="hero-3d-graphics">
+            <div class="glass-card-3d">
+              <i class="fas fa-vr-cardboard"></i>
+              <span>VR Headsets</span>
+            </div>
+            <div class="glass-card-3d">
+              <i class="fas fa-tv"></i>
+              <span>3D TVs</span>
+            </div>
+            <div class="glass-card-3d">
+              <i class="fas fa-glasses"></i>
+              <span>Anaglyph Glasses</span>
+            </div>
+            <div class="glass-card-3d">
+              <i class="fas fa-glasses"></i>
+              <span>AR Glasses</span>
+            </div>
+            <div class="glass-card-3d">
+              <i class="fas fa-mobile-alt"></i>
+              <span>3D Smartphones</span>
+            </div>
+            <div class="glass-card-3d">
+              <i class="fas fa-film"></i>
+              <span>3D Projectors</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-indicator">
+    <span>Scroll Down</span>
+    <i class="fas fa-arrow-down"></i>
+  </div>
+</section>
+ <!-- 3D Showcase - Before/After Sliders (Fixed - Text properly below images) -->
+<section id="comparison" class="showcase-section">
+  <div class="container">
+    <div class="section-header-center">
+      <span class="section-tag"><i class="fas fa-cube"></i> 3D Showcase</span>
+      <h2>See the <span class="gradient-text">Difference</span></h2>
+      <p>Before & after conversions — witness the magic of  3D</p>
+    </div>
+    
+    <div class="sliders-grid">
+      <!-- Slider Card 1 - Immersive 3D-->
+      <div class="slider-card">
+        <div class="slider-title">Immersive 3D <span> Before/After</span></div>
+        
+        <!-- Image Slider Container -->
+        <div class="hero-image">
+          <div class="slider-container" id="sliderContainer1">
+            <div class="slider-images">
+              <img src="images/Showcase slider/Anaglyph 3D.png" alt="Before 2D" class="slider-before">
+              <img src="images/Showcase slider/2D.png" alt="After 3D" class="slider-after" id="sliderAfter1">
+            </div>
+            <div class="slider-divider" id="sliderDivider1">
+              <div class="slider-handle">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="15 18 9 12 15 6"></polyline>
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Text Below Image - Properly placed, not inside image -->
+        <div class="slider-description">
+          <i class="fas fa-arrows-alt" style="color: #cc0000; margin-right: 8px;"></i>
+          <span>Preview shown using anaglyph 3D for demonstration purposes. The full experience is available in SBS (Side-by-Side) 3D format and can be enjoyed on compatible 3D displays, including 3D TVs, VR headsets, and 3D projectors, with the appropriate tools and applications for 3D playback.</span>
+        </div>
+      </div>
+      
+      <!-- Slider Card 2 - Out Of  Frame -->
+      <div class="slider-card">
+        <div class="slider-title">Out Of  Frame 3D <span>Before/After</span></div>
+        
+        <!-- Image Slider Container -->
+        <div class="hero-image">
+          <div class="slider-container" id="sliderContainer2">
+            <div class="slider-images">
+              <img src="images/Showcase slider/Frame Break 3D.png" alt="Before 2D" class="slider-before">
+              <img src="images/Showcase slider/FB 2D.png" alt="After 3D" class="slider-after" id="sliderAfter2">
+            </div>
+            <div class="slider-divider" id="sliderDivider2">
+              <div class="slider-handle">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="15 18 9 12 15 6"></polyline>
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Text Below Image - Properly placed, not inside image -->
+        <div class="slider-description">
+          <i class="fas fa-arrows-alt" style="color: #cc0000; margin-right: 8px;"></i>
+          <span>Demonstration of a frame-break effect, where objects appear to extend beyond the screen's borders to enhance the illusion of depth and immersion.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <!-- Immersive 3DPreview - 4 Videos -->
+  <section id="Classic3D" class="video-section">
+    <div class="container">
+      <div class="section-header-between">
+        <div>
+          <span class="section-tag"> </span>
+          <h2> <span class="gradient-text">Immersive 3D</span></h2>
+        </div>
+        <a href="gallery-classic.html" class="view-all-btn">View All Videos <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <p>  Weekly content will be uploaded</p>
+      <p class="section-subtitle"></p>
+      <div class="featured-grid-4" id="classicGridPreview"></div>
+    </div>
+  </section>
+
+  <!-- Out Of The Frame 3D Preview - 4 Videos -->
+  <section id="OutOfTheFrame3D" class="video-section">
+    <div class="container">
+      <div class="section-header-between">
+        <div>
+          <span class="section-tag"></span>
+          <h2><span class="gradient-text">Out Of  Frame 3D</span></h2>
+        </div>
+        <a href="gallery-outframe.html" class="view-all-btn">View All Videos <i class="fas fa-arrow-right"></i></a>
+      </div>
+             <p>  Weekly content will be uploaded</p>
+      <p class="section-subtitle"></p>
+      <div class="featured-grid-4" id="outFrameGridPreview"></div>
+    </div>
+  </section>
+ <!-- About Section - Single Box with Left & Right Text (Simple Design) -->
+<section id="about" class="about-section">
+  <div class="container">
+    <div class="about-header">
+      <span class="section-tag"><i class="fas fa-info-circle"></i> About Us</span>
+      <h2>ANI<span class="gradient-text">3D</span></h2>
+    </div>
+    
+    <!-- Single Box with 2 columns inside -->
+    <div class="about-single-box">
+      <!-- Left Column Text -->
+      <div class="about-left">
+        <div class="about-icon">
+          <i class="fas fa-vr-cardboard"></i>
+        </div>
+        <p>Ani3D is more than just a library of short-form 3D content. It is a passion-driven initiative dedicated to exploring what visual media could feel like through stereoscopic 3D experiences.</p>
+        <p>I'm Aniket Bhosale, a passionate 3D enthusiast exploring what cinema, television, internet culture, and everyday visual media could feel like in stereoscopic 3D. Ever since I fell in love with the format, I've always been fascinated by one simple question:</p>
+        <p1 class="simple-quote">"What would this look like in 3D?"</p1>
+        <p>              </p>
+        <p>That curiosity became the foundation of this project.</p>
+        <p>Some of these films were originally released in 3D.</p>
+        <p>Some never received a 3D version at all.</p>
+        <p>And some simply had incredible untapped 3D potential.</p>
+        <p>This project also explores iconic scenes reimagined in 3D, alongside native vs AI-converted comparisons to better understand how stereoscopic depth can transform the viewing experience.</p>
+      </div>
+      
+      <!-- Right Column Text -->
+      <div class="about-right">
+       <p>Designed as a one-year journey, this initiative is about preserving the excitement and culture surrounding 3D while also experimenting with content audiences never had the chance to experience stereoscopically. It's a creative playground built around one idea:</p>
+        <p1 class="simple-quote">"What if?"</p1>
+        <p>  </p>
+        <p>But more than anything, Ani3D is about community.</p>
+        <p>It's about connecting with like-minded people who still appreciate the magic of immersive visuals, theatrical depth, and the unique feeling that 3D can create. Whether you're a lifelong stereoscopic fan, someone curious about the format, or even an aspiring creator interested in 3D filmmaking and conversion workflows, this space is meant to be shared with people who carry that same excitement for the medium.</p>
+        <p>Hopefully, by the end of this journey, both me and the community built around Ani3D will have experienced almost everything possible in 3D. That's the experience I want this project to become: a shared journey driven by curiosity, experimentation, and a passion for immersive storytelling.</p>
+        <p>And honestly, I'd be more than happy to have more and more people join me along the way.</p>
+        <p></p>
+        <p1 class="simple-quote end-quote">"Experience cinema differently. Experience everything in 3D."</p1>
+      </div>
+    </div>
+  </div>
+</section>
+
+ <!-- Owl3D Section -->
+<section id="owl3d" class="owl3d-section">
+  <div class="container">
+    <div class="owl3d-header">
+      <span class="section-tag"><i class="fas fa-cogs"></i> Powered By</span>
+      <h2>Owl3D <span class="gradient-text">Technology</span></h2>
+    </div>
+    
+    <div class="owl3d-grid">
+      <div class="owl3d-box">
+        <div class="owl3d-icon">
+          <i class="fas fa-robot"></i>
+        </div>
+        <div class="owl3d-content">
+          <p>Some time back, I came across an application called Owl3D, a PC-based tool that allows users to convert 2D images and videos into stereoscopic 3D using AI-assisted depth conversion. As someone who has always been passionate about 3D, I was genuinely surprised by how impressive and immersive some of the results could look.</p>
+          
+          <p>What I personally enjoy most about the application is the amount of creative control it gives users. From different 3D formats and depth strengths to multiple rendering styles and conversion approaches, the software allows creators to experiment with a wide range of possibilities depending on the type of experience they want to create.</p>
+          
+          <p><strong class="highlight-text">And no, this isn't a sponsored promotion or a paid collaboration.</strong></p>
+          
+          <p>I'm simply talking about a tool that genuinely helped me explore stereoscopic 3D creation in a way that previously felt inaccessible outside professional industry workflows. Even the free version offers a surprisingly large number of features, which is exactly what I currently use myself for many of the projects and experiments uploaded on this website.</p>
+          
+          <p>As for how good the 3D output is, I'll leave that for you to decide. Every piece of 3D content converted using Owl3D and featured on this website is available for everyone to experience, enjoy, and judge for themselves.</p>
+          
+          <div class="owl3d-quote">
+            <i class="fas fa-quote-left"></i>
+            <p>So why am I so excited about it?</p>
+          </div>
+          
+          <p>Because tools like Owl3D make stereoscopic 3D experimentation more accessible than ever before, allowing enthusiasts and creators to explore ideas that previously required far more specialized equipment and workflows.</p>
+          
+          <p>Even though 3D may not be as mainstream as it once was, the passion for the format still exists among enthusiasts around the world. This project exists to help keep that excitement alive while building a community of people who still love the magic of immersive visual storytelling and appreciate the tools that make those creative possibilities more accessible than ever.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <!-- Community Section (With Contact Form) -->
+  <section id="community" class="community-section">
+  <div class="container">
+    <div class="section-header-center">
+      <span class="section-tag">Connect</span>
+      <h2>Join Our <span class="gradient-text">Community</span></h2>
+      <p>Every message helps improve The 3D Experience Project</p>
+    </div>
+    
+    <!-- Professional Split Layout - Left Social / Right Form -->
+    <div class="professional-contact-wrapper">
+      
+      <!-- LEFT SIDE - Social Media Connections -->
+      <div class="social-connect-section">
+        <div class="social-header">
+          <div class="social-icon-bg">
+            <i class="fas fa-share-alt"></i>
+          </div>
+          <h3>Connect With <span class="gradient-text">Us</span></h3>
+          <p>Join our community on social media for daily 3D content, updates</p>
+        </div>
+        
+        <div class="social-links-grid">
+          <a href="https://www.youtube.com/@Anicake05" target="_blank" class="social-link-card youtube">
+            <div class="social-link-icon"><i class="fab fa-youtube"></i></div>
+            <div class="social-link-info">
+              <h4>YouTube</h4>
+              <p>3D conversions, reviews & tutorials.</p>
+            </div>
+            <i class="fas fa-arrow-right"></i>
+          </a>
+          
+          <a href="########" target="_blank" class="social-link-card discord">
+            <div class="social-link-icon"><i class="fab fa-discord"></i></div>
+            <div class="social-link-info">
+              <h4>Discord</h4>
+              <p>Coming soon... A dedicated community for 3D enthusiasts. </p>
+            </div>
+            <i class="fas fa-arrow-right"></i>
+          </a>
+
+          <a href="https://www.instagram.com/ani3d.in?igsh=bjVkM2Znem14emM3" target="_blank" class="social-link-card reddit">
+            <div class="social-link-icon"><i class="fab fa-instagram"></i></div>
+            <div class="social-link-info">
+              <h4>Instagram</h4>
+              <p>3D memes, reels, and trailers.</p>
+            </div>
+            <i class="fas fa-arrow-right"></i>
+          </a>
+          
+          <a href="mailto:aniketimax@gmail.com" class="social-link-card email">
+            <div class="social-link-icon"><i class="fas fa-envelope"></i></div>
+            <div class="social-link-info">
+              <h4>Email Us</h4>
+              <p>Questions, feedback & collaboration inquiries.</p>
+            </div>
+            <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+        
+        <div class="social-stats">
+          <div class="stat-badge">
+            <i class="fas fa-users"></i>
+            <span></span>
+          </div>
+          <div class="stat-badge">
+            <i class="fas fa-clock"></i>
+            <span>Active 24/7</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- RIGHT SIDE - Contact Form -->
+      <div class="contact-form-section">
+        <div class="form-header-modern">
+          <div class="form-icon-bg">
+            <i class="fas fa-comment-dots"></i>
+          </div>
+          <h3>Send Us a <span class="gradient-text">Message</span></h3>
+          <p>Questions, feedback, collaborations, or just want to talk about 3D? We'd love to hear from you!</p>
+        </div>
+        
+        <form id="contactForm" class="pro-contact-form">
+          <div class="form-row">
+            <div class="input-group-modern">
+              <label><i class="fas fa-user"></i> Full Name</label>
+              <input type="text" id="userName" name="userName" required placeholder="John Doe">
+            </div>
+            <div class="input-group-modern">
+              <label><i class="fas fa-envelope"></i> Email Address</label>
+              <input type="email" id="userEmail" name="userEmail" required placeholder="hello@example.com">
+            </div>
+          </div>
+          
+          <div class="input-group-modern">
+            <label><i class="fas fa-tag"></i> Subject</label>
+            <select id="userSubject" name="userSubject">
+              <option value="feedback">💬 Feedback & Suggestions</option>
+              <option value="question">❓ General Question</option>
+              <option value="collaboration">🤝 Collaboration / Partnership</option>
+              <option value="support">🛠️ Website & Playback Support</option>
+              <option value="request">🎬 Content Request</option>
+              <option value="other">📌 Other</option>
+            </select>
+          </div>
+          
+          <div class="input-group-modern">
+            <label><i class="fas fa-pencil-alt"></i> Your Message</label>
+            <textarea id="userMessage" name="userMessage" rows="4" required placeholder="Tell us how we can help, share your ideas, or ask us anything about Ani3D..."></textarea>
+          </div>
+          
+          <button type="submit" class="submit-btn-pro" id="submitFormBtn">
+            <span class="btn-text">Send Message</span>
+            <span class="btn-icon"><i class="fas fa-paper-plane"></i></span>
+          </button>
+          
+          <div id="formStatus" class="form-status-pro"></div>
+        </form>
+        
+        <div class="form-guarantee">
+          <div class="guarantee-item">
+            <i class="fas fa-clock"></i>
+            <span>We usually reply within 24-48 hours</span>
+          </div>
+          <div class="guarantee-item">
+            <i class="fas fa-shield-alt"></i>
+            <span>Your data is secure</span>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-content">
+    <a href="index.html" class="logo-link" style="text-decoration: none;">
+
+      <div class="footer-logo">
+         <div class="logo">
+        <img src="favicon_io/logo.png" alt="ANI3D Logo" class="logo-img">
+      </div>
+        <p>Experience cinema differently.</p>
+        <p> Experience everything in 3D.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-column">
+        <h4>Explore</h4>
+        <a href="index.html">Home</a>
+        <a href="blog.html">Blog</a>
+        <a href="creator.html">Creator</a>
+      </div>
+      <div class="footer-column">
+        <h4>Galleries</h4>
+        <a href="gallery-classic.html">Immersive 3D</a>
+        <a href="gallery-outframe.html">Out of Frame</a>
+      </div>
+      <div class="footer-column">
+        <h4>Legal</h4>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms & Conditions</a>
+      </div>
+      </div>
+    </div>
+     <div class="footer-bottom">
+          <p>© 2026 ANI3D — All rights reserved</p>
+        </div>
+  </div>
+</footer>
+
+
+
+<div id="videoModal" class="modal">
+  <span class="close-modal">&times;</span>
+  <div class="modal-content">
+    <div class="modal-video" id="modalVideo"></div>
+    <div class="modal-info" id="modalInfo"></div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

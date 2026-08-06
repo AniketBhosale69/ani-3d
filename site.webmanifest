@@ -1,0 +1,30 @@
+{
+  "name": "ANI3D — The 3D Experience Project",
+  "short_name": "ANI3D",
+  "description": "Stereoscopic 3D movies, trailers, clips and AI-assisted 2D-to-3D conversions.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "theme_color": "#cc0000",
+  "background_color": "#030303",
+  "icons": [
+    {
+      "src": "/favicon_io/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon_io/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon_io/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ]
+}
