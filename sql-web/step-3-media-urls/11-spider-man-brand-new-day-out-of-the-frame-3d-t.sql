@@ -1,0 +1,1 @@
+UPDATE videos SET stream_url = 'https://files.ani3d.in/0:/outframe/web/Spider-Man%20Brand%20New%20Day%20-%20Out%20Of%20The%20Frame%203D%20Trailer.mp4?inline=true', download_url = 'https://files.ani3d.in/0:/outframe/web/Spider-Man%20Brand%20New%20Day%20-%20Out%20Of%20The%20Frame%203D%20Trailer.mp4' WHERE title = 'Spider-Man: Brand New Day - Out Of The Frame 3D Trailer';

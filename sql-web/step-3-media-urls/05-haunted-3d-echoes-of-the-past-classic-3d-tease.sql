@@ -1,0 +1,1 @@
+UPDATE videos SET stream_url = 'https://files.ani3d.in/0:/classic/web/Haunted%203D%20Echoes%20Of%20The%20Past%20-%20Classic%203D%20Teaser.mp4?inline=true', download_url = 'https://files.ani3d.in/0:/classic/master/Haunted%203D%20Echoes%20Of%20The%20Past%20-%20Classic%203D%20Teaser.mov' WHERE title = 'Haunted 3D Echoes Of The Past - Classic 3D Teaser';

@@ -1,0 +1,1 @@
+UPDATE videos SET stream_url = 'https://files.ani3d.in/0:/classic/web/Spiderman%20Brand%20New%20Day%20-%20Classic%203D%20Trailer.mp4?inline=true', download_url = 'https://files.ani3d.in/0:/classic/master/Spiderman%20Brand%20New%20Day%20-%20Classic%203D%20Trailer.mov' WHERE title = 'Spider-Man: Brand New Day - Immersive 3D Trailer';

@@ -1,0 +1,1 @@
+UPDATE videos SET stream_url = 'https://files.ani3d.in/0:/outframe/web/Varanasi%20To%20The%20World%20-%20Out%20Of%20The%20Frame%203D%20Trailer.mp4?inline=true', download_url = 'https://files.ani3d.in/0:/outframe/web/Varanasi%20To%20The%20World%20-%20Out%20Of%20The%20Frame%203D%20Trailer.mp4' WHERE title = 'Varanasi To The World - Out Of The Frame 3D Trailer';

@@ -1,0 +1,1 @@
+UPDATE videos SET stream_url = 'https://files.ani3d.in/0:/outframe/web/The%20Amazing%20Spider-Man%20%20Out%20of%20the%20Frame%203D%20Final%20Swing.mp4?inline=true', download_url = 'https://files.ani3d.in/0:/outframe/web/The%20Amazing%20Spider-Man%20%20Out%20of%20the%20Frame%203D%20Final%20Swing.mp4' WHERE title = 'The Amazing Spider-Man | Out of the Frame 3D Final Swing';

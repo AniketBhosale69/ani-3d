@@ -1,0 +1,1 @@
+UPDATE videos SET stream_url = 'https://files.ani3d.in/0:/classic/web/Alpha%20-%20Classic%203D%20Teaser.mp4?inline=true', download_url = 'https://files.ani3d.in/0:/classic/master/Alpha%20-%20Classic%203D%20Teaser.mov' WHERE title = 'Alpha - Immersive 3D Trailer';

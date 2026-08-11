@@ -620,7 +620,16 @@
     }
     .modal-close:hover { color: #cc0000; transform: rotate(90deg); }
     .modal-video { width: 100%; aspect-ratio: 16/9; background: #000; flex-shrink: 0; }
-    .modal-video iframe { width: 100%; height: 100%; border: none; }
+    /* object-fit is required, not cosmetic: the box is a fixed 16/9 but the SBS
+       masters run up to 3.48:1, so without it the widest titles get cropped. */
+    .modal-video iframe,
+    .modal-video video { width: 100%; height: 100%; border: none; object-fit: contain; background: #000; }
+    .modal-video-error {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 10px; height: 100%; padding: 18px; text-align: center;
+      color: #bbb; font-size: 0.85rem; line-height: 1.5;
+    }
+    .modal-video-error i { color: #cc0000; }
     .modal-info { padding: 14px 18px 18px; flex: 1; overflow-y: auto; max-height: 45vh; }
     .modal-info::-webkit-scrollbar { width: 3px; }
     .modal-info::-webkit-scrollbar-thumb { background: #cc0000; border-radius: 10px; }
@@ -1810,6 +1819,53 @@
   }
 
   // ========== MODAL ==========
+
+  // Media the browser can decode itself. Everything on files.ani3d.in is H.264
+  // in MP4; anything else here is a leftover embed URL, which still gets an
+  // iframe so old rows keep working.
+  const NATIVE_VIDEO_RE = /\.(mp4|m4v|mov|webm|mkv)(\?|$)/i;
+
+  function buildPlayer(container, video, streamUrl) {
+    if (!NATIVE_VIDEO_RE.test(streamUrl)) {
+      container.innerHTML = `<iframe src="${streamUrl}" frameborder="0" allowfullscreen allow="autoplay; fullscreen"></iframe>`;
+      return;
+    }
+
+    const el = document.createElement('video');
+    el.controls = true;
+    el.playsInline = true;
+    el.preload = 'metadata';
+    // Deliberately no crossorigin attribute: media loads as a no-CORS request
+    // and works without one. Setting it forces a CORS check that breaks playback.
+    if (video.thumb) el.poster = video.thumb;
+
+    // files.ani3d.in proxies Google Drive, which can fail for reasons that have
+    // nothing to do with the file: per-file download quota, an expired refresh
+    // token, an outage. Offer the download instead of an endless black box.
+    let settled = false;
+    let timer;
+    const succeed = () => { settled = true; clearTimeout(timer); };
+    const fail = () => {
+      if (settled) return;
+      settled = true;
+      clearTimeout(timer);
+      const dl = video.download_url || '';
+      container.innerHTML = `
+        <div class="modal-video-error">
+          <p><i class="fas fa-triangle-exclamation"></i> This video couldn't be played here.</p>
+          <p>Download it and play it in VLC, or on a 3D TV / headset.</p>
+          ${dl ? `<a class="modal-download-btn" href="${dl}" target="_blank" rel="noopener"><i class="fas fa-download"></i> Download Video</a>` : ''}
+        </div>`;
+    };
+
+    el.addEventListener('loadedmetadata', succeed, { once: true });
+    el.addEventListener('error', fail, { once: true });
+    timer = setTimeout(fail, 20000);
+
+    el.src = streamUrl;
+    container.appendChild(el);
+  }
+
   function openStreamModal(video) {
     if (!video) return;
     const modal = document.getElementById('videoModal');
@@ -1817,7 +1873,8 @@
     const info = document.getElementById('modalInfo');
     const streamUrl = video.stream_url || '';
     if (!streamUrl) { alert('Stream URL not available'); return; }
-    container.innerHTML = `<iframe src="${streamUrl}" frameborder="0" allowfullscreen allow="autoplay; fullscreen" style="width:100%;height:100%;border:none;"></iframe>`;
+    container.innerHTML = '';
+    buildPlayer(container, video, streamUrl);
     const contentType = video.content_type || 'N/A';
     const language = video.language || 'N/A';
     const year = video.year || 'N/A';

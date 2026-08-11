@@ -268,12 +268,14 @@
           <span class="hint">Comma-separated. These feed the gallery genre filter, so keep spelling consistent.</span>
         </div>
         <div class="field full">
-          <label for="f_stream_url">Stream URL (Wistia embed)</label>
-          <input id="f_stream_url" type="url" placeholder="https://fast.wistia.net/embed/iframe/xxxxxxxx">
+          <label for="f_stream_url">Stream URL (files.ani3d.in web encode)</label>
+          <input id="f_stream_url" type="url" placeholder="https://files.ani3d.in/0:/classic/web/Title.mp4?inline=true">
+          <span class="hint">Point at the <code>web/</code> encode and keep <code>?inline=true</code> — that is what makes the browser play it instead of downloading it.</span>
         </div>
         <div class="field full">
-          <label for="f_download_url">Download URL (VikingFile)</label>
-          <input id="f_download_url" type="url" placeholder="https://vikingfile.com/f/xxxxxxxx">
+          <label for="f_download_url">Download URL (files.ani3d.in master)</label>
+          <input id="f_download_url" type="url" placeholder="https://files.ani3d.in/0:/classic/master/Title.mov">
+          <span class="hint">The <code>master/</code> file, with no <code>?inline=true</code>. Outframe has no masters — reuse its <code>web/</code> URL.</span>
         </div>
         <div class="field full">
           <label for="f_thumb">Thumbnail URL (ImgBB)</label>

@@ -1,7 +1,7 @@
 INSERT INTO videos (category, title, content_type, genre, language, year, stream_url, download_url, thumb, description, created_at)
 VALUES ('classic', 'Haunted 3D Echoes Of The Past - Classic 3D Teaser', 'Trailer', 'Hindi
 
-Horror, Romance, Thriller', 'Hindi', 2026, 'https://fast.wistia.com/embed/medias/b6rpxti7u6', 'https://vikingfile.com/f/fzgdM2Yl7v', 'https://i.ibb.co/yBX99hHC/Haunted-3-D-Echoes-Of-The-Past-Classic-3-D-Thumbnail.png', 'This trailer was converted using Owl3D''s custom 3D settings, which provide full control over the stereoscopic conversion process, including depth strength, convergence, rendering style, and other advanced parameters commonly used to fine-tune the 3D viewing experience.
+Horror, Romance, Thriller', 'Hindi', 2026, 'https://files.ani3d.in/0:/classic/web/Haunted%203D%20Echoes%20Of%20The%20Past%20-%20Classic%203D%20Teaser.mp4?inline=true', 'https://files.ani3d.in/0:/classic/master/Haunted%203D%20Echoes%20Of%20The%20Past%20-%20Classic%203D%20Teaser.mov', 'https://i.ibb.co/yBX99hHC/Haunted-3-D-Echoes-Of-The-Past-Classic-3-D-Thumbnail.png', 'This trailer was converted using Owl3D''s custom 3D settings, which provide full control over the stereoscopic conversion process, including depth strength, convergence, rendering style, and other advanced parameters commonly used to fine-tune the 3D viewing experience.
 
 With a wide range of customization options available, from subtle depth adjustments to stronger pop-out effects, Owl3D offers more than 20 possible output variations. As part of The 3D Experience Project, I will continue experimenting with different settings in future uploads to identify the most natural, immersive, and enjoyable stereoscopic 3D experience possible.
 

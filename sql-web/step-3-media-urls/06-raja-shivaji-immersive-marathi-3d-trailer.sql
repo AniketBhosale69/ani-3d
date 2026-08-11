@@ -1,0 +1,1 @@
+UPDATE videos SET stream_url = 'https://files.ani3d.in/0:/classic/web/Raja%20Shivaji%20-%20Classic%203D%20Marathi%20Trailer.mp4?inline=true', download_url = 'https://files.ani3d.in/0:/classic/master/Raja%20Shivaji%20-%20Classic%203D%20Marathi%20Trailer.mov' WHERE title = 'Raja Shivaji - Immersive Marathi 3D Trailer';

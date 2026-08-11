@@ -16,8 +16,8 @@ const classicPreview = [
     genre: "Action , Fantasy Epic , Quest Sword & Sandal , Adventure ,Drama , Fantasy , Action Epic , Adventure Epic", 
     language: "english",
     year: "2026",
-    streamUrl: "https://fast.wistia.com/embed/medias/qn82osie9v", 
-    downloadUrl: "https://vikingfile.com/f/mUlsVqXCH2", 
+    streamUrl: "https://files.ani3d.in/0:/classic/web/The%20Odyssey%20-%202.39%20Classic%203D%20Trailer.mp4?inline=true", 
+    downloadUrl: "https://files.ani3d.in/0:/classic/master/The%20Odyssey%20-%202.39%20Classic%203D%20Trailer.mp4", 
     thumb: "https://i.ibb.co/7xnqHjYJ/The-Odyssey-Thumbnail.png",
     desc: "This trailer was converted using Owl3D's custom 3D settings, which provide full control over the stereoscopic conversion process, including depth strength, convergence, rendering style, and other advanced parameters commonly used to fine-tune the 3D viewing experience.\n\nWith a wide range of customization options available, from subtle depth adjustments to stronger pop-out effects, Owl3D offers more than 20 possible output variations. As part of The 3D Experience Project, I will continue experimenting with different settings in future uploads to identify the most natural, immersive, and enjoyable stereoscopic 3D experience possible.\n CURRENT OWL3D CONVERSION SETTINGS\n OUTPUT SETTINGS:\n• Output file format: VIDEO\n• Output resolution: 1080p (free version max)\n• Output codec: H264\n• Output container: MP4\n• Output encoding setting: Quality optimized\n• GPU encoding: Enabled\n• Preserve content aspect ratio: Enabled\n• Fast Re-export 3D: Off\n\n DEPTH & 3D ENGINE:\n• Depth backend: Precision V2\n• Black bar detection: Enabled\n• Enhanced colour fidelity: Enabled\n• Depth temporal stability: Low\n• Output 3D effect: Strength: 7, Style: Real: 5\n• Output 3D convergence: Auto (Pop-out)\n• Output render mode: Standard (both sides)\n• Output render profile: CUSTOM\n \n NOTES & RECOMMENDATIONS\n  \nThese settings provide strong depth with a natural pop-out effect. Feel free to tweak them for your own conversions!\n\nIf you enjoy the current depth profile and stereoscopic presentation, you're welcome to use these settings as a reference or starting point for your own 3D conversions. Feel free to experiment and adjust them to suit your personal preferences and the type of 3D experience you're aiming to create.\n"  },
   { 
@@ -27,8 +27,8 @@ const classicPreview = [
     genre: "Action , Fantasy Epic , Quest Sword & Sandal , Adventure ,Drama , Fantasy , Action Epic , Adventure Epic", 
     language: "english",
     year: "2026",
-    streamUrl: "https://fast.wistia.com/embed/medias/u5yxo4nuv3", 
-    downloadUrl: "https://vikingfile.com/f/OI0P5y9FUc", 
+    streamUrl: "https://files.ani3d.in/0:/classic/web/The%20Odyssey%20-%201.43%20Classic%203D%20Trailer.mp4?inline=true", 
+    downloadUrl: "https://files.ani3d.in/0:/classic/master/The%20Odyssey%20-%201.43%20Classic%203D%20Trailer.mov", 
     thumb: "https://i.ibb.co/Y4wxJsPp/The-Odyssey-3-D-1-43.png",
 desc: "This trailer was converted using Owl3D's custom 3D settings, which provide full control over the stereoscopic conversion process, including depth strength, convergence, rendering style, and other advanced parameters commonly used to fine-tune the 3D viewing experience.\n\nWith a wide range of customization options available, from subtle depth adjustments to stronger pop-out effects, Owl3D offers more than 20 possible output variations. As part of The 3D Experience Project, I will continue experimenting with different settings in future uploads to identify the most natural, immersive, and enjoyable stereoscopic 3D experience possible.\n\n\n CURRENT OWL3D CONVERSION SETTINGS\n\n\nOUTPUT SETTINGS:\n• Output file format: VIDEO\n• Output resolution: 1080p (free version max)\n• Output codec: H264\n• Output container: MKV\n• Output encoding setting: Quality + File size optimized\n• GPU encoding: Enabled\n• Preserve content aspect ratio: Enabled\n• Fast Re-export 3D: Off\n\nDEPTH & 3D ENGINE:\n• Depth backend: Precision V2\n• Black bar detection: Enabled\n• Enhanced colour fidelity: Enabled\n• Depth temporal stability: Low\n• Output 3D effect: Strength: 4.5, Style: Real: 5\n• Output 3D convergence: Auto (Pop-out)\n• Output render mode: Standard (both sides)\n• Output render profile: CUSTOM\n\n\n NOTES & RECOMMENDATIONS\n\n\nThe lower strength (4.5) keeps depth natural and comfortable for longer viewing. Perfect for epic, large-screen 3D content.\n\nIf you enjoy the current depth profile and stereoscopic presentation, you're welcome to use these settings as a reference or starting point for your own 3D conversions. Feel free to experiment and adjust them to suit your personal preferences and the type of 3D experience you're aiming to create."  },
   { 
@@ -38,8 +38,8 @@ desc: "This trailer was converted using Owl3D's custom 3D settings, which provid
     genre: "Adventure , Marvel , Superhero , Urban Adventure , Action , Adventure , Fantasy , Sci-Fi", 
     language: "english",
     year: "2026",
-    streamUrl: "https://fast.wistia.com/embed/medias/jasg8uu98i", 
-    downloadUrl: "https://vikingfile.com/f/yvQuFUTEka", 
+    streamUrl: "https://files.ani3d.in/0:/classic/web/Spiderman%20Brand%20New%20Day%20-%20Classic%203D%20Trailer.mp4?inline=true", 
+    downloadUrl: "https://files.ani3d.in/0:/classic/master/Spiderman%20Brand%20New%20Day%20-%20Classic%203D%20Trailer.mov", 
     thumb: "https://i.ibb.co/VWQ6PwbM/Spider-Man-Brand-New-Day-Classic-3-D-Trailer.png",
     desc: "This trailer was converted using Owl3D's custom 3D settings, which provide full control over the stereoscopic conversion process, including depth strength, convergence, rendering style, and other advanced parameters commonly used to fine-tune the 3D viewing experience.\n\nWith a wide range of customization options available, from subtle depth adjustments to stronger pop-out effects, Owl3D offers more than 20 possible output variations. As part of The 3D Experience Project, I will continue experimenting with different settings in future uploads to identify the most natural, immersive, and enjoyable stereoscopic 3D experience possible.\n\n\nCURRENT OWL3D CONVERSION SETTINGS\n\n\n OUTPUT SETTINGS:\n• Output file format: VIDEO\n• Output resolution: 1080p (free version max)\n• Output codec: H265\n• Output container: MP4\n• Output encoding setting: Quality + File size optimized\n• GPU encoding: Enabled\n• Preserve content aspect ratio: Enabled\n• Fast Re-export 3D: Off\n\n DEPTH & 3D ENGINE:\n• Depth backend: Precision V2\n• Black bar detection: Enabled\n• Enhanced colour fidelity: Enabled\n• Depth temporal stability: Low\n• Output 3D effect: Strength: 5.5, Style: Real: 5\n• Output 3D convergence: Auto (Pop-out)\n• Output render mode: Standard (both sides)\n• Output render profile: CUSTOM\n\n\n NOTES & RECOMMENDATIONS\n\n\nThe H265 encoding makes this ideal for streaming or storage without sacrificing visual quality. Great balance of depth and performance.\n\nIf you enjoy the current depth profile and stereoscopic presentation, you're welcome to use these settings as a reference or starting point for your own 3D conversions. Feel free to experiment and adjust them to suit your personal preferences and the type of 3D experience you're aiming to create."  },
   { 
@@ -49,8 +49,8 @@ desc: "This trailer was converted using Owl3D's custom 3D settings, which provid
     genre: "Action , Adventure , Thriller ", 
     language: "Hindi",
     year: "2026",
-    streamUrl: "https://fast.wistia.com/embed/medias/nug44e1dil", 
-    downloadUrl: "https://vikingfile.com/f/OiVsz5ykHT", 
+    streamUrl: "https://files.ani3d.in/0:/classic/web/Alpha%20-%20Classic%203D%20Teaser.mp4?inline=true", 
+    downloadUrl: "https://files.ani3d.in/0:/classic/master/Alpha%20-%20Classic%203D%20Teaser.mov", 
     thumb: "https://i.ibb.co/N285QgYG/Alpha-Classic-3-D.png",
 desc: "This trailer was converted using Owl3D's custom 3D settings, which provide full control over the stereoscopic conversion process, including depth strength, convergence, rendering style, and other advanced parameters commonly used to fine-tune the 3D viewing experience.\n\nWith a wide range of customization options available, from subtle depth adjustments to stronger pop-out effects, Owl3D offers more than 20 possible output variations. As part of The 3D Experience Project, I will continue experimenting with different settings in future uploads to identify the most natural, immersive, and enjoyable stereoscopic 3D experience possible.\n\n\nCURRENT OWL3D CONVERSION SETTINGS\n\n\n OUTPUT SETTINGS:\n• Output file format: VIDEO\n• Output resolution: 1080p (free version max)\n• Output codec: H264\n• Output container: MKV\n• Output encoding setting: Quality + File size optimized\n• GPU encoding: Enabled\n• Preserve content aspect ratio: Enabled\n• Fast Re-export 3D: Off\n\nDEPTH & 3D ENGINE:\n• Depth backend: Precision V2\n• Black bar detection: Enabled\n• Enhanced colour fidelity: Enabled\n• Depth temporal stability: Low\n• Output 3D effect: Strength: 5.5, Style: Real: 5\n• Output 3D convergence: Auto (Pop-out)\n• Output render mode: Standard (both sides)\n• Output render profile: CUSTOM\n\n\n NOTES & RECOMMENDATIONS\n\n\nA solid all-rounder setting—good depth with efficient compression. Perfect for action scenes that need punch without overwhelming the viewer.\n\nIf you enjoy the current depth profile and stereoscopic presentation, you're welcome to use these settings as a reference or starting point for your own 3D conversions. Feel free to experiment and adjust them to suit your personal preferences and the type of 3D experience you're aiming to create."  }
 ];
@@ -63,8 +63,8 @@ const outframePreview = [
     genre: "Telugu , Action Epic , Adventure Epic , Fantasy Epic , Globetrotting Adventure , Action , Adventure , Fantasy , Thriller",
     language: "Telugu",
     year: "2026",
-    streamUrl: "https://fast.wistia.com/embed/medias/6fjl3nacga",
-    downloadUrl: "https://vikingfile.com/f/R2kfQU351L",
+    streamUrl: "https://files.ani3d.in/0:/outframe/web/Varanasi%20To%20The%20World%20-%20Out%20Of%20The%20Frame%203D%20Trailer.mp4?inline=true",
+    downloadUrl: "https://files.ani3d.in/0:/outframe/web/Varanasi%20To%20The%20World%20-%20Out%20Of%20The%20Frame%203D%20Trailer.mp4",
     thumb: "https://i.ibb.co/RGccXYg7/Varanasi-Frame-Break-3-D-Trailer.png",
     desc: "Out of Frame 3D is 2D content that mimics a 3D visual style where selected elements extend beyond the frame or black screen area to create a pop-out effect. It brings specific elements forward to deliver a 3D-like experience without the need for glasses or special devices.\n\nThis video was edited by Aniket Bhosale in Adobe Premiere Pro using masking tools to isolate elements and build layered depth.\n\nThe intent is to make 2D content feel more 3D and immersive."
   },
@@ -75,8 +75,8 @@ const outframePreview = [
     genre: "Hindi , Action Epic , Gangster , Political Thriller , Spy , Action , Crime",
     language: "hindi",
     year: "2026",
-    streamUrl: "https://fast.wistia.com/embed/medias/t2ozk643l0",
-    downloadUrl: "https://vikingfile.com/f/ggrw8PcjVH",
+    streamUrl: "https://files.ani3d.in/0:/outframe/web/Dhurandhar%20The%20Revenge%20Hindi%20-%20Out%20Of%20The%20Frame%203D%20Trailer.mp4?inline=true",
+    downloadUrl: "https://files.ani3d.in/0:/outframe/web/Dhurandhar%20The%20Revenge%20Hindi%20-%20Out%20Of%20The%20Frame%203D%20Trailer.mp4",
     thumb: "https://i.ibb.co/yms1CKFd/Dhurandhar-The-Revenge-Official-Hindi-Out-Of-The-Frame-3-D.png",
     desc: "Out of Frame 3D is 2D content that mimics a 3D visual style where selected elements extend beyond the frame or black screen area to create a pop-out effect. It brings specific elements forward to deliver a 3D-like experience without the need for glasses or special devices.\n\nThis video was edited by Aniket Bhosale in Adobe Premiere Pro using masking tools to isolate elements and build layered depth.\n\nThe intent is to make 2D content feel more 3D and immersive."
   },
@@ -87,8 +87,8 @@ const outframePreview = [
     genre: "Kannada , Action , Crime , Drama , Thriller",
     language: "hindi",
     year: "2027",
-    streamUrl: "https://fast.wistia.com/embed/medias/40blc0eden",
-    downloadUrl: "https://vikingfile.com/f/9PSsMzOkBN",
+    streamUrl: "https://files.ani3d.in/0:/outframe/web/Toxic%20Introducing%20Raya%20-%20Out%20Of%20The%20Frame%203D%20Trailer.mp4?inline=true",
+    downloadUrl: "https://files.ani3d.in/0:/outframe/web/Toxic%20Introducing%20Raya%20-%20Out%20Of%20The%20Frame%203D%20Trailer.mp4",
     thumb: "https://i.ibb.co/whVRzs9b/Toxic-3D.png",
     desc: "Out of Frame 3D is 2D content that mimics a 3D visual style where selected elements extend beyond the frame or black screen area to create a pop-out effect. It brings specific elements forward to deliver a 3D-like experience without the need for glasses or special devices.\n\nThis video was edited by Aniket Bhosale in Adobe Premiere Pro using masking tools to isolate elements and build layered depth.\n\nThe intent is to make 2D content feel more 3D and immersive."
   },
@@ -99,8 +99,8 @@ const outframePreview = [
     genre: "Adventure , Marvel , Superhero , Urban Adventure , Action , Adventure , Fantasy , Sci-Fi", 
     language: "english",
     year: "2026",
-    streamUrl: "https://fast.wistia.com/embed/medias/nmh4k5g936",
-    downloadUrl: "https://vikingfile.com/f/e3XAezy0OZ",
+    streamUrl: "https://files.ani3d.in/0:/outframe/web/Spider-Man%20Brand%20New%20Day%20-%20Out%20Of%20The%20Frame%203D%20Trailer.mp4?inline=true",
+    downloadUrl: "https://files.ani3d.in/0:/outframe/web/Spider-Man%20Brand%20New%20Day%20-%20Out%20Of%20The%20Frame%203D%20Trailer.mp4",
     thumb: "https://i.ibb.co/hRNTs2qM/Brand-New-Day-3-D.png",
     desc: "Out of Frame 3D is 2D content that mimics a 3D visual style where selected elements extend beyond the frame or black screen area to create a pop-out effect. It brings specific elements forward to deliver a 3D-like experience without the need for glasses or special devices.\n\nThis video was edited by Aniket Bhosale in Adobe Premiere Pro using masking tools to isolate elements and build layered depth.\n\nThe intent is to make 2D content feel more 3D and immersive."
   },
@@ -720,7 +720,8 @@ function renderPreview(gridId, videos, showDesc = true) {
          data-id="${v.id}" 
          data-file="${v.streamUrl}" 
          data-filetype="embed"
-         data-download="${v.downloadUrl}" 
+         data-thumb="${v.thumb || ''}"
+         data-download="${v.downloadUrl}"
          data-title="${v.title}" 
          data-desc="${escapedDesc}"
          data-genre="${v.genre}" 
@@ -766,8 +767,9 @@ function renderPreview(gridId, videos, showDesc = true) {
         genre: this.dataset.genre,
         language: this.dataset.lang, 
         year: this.dataset.year,
-        file: this.dataset.file, 
+        file: this.dataset.file,
         fileType: this.dataset.filetype,
+        thumb: this.dataset.thumb,
         downloadUrl: this.dataset.download,
         showDesc: showDesc
       };
@@ -787,8 +789,9 @@ function renderPreview(gridId, videos, showDesc = true) {
           genre: card.dataset.genre,
           language: card.dataset.lang, 
           year: card.dataset.year,
-          file: card.dataset.file, 
+          file: card.dataset.file,
           fileType: card.dataset.filetype,
+          thumb: card.dataset.thumb,
           downloadUrl: card.dataset.download,
           showDesc: showDesc
         };
@@ -915,6 +918,57 @@ function initReset() {
 }
 
 // ======================== MODAL FUNCTIONS ========================
+
+// Media the browser can decode itself. Everything on files.ani3d.in is H.264 in
+// MP4; anything else is an embed URL (Wistia, YouTube), which keeps the iframe.
+const NATIVE_VIDEO_RE = /\.(mp4|m4v|mov|webm|mkv)(\?|$)/i;
+
+function buildPlayer(container, video) {
+  const src = video.file || '';
+  if (!src) return;
+
+  if (!NATIVE_VIDEO_RE.test(src)) {
+    container.innerHTML = `<iframe src="${src}" frameborder="0" allow="autoplay; fullscreen" style="width:100%; height:100%;"></iframe>`;
+    return;
+  }
+
+  const el = document.createElement('video');
+  el.controls = true;
+  el.autoplay = true;
+  el.playsInline = true;
+  el.preload = 'metadata';
+  // No crossorigin attribute on purpose: media loads as a no-CORS request and
+  // works without one. Setting it forces a CORS check that breaks playback.
+  if (video.thumb) el.poster = video.thumb;
+  // No hardcoded type="video/mp4" on a <source> — let the server's Content-Type
+  // decide, so .mov and friends aren't mislabelled.
+
+  // files.ani3d.in proxies Google Drive, which can fail for reasons unrelated to
+  // the file: per-file download quota, an expired refresh token, an outage.
+  let settled = false;
+  let timer;
+  const succeed = () => { settled = true; clearTimeout(timer); };
+  const fail = () => {
+    if (settled) return;
+    settled = true;
+    clearTimeout(timer);
+    const dl = video.downloadUrl || '';
+    container.innerHTML = `
+      <div class="modal-video-error">
+        <p><i class="fas fa-triangle-exclamation"></i> This video couldn't be played here.</p>
+        <p>Download it and play it in VLC, or on a 3D TV / headset.</p>
+        ${dl ? `<a class="modal-download-btn" href="${dl}" target="_blank" rel="noopener"><i class="fas fa-download"></i> Download Video</a>` : ''}
+      </div>`;
+  };
+
+  el.addEventListener('loadedmetadata', succeed, { once: true });
+  el.addEventListener('error', fail, { once: true });
+  timer = setTimeout(fail, 20000);
+
+  el.src = src;
+  container.appendChild(el);
+}
+
 function openModal(video) {
   const modal = document.getElementById("videoModal");
   const modalVideo = document.getElementById("modalVideo");
@@ -925,24 +979,11 @@ function openModal(video) {
     return;
   }
   
-  let videoHTML = '';
-  
-  if (video.file && (video.file.includes('wistia.com') || 
-                     video.file.includes('vikingfile.com') || 
-                     video.file.includes('youtube.com') || 
-                     video.file.includes('youtu.be'))) {
-    videoHTML = `<iframe src="${video.file}" frameborder="0" allow="autoplay; fullscreen" style="width:100%; height:100%;"></iframe>`;
-  } else {
-    videoHTML = `<video controls autoplay style="width:100%; height:100%;">
-                   <source src="${video.file}" type="video/mp4">
-                   Your browser does not support video.
-                 </video>`;
-  }
-  
   if (modalVideo) {
-    modalVideo.innerHTML = videoHTML;
+    modalVideo.innerHTML = '';
+    buildPlayer(modalVideo, video);
   }
-  
+
   if (modalInfo) {
     const genreDisplay = video.genre ? video.genre.split(',').map(g => g.trim()).join(' • ') : video.genre || '3D';
     

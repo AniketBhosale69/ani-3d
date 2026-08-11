@@ -1,0 +1,1 @@
+UPDATE videos SET stream_url = 'https://files.ani3d.in/0:/classic/web/The%20Odyssey%20-%202.39%20Classic%203D%20Trailer.mp4?inline=true', download_url = 'https://files.ani3d.in/0:/classic/master/The%20Odyssey%20-%202.39%20Classic%203D%20Trailer.mp4' WHERE title = 'The Odyssey - 2.39:1 Immersive 3D Trailer';
