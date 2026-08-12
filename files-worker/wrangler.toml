@@ -1,0 +1,30 @@
+# Worker behind https://files.ani3d.in — the Google Drive media index.
+#
+# Deploy from THIS directory:  npx wrangler deploy
+# It is a standalone Worker, deliberately separate from the ani-3d Pages project
+# in the parent directory. Do not merge the two — Pages publishes every file
+# under its output dir, which here is the whole repo.
+
+name = "ani3d-files"
+main = "worker.js"
+compatibility_date = "2026-01-01"
+
+# The custom domain already points at the old worker. Deploying with this route
+# takes the hostname over; if the zone lives in a different Cloudflare account
+# than the one wrangler is logged into, set the route in the dashboard instead
+# (Workers & Pages > ani3d-files > Settings > Domains & Routes).
+routes = [
+  { pattern = "files.ani3d.in", custom_domain = true }
+]
+
+# Credentials are NOT in this repo. Set them as secrets before the first deploy
+# or every request returns 500 with {"error":"not_configured"}:
+#   npx wrangler secret put CLIENT_ID
+#   npx wrangler secret put CLIENT_SECRET
+#   npx wrangler secret put REFRESH_TOKEN
+#
+# In the dashboard: ani3d-files > Settings > Variables and Secrets, type Secret
+# (not Plaintext — Plaintext values are readable afterwards).
+#
+# ROOT_FOLDER_ID is not a secret and is hardcoded in worker.js; it can still be
+# overridden here or by a variable if the Drive layout ever moves.

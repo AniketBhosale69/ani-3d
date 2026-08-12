@@ -29,9 +29,10 @@ node_modules/
 # — no secrets in it, but it names Drive folder ids and describes the infra.
 /MEDIA-MIGRATION-PLAN.md
 
-# Google Drive index worker. Holds a live OAuth client_secret + refresh_token as
-# plaintext constants, and `pages_build_output_dir = "."` means ANY committed
-# root file is served publicly (https://ani-3d.pages.dev/<file>). Committing
-# either of these would hand out full read access to the Drive account.
+# The old generated Bhadoo/GoIndex worker, kept only as a local reference. It
+# still holds a live OAuth client_secret + refresh_token as plaintext constants,
+# and `pages_build_output_dir = "."` means ANY committed file is served publicly
+# (https://ani-3d.pages.dev/<path>). Committing it would hand out read access to
+# the Drive account. Its replacement, files-worker/, is committed — that one
+# reads its credentials from Worker secrets and hardcodes nothing.
 /worker.js
-/files-worker/
